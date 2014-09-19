@@ -38,7 +38,7 @@ Bluetooth LEは、その規格のもとで任意のプロファイルを勝手�
 
 Bluetooth LEのデバイスの振る舞いは、ジェネリック・アトリビュート・プロファイル(Generic Attribute Profile, GAP)として定義されています。GAPが定義するBluetooth LEデバイスの4つの役割のうち、Core Bluetoothフレームワークでアプリケーション開発者が扱うのはセントラルとペリフェラルの2つです。ペリフェラルは、そのデバイスを発見してもらうためのアドバタイジングを行なう役割です。セントラルは、アドバタイジングをしているデバイスを発見して、そのデバイスに接続する役割です。
 
-通信機能は、機能毎に階層表示したプロトコル・スタック<!--TBD  スタックの図 -->で表されます。
+通信機能は、機能毎に階層表示したプロトコル・スタック ( [#fig_ble_protocol_stack] ) で表されます。
 
 リンク層は隣接するデバイス都の間に信頼できる1本の通信路を確立します。Bluetoothには、他のデバイスのパケットを他のデバイスに中継するトランスポート層はなく、隣接したデバイスとの直接通信のみをサポートします。このリンク層で通信タイミングなどを制御する中心となる役割をマスターと呼び、そのマスターに接続するデバイスの役割をスレーブと呼びます。1つのマスターに複数のスレーブが接続した小さなネットワークを、ピコネットと呼びます。
 
@@ -97,7 +97,7 @@ iOSアプリケーションがペリフェラル・ロールならば、バッ�
 Core Bluetoothフレームワークは、iOSアプリケーションにBluetooth LEデバイスの発見と接続そして通信を提供するフレームワークです。Bluetooth LEの
 通信パラメータ設定などの詳細を隠蔽してくれるので、振る舞いのみに注力して開発ができます。
 
-<!--TBD  スタックとBTServerとかのあれの図 -->は、アプリケーションのダンプ・レポートから推測したiOSのBluetooth LEの実装です。Bluetooth LEのホストは、BTServerというデーモンが実装しています。Core BLuetoothフレームワークは、iOSアプリケーションとこのBSServerとの間のプロセス間通信(Inter Process Communication, IPC)を提供します。
+図はアプリケーションのダンプ・レポートから推測したiOSのBluetooth LEの実装です。Bluetooth LEのホストは、BTServerというデーモンが実装しています。Core BLuetoothフレームワークは、iOSアプリケーションとこのBSServerとの間のプロセス間通信(Inter Process Communication, IPC)を提供します。
 
 ### UUIDとCBUUIDクラス
 
@@ -105,14 +105,18 @@ UUIDは、サーバのように統合するものがなくとも生成できる�
 
 このUUIDを表すのがCBUUIDクラスです。CBUUIDクラスのインスタンスは UUIDWithString:クラスメソッドで文字列から生成できます。
 
+~~~ {.objectivec}
     CBUUID *anyServiceUUID = [CBUUID UUIDWithString: @"7E20767A-30BB-4EB2-A43E-AC318D9A89A0"];
+~~~
 
 Bluetooth LEはUUIDの16ビットの短縮表現を決めています。これは128ビットのUUID"0000XXXX-0000-1000-8000-00805F9B34FB"のうち、X部分の16ビットだけを抜き出した表現です。短縮形の16ビットのUUIDをX部分に当てはめて、128ビットの本来のUUIDを復元できます。
 例えば、0x180Dが割り振られた心拍を表すサービスの本来のUUIDは、0000180D-0000-1000-8000-00805F9B34FBになります。
 
 UUIDWithString:クラスメソッドに16新表記で16ビットのUUIDを文字列で指定すると、この短縮形のUUIDが生成されます。
 
+~~~ {.objectivec}
     CBUUID *heartRateServiceUUID = [CBUUID UUIDWithString: @"180D"];
+~~~
 
 16ビットの短縮形UUIDは、無線通信のデータ量の削減が目的です。この16ビットの値は、Bluetooth SIGが割り当てと定義を決めており、ユーザが勝手に利用することはできません。GATTのサーバおよびクライアントは、この16ビットの値を内部で128ビットのUUIDに復元して、UUIDの比較などの処理は、128ビットのUUIDに対して実行されます。
 
@@ -155,7 +159,9 @@ iOSアプリケーションがセントラル・ロールのとき、その通�
 
 セントラル・マネージャに対応するものが、CBCentralManagerクラスです。Bluetooth LEの通信を始める前に、CBCentralMangerクラスのオブジェクトにメモリ領域を割り当て、initWithDelegate:queue:メソッドで初期化します。
 
+~~~ {.objectivec}
     myCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+~~~
 
 initWithDelegate:queue:メソッドの引数は2つあります。最初の引数はセントラル・ロールのイベントを受け取るデリゲートを指定します。ここではselfを指定しています。この引数に指定するインスタンスはCBCentralManagerDelegateを実装します。
 
@@ -186,7 +192,7 @@ CBCentralManagerDelegateプロトコルには、たくさんのメソッドが�
 
 CBCentralManagerのインスタンスを作ると、直ちにstateの値が変更されます。Bluetooth4に対応していないiOSデバイスであれば、stateプロパティはCBCentralManagerStateUnsupportedになります。Bluetooth LEを使うことはできないので、iOSアプリケーションで対処をします。Bluetooth4対応のiOSデバイスであれば、stateプロパティはCBCentralManagerStatePoweredOnまたはCBCentralManagerStatePoweredOffに変更されます。
 
-Bluetoothの電源On/Offは、iOSアプリケーションから操作することはできません。ユーザがiOSの設定アプリケーションから、Bluetoothの電源On/Offができます。ペリフェラルを検索するために、iOSアプリケーションがスキャンを開始したときに、Bluetoothの電源がOffであれば<!--TBD  スキャン時だっけ?/>、Bluetoothの電源をOnにする画面が自動で表示されます<TBD 電源ONのダイアログ  -->。設定ボタンを押すと、自分のiOSアプリケーションからiOSの設定アプリケーションに遷移して、Bluetoothの電源設定画面が表示されます。
+Bluetoothの電源On/Offは、iOSアプリケーションから操作することはできません。ユーザがiOSの設定アプリケーションから、Bluetoothの電源On/Offができます。ペリフェラルを検索するために、iOSアプリケーションがスキャンを開始したときに、Bluetoothの電源がOffであれば<!--TBD  スキャン時だっけ?-->、Bluetoothの電源をOnにする画面が自動で表示されます<!--TBD 電源ONのダイアログ  -->。設定ボタンを押すと、自分のiOSアプリケーションからiOSの設定アプリケーションに遷移して、Bluetoothの電源設定画面が表示されます。
 
 <!--
 TBD: これを引き起こす再現実験とその時の処理の確認はできないだろうか?
@@ -206,7 +212,9 @@ TBD
 
 セントラルが行なう最初のタスクは、ペリフェラル・デバイスの発見です。ペリフェラル・デバイスは、自分の存在を周囲のセントラル・デバイスに伝えるために、アドバタイジング・パケットを送信しています。CBCentralManagerのscanForPeripheralsWithServices:options:メソッドを呼び出して、セントラルのアドバタイジング・パケットの受信を開始します。
 
+~~~ {.objectivec}
     [myCentralManager scanForPeripheralsWithServices:nil options:nil];
+~~~
 
 scanForPeripheralsWithServices:options:メソッドの引数は2つあります。最初の引数は、<!--TBD  一致は論理積なのか和なのか  -->ペリフェラルをフィルタリングするためのものです。発見したいサービスのUUIDを、NSArrayで配列にして指定します。サービスはペリフェラルの機能に対応しています。サービスでフィルタリングすることで、セントラルが必要とする機能がある機器のみを、発見できます。この引数にnilを指定すると、フィルタリングせず、発見した全てのペリフェラルが報告されます。Appleは、Core Bluetoothプログラミング・ガイドで、より低消費電力の動作にするために、サービスを指定することを推奨しています。nilを指定することは、推奨していません。
 
@@ -231,18 +239,20 @@ iOSアプリケーションがすでにスキャンを開始しているとき�
 
 ローカルのセントラルがアドバタイジング・パケットを受信すると、CBCentralManagerDelegateプロトコルのcentralManager:didDiscoverPeripheral:advertisementData:RSSI: メソッドに通知されます。
 
+~~~ {.objectivec}
     -(void)centralManager:(CBCentralManager *)central
     didDiscoverPeripheral:(CBPeripheral *)peripheral 
         advertisementData:(NSDictionary *)advertisementData
                      RSSI:(NSNumber *)RSSI {
       NSLog(@"Discovered %@", peripheral.name);
       ...
+~~~
 
 centralManager:didDiscoverPeripheral:advertisementData:RSSI: メソッドには4つの引数があります。最初の引数はCBCentralManagerクラスのインスタンスを、次の引数はペリフェラルを表すCBperipheralクラスのインスタンスです。3つ目の引数 advertisementData は、アドバタイジング・パケットのデータをおさめたNSDictionaryクラスのインスタンスです。最後のRSSIは受信信号強度を表します。
 
 受信信号強度の値は、次の式で与えられます:
 
- RSSI = 10 * log I(mW) (dBm)
+$$RSSI = 10 * log I(mW) (dBm)$$
 
 この式のIは、受信信号電力をミリワット単位で表します。RSSIの値は、送信電力、デバイスとの距離等できまる伝搬損失、そして受信感度で決まります。受信信号電力は桁違いに変化するため、扱いやすくするためにRSSIは対数で表現されます。RSSIは、目安として、-30 dBm から-100 dBm までのマイナスの値を取ります。
 
@@ -284,6 +294,7 @@ CBAdvertisementDataManufacturerDataKey のバリューは、ペリフェラル�
 
 ペリフェラルが発見できれば、次にそれが接続したいペリフェラルかを判定して、接続処理を行います。
 
+~~~ {.objectivec}
     -(void)centralManager:(CBCentralManager *)central
     didDiscoverPeripheral:(CBPeripheral *)peripheral 
         advertisementData:(NSDictionary *)advertisementData
@@ -294,6 +305,7 @@ CBAdvertisementDataManufacturerDataKey のバリューは、ペリフェラル�
       _peripheral = peripheral;
       [myCentralManager connectPeripheral:peripheral options:nil];
     }
+~~~
 
 ペリフェラルが接続先か否かは、引数advertisementDataの内容で判別します。ローカル・ネームが対応機種名かで判定する実装が、よく使われます。接続するならば、CBCentralManagerクラスのconnectPeripheral:options: メソッドを呼び出します。
 
@@ -303,26 +315,32 @@ Bluetooth LEの接続処理は、アドバタイジング・パケットを受�
 
 ペリフェラルとの接続が確立すると、CBCentralManagerDelegateプロトコルのcentralManager:didConnectPeripheral:メソッドが呼び出されます。この引数peripheralは、connectPeripheral:options:メソッドに指定したCBPeripheralクラスのインスタンスと同じものです<!--TBD  確認  -->。
 
+~~~ {.objectivec}
 - (void)centralManager:(CBCentralManager *)central
   didConnectPeripheral:(CBPeripheral *)peripheral {
     NSLog(@"Peripheral connected");
     ...
+~~~
 
 接続処理に失敗した場合は、CBCentralManagerDelegateプロトコルのcentralManager:didFailToConnectPeripheral:error:メソッドが呼び出されます。接続失敗の原因は、引数_error_で渡されます。
 
+~~~ {.objectivec}
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"Failed to connect to a Peripheral");
     ...
+~~~
 
 ##### サービスの検索
 
 ペリフェラルには様々な機能があります。その機能それぞれを表すのが、Bluetooth LEのサービスです。ペリフェラルと接続できたならば、次は必要なサービスを検索します。
 
+~~~ {.objectivec}
 - (void)centralManager:(CBCentralManager *)central
   didConnectPeripheral:(CBPeripheral *)peripheral {
     ...
     peripheral.delegate = self;
     [peripheral discoverServices:nil];
+~~~
 
 ペリフェラルの処理結果は、デリゲートのメソッド呼び出しで非同期に返されます。このコードはCBPeripheralDelegateプロトコルを実装した_self_を、引数_peripheral_のdelegateプロパティに設定します。
 
@@ -334,6 +352,7 @@ Core Bluetoothフレームワークは、discoverServices:メソッドに、サ�
 
 サービスを発見すると、そのCBPeripheralのインスタンスのdelegateプロパティに設定したインスタンスの、CBPeripheralDelegateプロトコルのperipheral:didDiscoverServices: メソッドが呼ばれます。
 
+~~~ {.objectivec}
 - (void)peripheral:(CBPeripheral *)peripheral
 didDiscoverServices:(NSError *)error {
     for (CBService *service in peripheral.services) {
@@ -342,6 +361,7 @@ didDiscoverServices:(NSError *)error {
             [peripheral discoverCharacteristics:nil forService:service];
         } 
         ...
+~~~
 
 引数peripheralのservicesプロパティは、NSArrayクラスのインスタンスで、その内容はCBServiceクラスのインスタンスの配列です。もしもサービス検索でエラーが発生していれば、引数_error_にその内容が入ります。
 
@@ -349,6 +369,7 @@ didDiscoverServices:(NSError *)error {
 
 使いたいサービスの検索が完了すれば、次はサービスそれぞれの、アクセスしたいキャラクタリスティクスを取得していきます。サービスごとに検索したいキャラクタリスティクスは異なるので、まず、CBPeripheralクラスのインスタンスのservicesプロパティのインスタンスが、どのサービスに対応しているのかを判別しなければなりません。これは、CBServiceクラスのインスタンスのUUIDプロパティの一致で判定できます。
 
+~~~ {.objectivec}
 - (void)peripheral:(CBPeripheral *)peripheral
 didDiscoverServices:(NSError *)error {
     for (CBService *service in peripheral.services) {
@@ -357,6 +378,7 @@ didDiscoverServices:(NSError *)error {
             [peripheral discoverCharacteristics:nil forService:service];
         } 
         ...
+~~~
 
 CBPeripheralクラスの discoverCharacteristics:forService: メソッドを呼び出してキャラクタリスティクスを検索します。このメソッドには2つの引数があります。最初の引数は、検索したいキャラクタリスティクスのUUIDの配列を指定します。forService:には検索対象のサービスを指定します。
 
@@ -364,6 +386,7 @@ discoverCharacteristics:forService: メソッドの最初の引数にnilを指�
 
 キャラクタリスティクスが検索できると、CBPeripheralDelegateプロトコルのperipheral:didDiscoverCharacteristicsForService:error: メソッドが呼ばれます。
 
+~~~ {.objectivec}
 - (void)peripheral:(CBPeripheral *)peripheral
 didDiscoverCharacteristicsForService:(CBService *)service
              error:(NSError *)error {
@@ -371,6 +394,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
         NSLog(@"Discovered characteristic %@", characteristic);
         ...
 } ...
+~~~
 
 キャラクタリスティクスは、CBCharacteristicクラスのインスタンスで与えられます。引数serviceのcharacteristicsプロパティは、このCBCharacteristicのインスタンスをNSArrayで配列にしたものです。キャラクタリスティクスの取得時にエラーが発生した場合は、引数errorでエラー情報が渡されます。正常動作時は、引数errorの値はnilです。
 
@@ -386,17 +410,21 @@ Bluetooth LEの通信プロトコルには、キャラクタリスティクス�
 
 キャラクタリスティクスの読み出しには、CBPeripheralクラスのreadValueForCharacteristic:メソッドを使います。引数には、読み出したいキャラクタリスティクスに対応するCBCharacteristicのインスタンスを与えます。
 
+~~~ {.objectivec}
     NSLog(@"Reading value for characteristic %@", interestingCharacteristic);
     [peripheral readValueForCharacteristic:interestingCharacteristic];
+~~~
 
 キャラクタリスティクスの読み出し結果は、CBPeripheralDelegateプロトコルのperipheral:didUpdateValueForCharacteristic:error:メソッドで返されます。
 
+~~~ {.objectivec}
 - (void)peripheral:(CBPeripheral *)peripheral
 didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error {
     NSData *data = characteristic.value;
     // parse the data as needed
     ...
+~~~
 
 読み出しに成功すれば引数errorはnilです。もしも失敗した場合は、引数errorにはエラー内容を表すNSErrorのインスタンスが与えられます。読み出しに成功していれば、読み出し値は、引数characteristicのvalueプロパティから取り出せます。
 
@@ -408,7 +436,9 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
 
 キャラクタリスティクスの値変更通知を受け取るには、CBPeripheralクラスのsetNotifyValue:forCharacteristic:メソッドを使います。サブスクリプションの権限がないキャラクタリスティクスに、このメソッドを呼び出しても、なにも変化しません。
 
+~~~ {.objectivec}
 ￼￼￼￼[peripheral setNotifyValue:YES forCharacteristic:interestingCharacteristic];
+~~~
 
 setNotifyValue:forCharacteristic:メソッドには引数が2つあります。最初の引数は、通知を受け取るか受け取らないかを指定するBooleanの値です。YESまたはNOを与えます。2つ目の引数は、通知を受けたいキャラクタリスティクスのCBCharacteristicのインスタンスです。
 
@@ -417,12 +447,14 @@ setNotifyValue:forCharacteristic:メソッドには引数が2つあります。�
 サブスクリプションをYESに設定すると、キャラクタリスティクスの値が更新されると、その更新値が
 CBPeripheralDelegateプロトコルの peripheral:didUpdateNotificationStateForCharacteristic:error: メソッドで通知されます。
 
+~~~ {.objectivec}
 - (void)peripheral:(CBPeripheral *)peripheral
 didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error {
     if (error) {
         NSLog(@"Error changing notification state: %@",
 } ...
+~~~
 
 引数の意味や使いかたは、値読み出しの peripheral:didUpdateValueForCharacteristic:error:メソッドのそれと、同じです。
 
@@ -430,8 +462,10 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
 
 ペリフェラルへの値の書き込みは、読み込みと同じくキャラクタリスティクスを通じて行います。値の書き込みは、ペリフェラルに保存されているデータを変更する意味のほか、例えばエアコンの赤外線リモコンに開始/停止の動作指定や温度設定のボタンがあるように、動作や目標値を指示する意味もあります。
 
+~~~ {.objectivec}
     NSLog(@"Writing value for characteristic %@", interestingCharacteristic); [peripheral writeValue:dataToWrite forCharacteristic:interestingCharacteristic
          type:CBCharacteristicWriteWithResponse];
+~~~
 
 キャラクタリスティクスに書き込む CBPeripheral クラスの writeValue:forCharacteristic:type: メソッドには、3つの引数があります。最初の引数には書き込みたいバイト・データを収めたNSDataのインスタンスを、2つ目の引数には書き込み対象のキャラクタリスティクスの CBCharacteristic のインスタンスを、最後の3つ目の引数には書き込みタイプを表す定数を与えます。
 
@@ -454,12 +488,14 @@ CBCharacteristicPropertyWrite との論理積が0でなれば(ビットが立っ
 
 writeValue:forCharacteristic:type: メソッドの引数_type_に CBCharacteristicWriteWithResponse を指定したとき、CBPeripheralDelegateプロトコルのperipheral:didWriteValueForCharacteristic:error: メソッドに、書き込み結果が返されます。
 
+~~~ {.objectivec}
 - (void)peripheral:(CBPeripheral *)peripheral
 didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error {
     if (error) {
         NSLog(@"Error writing characteristic value: %@",
 } ...
+~~~
 
 引数は3つあります。読み込み処理の場合と同じように、エラーが発生すれば引数_error_にその内容が渡されます。正常に処理できたならば、引数_error_はnilです。
 
@@ -486,7 +522,9 @@ Bluetooth LEにはセントラルとペリフェラルという2つの役割が�
 
 ペリフェラルの役割はCBPeripheralManagerクラスが提供します。CBPeripheralManagerクラスのinitWithDelegate:queue:メソッドでインスタンスを生成します。
 
+~~~ {.objectivec}
     myPeripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+~~~
 
 initWithDelegate:queue:メソッド
 の引数は2つあります。最初の引数はペリフェラル・ロールのイベントを受け取るCBPeripheralManagerDelegateプロトコルを実装したデリゲートを指定します。ここではselfを与えています。2つめのquequeは、通信処理を行なうキューを指定します。nilを指定した場合はメインキューが使われます。
@@ -527,25 +565,29 @@ Bluetooth LEのペリフェラルのデータベースは、ハンドル、タ�
 
 iOSアプリケーションが、内部のデータを外部に公開するには、まずペリフェラル・マネージャーのデータベースを構築します。セントラル・ロールでは、サービスおよびキャラクタリスティクスは、それぞれCBServiceクラスおよびCBCharacteristicクラスに対応していました。ペリフェラル・マネージャーは、サービスおよびキャラクタリスティクスの編集に、それぞれCBMutableServiceクラスおよびCBMutableCharacteristicクラスを使います。CBMutableServiceクラスはCBServiceクラスを、またCBMutableCharacteristicクラスはCBCharacteristicクラスを継承します。
 
-まずサービスとキャラクタリスティクスのUUID、そしてキャラクタリスティクスのパーミション設定と役割を定義します。UUIDを表すCBUUIDクラスおよびUUIDの生成方法は<!--TBD  参照 -->で述べました。Bluetooth SIGが公開しているサービスを実装するならば16ビットのUUIDを使います。任意のサービスを定義するならば128ビットのUUIDを生成します。
+まずサービスとキャラクタリスティクスのUUID、そしてキャラクタリスティクスのパーミション設定と役割を定義します。UUIDを表すCBUUIDクラスおよびUUIDの生成方法は(TBD 参照)で述べました。Bluetooth SIGが公開しているサービスを実装するならば16ビットのUUIDを使います。任意のサービスを定義するならば128ビットのUUIDを生成します。
 
 まずCBMutableCharacteristcクラスのインスタンスを生成します。CBMutableCharacteristicクラスのinitWithType:properties:value:permissions:メソッドを使います。
 
+~~~ {.objectivec}
 	myCharacteristic =
     	[[CBMutableCharacteristic alloc] initWithType:myCharacteristicUUID
 	     properties:CBCharacteristicPropertyRead
     	 value:myValue permissions:CBAttributePermissionsReadable];
+~~~
 
 initWithType:properties:value:permissions:メソッドには引数が4つあります。最初の引数initWithTypeはキャラクタリスティクスのUUIDを表すCBUUIDのインスタンスを与えます。引数valueは、キャラクタリスティクスの値を表すNSDataのインスタンスを与えます。引数propertiesには、キャラクタリスティクスの属性をCBCharacteristicProperties列挙型の値で与えます。引数permissionsには、キャラクタリスティクスのパーミションをCBAttributePermissions列挙型の値で与えます。この2つの列挙型は、いずれも列挙型の複数の値を論理和でまとめて指定できます。
 
 引数valueがnilの場合は、そのキャラクタリスティクスの値は、変化するものとされます。リモートのセントラルがキャラクタリスティクスの値を読み出すと、それがデリゲートに通知されます。デリゲートに、値の返信処理の責任があります。
 
-引数valueにNSDataのインスタンスを与えると、Core Bluetoothフレームワークは、そのキャラクタリスティクスの値は固定値として扱います。キャラクタリスティクスのプロパティは自動的に読み込み可能になります<!--TBD  自動的か確認する/>。引数valueの値はキャッシュされて、リモートがこのキャラクタリスティクスを読み出すと、そのキャッシュされた値が自動的にセントラルに返されます。このとき、ペリフェラル・マネージャーはデリゲートのメソッドを呼び出しません。<TBD 動作確認  -->
+引数valueにNSDataのインスタンスを与えると、Core Bluetoothフレームワークは、そのキャラクタリスティクスの値は固定値として扱います。キャラクタリスティクスのプロパティは自動的に読み込み可能になります<!--TBD  自動的か確認する-->。引数valueの値はキャッシュされて、リモートがこのキャラクタリスティクスを読み出すと、そのキャッシュされた値が自動的にセントラルに返されます。このとき、ペリフェラル・マネージャーはデリゲートのメソッドを呼び出しません。<!--TBD 動作確認  -->
 
 サービスは、キャラクタリスティクスの集合です。CBMutableServiceクラスのinitWithType:primary:メソッドでインスタンスを生成します。
 
+~~~ {.objectivec}
 	myService = [[CBMutableService alloc] initWithType:myServiceUUID primary:YES];
     myService.characteristics = @[myCharacteristic];
+~~~
 
 initWithType:primary:メソッドは2つの引数をとります。最初の引数は、そのサービスのUUIDを表すCBUUIDのインスタンスです。2つ目の引数はサービスがプライマリ・サービスかを示すBoolean型の値です。このサンプル・コードはプライマリ・サービスを指定しています。引数primaryをNOにすると、セカンダリ・サービスの指定になります。
 
@@ -562,10 +604,12 @@ initWithType:primary:メソッドは2つの引数をとります。最初の引�
 
 もしもローカルのキャラクタリスティクスの値が、しばしば変更されるものならば、リモートのセントラルにサブスクライブさせることを推奨します。そのために、キャラクタリスティクスにサブスクライブを許可するパーミション設定が必要です。これは、CBCharacteristicのpropertyプロパティに、CBCharacteristicPropertyNotifyを設定します:
 
+~~~ {.objectivec}
 myCharacteristic = [[CBMutableCharacteristic alloc]
     initWithType:myCharacteristicUUID
     properties:CBCharacteristicPropertyRead | CBCharacteristicPropertyNotify
     value:nil permissions:CBAttributePermissionsReadable];
+~~~
 
 このサンプルコードはCBCharacteristicのインスタンス生成時に指定しています。<!--TBD  あとでプロパティ設定でもOK?  -->
 
@@ -576,11 +620,13 @@ BLEデバイスに個人情報を記録する場合があります。例えば�
 
 キャラクタリスティクスのプロパティには、読み書きおよびノーティフィケーションの暗号化を指定できます。<!--TBD  下のコード、プロパティとパーミションが2つ分かれているけど、個々の区別、解説すべし  -->
 
+~~~ {.objectivec}
 emailCharacteristic = [[CBMutableCharacteristic alloc]
     initWithType:emailCharacteristicUUID
     properties:CBCharacteristicPropertyRead
     | CBCharacteristicPropertyNotifyEncryptionRequired
     value:nil permissions:CBAttributePermissionsReadEncryptionRequired];
+~~~
 
 このサンプル・コードでは、キャラクタリスティクスは信頼するデバイスからのみ、読み出しおよびサブスクライブを受け付けます。リモートのセントラルがこのキャラクタリスティクスにアクセスすると、ローカルのペリフェラル・マネージャーはリモートのセントラルに、必要な権限がないというエラーを返します。そこで、リモートのセントラル・マネージャーは、次に、暗号化に必要な鍵を交換するため、ペリフェラルにペリフェラルを求めます。ローカルのiOSデバイスは、リモートのデバイスがペアリングを要求していることを、ユーザにダイアログ表示します。ユーザが、それを承認することで、ペアリングとボンディングが完了し、リモートのセントラルは、キャラクタリスティクスを読み出せるようになります。
 
@@ -590,25 +636,31 @@ emailCharacteristic = [[CBMutableCharacteristic alloc]
 
 キャラクタリスティクスを設定したCBMutableCharacteristcクラスのインスタンスができれば、次はペリフェラル・マネージャーのデータベースに、それらのサービスを追加します。これには、CBPeripheralManagerクラスのaddService:メソッドを使います。
 
+~~~ {.objectivec}
 	[myPeripheralManager addService:myService];
+~~~
 
 ペリフェラル・マネージャーにaddService:メソッドでサービスとキャラクタリスティクスを追加すると、その内容はペリフェラル・マネージャーにキャッシュされて、変更することはできません。複数のサービスが複数ある場合はaddService:メソッドを繰り返し呼び出します。
 
 ペリフェラル・マネージャーのデリゲートがperipheralManager:didAddService:error:メソッドを実装していれば、ペリフェラル・マネージャーはサービスの追加処理が完了するつど、このメソッドを呼び出します。もしもサービスの追加に失敗した場合は、このメソッドから原因を取得できます。
 
+~~~ {.objectivec}
 - (void)peripheralManager:(CBPeripheralManager *)peripheral
             didAddService:(CBService *)service
                     error:(NSError *)error {
     if (error) {
         NSLog(@"Error publishing service: %@", [error localizedDescription]);
 } ...
+~~~
 
 ##### アドバタイズメントの開始と停止
 
 周囲にいるかもしれないセントラルにペリフェラルの存在を伝えるために、CBPeripheralManagerクラスのstartAdvertising:メソッドで、アドバタイズメントを開始します。
 
+~~~ {.objectivec}
 [myPeripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey :
     @[myFirstService.UUID, mySecondService.UUID] }];
+~~~
 
 startAdvertising:メソッドの引数はオプションを指定したNSDictionaryのインスタンスです。このサンプル・コードでは、CBAdvertisementDataServiceUUIDsKey をキー値に、サービスのUUIDに対応するCBUUIDの配列をバリューにしています。
 
@@ -619,11 +671,13 @@ startAdvertising:メソッドの引数の辞書に指定できる値は、 CBAdv
 
 startAdvertising:メソッドを呼び出すと、ペリフェラル・マネージャーはデリゲートのperipheralManagerDidStartAdvertising:error:メソッドを呼び出します。もしもエラーがありアドバタイズメントが開始出きない場合は、引数errorで詳細情報が渡されます。
 
+~~~ {.objectivec}
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral
                                        error:(NSError *)error {
     if (error) {
         NSLog(@"Error advertising: %@", [error localizedDescription]);
 } ...
+~~~
 
 Core Bluetoothフレームワークは、下層の通信の詳細を隠すため、iOSアプリケーションから、アドバタイズメント・パケットの周期を設定することはできません。また、アドバタイズメントは、パケット・サイズに制約があるため、データ・サイズにも制約があることに注意が必要です。<!--TBD  制約条件?  -->。さらに、iOSアプリケーションがフォアグラウンドかバックグラウンドかにより、アドバタイズメント・パケットの内容が異なります。
 
@@ -644,10 +698,12 @@ iOSアプリケーションがバックグラウンド状態ならば、アド�
 
 値が固定値ではないキャラクタリスティクスは、CBMutableCharacteristicクラスのinitWithType:properties:value:permissions:メソッドで、valueにnilを設定したものです。
 
+~~~ {.objectivec}
 - (void)peripheralManager:(CBPeripheralManager *)peripheral
     didReceiveReadRequest:(CBATTRequest *)request {
     if ([request.characteristic.UUID isEqual:myCharacteristic.UUID]) {
         ...
+~~~
 
 peripheralManager:didReceiveReadRequest:メソッドは2つの引数をとります。最初の引数peripheralはペリフェラル・マネージャーを示します。2つ目の引数requestはセントラルからのリクエストを表すCBATTRequestクラスのインスタンスです。
 
@@ -666,16 +722,20 @@ CBCentralクラスは、1つだけのプロパティ CFUUIDRef UUID のプロパ
 
 リード・リクエストを受け取ったデリゲートは、セントラルが要求したデータを、CBATTRequestクラスのvalueプロパティに設定して返します。このために、まず対象となるキャラクタリスティクスが何かを調べます。これは、引数requestのcharacteristicプロパティのUUIDで判別できます。次のステップは、リード・リクエストのオフセット位置が、キャラクタリスティクスの値の範囲を超えていないことを確認します。
 
+~~~ {.objectivec}
     if (request.offset > myCharacteristic.value.length) {
         [myPeripheralManager respondToRequest:request
             withResult:CBATTErrorInvalidOffset];
         return;
     }
+~~~
 
 このオフセット値は、キャラクタリスティクスのデータが長くて、アトリビュート・プロトコルの1つのPDUに収まらない時に、複数のトランザクションに分割して読みだすときに使います。オフセット値が正しいと確認したのち、CBATTRequestのvalueプロパティに値を設定して、ペリフェラル・マネージャーのrespondToRequest:withResult:メソッドを呼び出します。Bluetooth LEの、リクエスト-レスポンスは1対1に対応しています。ですから、peripheralManager:didReceiveReadRequest:メソッドが呼び出されたら、対応するrespondToRequest:withResult:メソッドを、かならず1度だけ呼び出すようにします。
 
+~~~ {.objectivec}
     [myPeripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
     ...
+~~~
 
 respondToRequest:withResult:メソッドは引数を2つ取ります。最初の引数requestは、デリゲートの呼び出しで渡されたCBATTRequestのインスタンスのvalueプロパティを設定したものです。2つ目の引数は、CBATTError列挙型の変数です。
 
@@ -710,7 +770,9 @@ peripheralManager:didReceiveWriteRequests:メソッドの引数は2つです。�
 
 もしも2つ上の書き込みリクエストがきたときは、デリゲートは、それらのリクエストを1つのまとまりとして、アトミックに処理をします。一連の書き込みリクエストのうち1つが失敗したならば、一連の書き込み処理は実行されるべきではありません。
 
+~~~ {.objectivec}
     myCharacteristic.value = request.value;
+~~~
 
 書き込みリクエストの内容が正しいならば、対応するキャラクタリスティクスに値を書き込みます。このサンプル・コードにはありませんが、読み込み時と同じく、書き込みを実行する前に、オフセット値がキャラクタリスティクスの値の範囲を正しく示しているかを確認します。
 
@@ -718,34 +780,39 @@ peripheralManager:didReceiveWriteRequests:メソッドの引数は2つです。�
 
 respondToRequest:withResult:メソッドの最初の引数は、respondToRequest:withResult:メソッドで渡されたCBATTRequestのインスタンスです。2つ目の引数はCBATTError列挙型の変数です。<!-- ここ複数の返し方、ちょっとわからない -->
 
+~~~ {.objectivec}
  [myPeripheralManager respondToRequest:[requests objectAtIndex:0]
     withResult:CBATTErrorSuccess];
+~~~
 
 ##### セントラルへの通知
 
 リモートのセントラルは、ローカルのペリフェラル・マネージャーの1つあるいはそれ以上のキャラクタリスティクスをサブスクライブできます。サブスクライブされたキャラクタリスティクスの値が変更されると、ペリフェラル・マネージャーは、その更新値をリモートのセントラルに通知します。
 
-接続しているセントラルがキャラクタリスティクスをサブスクライブを要求した時、ペリフェラル・マネージャーはデリゲートのperipheralManager:central:didSubscribeToCharacteristic:メソッドを呼び出します。
+接続しているセントラルがキャラクタリスティクスをサブスクライブを要求した時、ペリフェラル・マネージャーはデリゲートの peripheralManager:central:didSubscribeToCharacteristic: メソッドを呼び出します。
 
+~~~ {.objectivec}
     - (void)peripheralManager:(CBPeripheralManager *)peripheral
                       central:(CBCentral *)central
     didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
         NSLog(@"Central subscribed to characteristic %@", characteristic);
         ...
+~~~ {.objectivec}
 
 peripheralManager:central:didSubscribeToCharacteristic:メソッドは3つの引数、ペリフェラル・マネージャー、セントラル、そしてサブスクライブされるキャラクタリスティクスのインスタンスを取ります。iOSアプリケーションが、このキャラクタリスティクスがサブスクライブされていることを、覚えておきます。
 
 
-iOSアプリケーションは、サブスクライブされているキャラクタリスティクスの値を更新するときに、ペリフェラル・マネージャーのupdateValue:forCharacteristic:onSubscribedCentrals: メソッドを呼び出します。
+iOSアプリケーションは、サブスクライブされているキャラクタリスティクスの値を更新するときに、ペリフェラル・マネージャーの updateValue:forCharacteristic:onSubscribedCentrals: メソッドを呼び出します。
 
+~~~ {.objectivec}
     NSData *updatedValue = // fetch the characteristic's new value
     BOOL didSendValue = [myPeripheralManager updateValue:updatedValue
         forCharacteristic:characteristic onSubscribedCentrals:nil];
+~~~
 
 updateValue:forCharacteristic:onSubscribedCentrals:メソッドは3つの引数をとります。最初の引数は、更新された値を示すNSDataのインスタンス、2つ目の引数はキャラクタリスティクス、最後の引数は通知を送るCBCentralオブジェクトの配列です。
 
 updateValue:forCharacteristic:onSubscribedCentrals:メソッドの最後のCBCentralの配列に、nilを指定すると、そのキャラクタリスティクスをサブスクライブする全てのセントラルに通知が送信されます。引数にCBCentralの配列を与えれば、その配列のセントラルのうち、そのキャラクタリスティクスをサブスクライブしているものに、通知が送信されます。配列の中に、そのキャラクタリスティクスをサブスクライブしていないセントラルがあっても、そのセントラルに通知が送信されることはありません。通知を送るセントラルの範囲を限定したい場合に使います。
-
 
 updateValue:forCharacteristic:onSubscribedCentrals:メソッドの戻り値はBoolean型です。アップデートが送信できるならばYESが、送信キューが満杯で通知ができないならばNOが返されます。もしも戻り値がNOであれば、送信キューに空きができたときに、ペリフェラル・マネージャーはデリゲートのeripheralManagerIsReadyToUpdateSubscribers:メソッドを呼び出します。もしも望むならば、このメソッドが呼び出されたときに、再度、通知処理を行います。
 
@@ -763,7 +830,7 @@ iOSアプリケーションはバックグラウンド実行に対応できま�
 
 バックグラウンド・モードを指定しないセントラル・ロールのiOSアプリケーションは、フォアグラウンドでスキャンをしていても、バックグラウンドに入ると、スキャンは停止します。ペリフェラルの発見および切断のイベントも通知されません。
 
-バックグラウンド・モードを指定しないペリフェラル・ロールのiOSアプリケーションは、バックグラウンド状態ではアドバタイズメントが停止されます。すでに接続が確立しているリモートのセントラルとの接続は、バックグラウンド状態になっても切れません<!--TBD  接続は切れるの?/>。しかし、リモートのセントラルがダイナミックなキャラクタリスティクスの値にアクセスすると、エラーが返されます。<TBD どんなエラ?  -->
+バックグラウンド・モードを指定しないペリフェラル・ロールのiOSアプリケーションは、バックグラウンド状態ではアドバタイズメントが停止されます。すでに接続が確立しているリモートのセントラルとの接続は、バックグラウンド状態になっても切れません<!--TBD  接続は切れるの?-->。しかし、リモートのセントラルがダイナミックなキャラクタリスティクスの値にアクセスすると、エラーが返されます。<!--TBD どんなエラ?  -->
 
 ### ユーザへのアラート通知
 
@@ -852,7 +919,9 @@ iOSアプリケーションがバックグラウンド状態になったとき�
 
 iOSアプリケーションの設計段階で、ユースケースに求められるペリフェラルのサービスとキャラクタリスティクスは決まります。ですから、検索は利用するものだけに限定することを勧めます。サービスを検索するCBPeripheralクラスのdiscoverServices:メソッドには、検索したいサービスのUUIDsを引数に指定できます。同様に、CBperipheralクラスのscanForPeripheralsWithServices:options:メソッドも、検索したいキャラクタリスティクスのUUIDsを引数に指定できます。
 
+~~~ {.objectivec}
 	[peripheral discoverServices:@[firstServiceUUID, secondServiceUUID]];
+~~~
 
 ### サブスクライブと読み出しの使いかた
 
@@ -894,7 +963,9 @@ setNotifyValue:forCharacteristic: methodの最初のパラメータをNO
 
 ペリフェラルに接続した時、iOSはそのペリフェラルをそれぞれ識別するUUIDを生成します。このUUIDを保存しておくと、あとでペリフェラルに再接続したいときに、セントラル・マネージャーのretrievePeripherals:メソッドを呼び出す時のペリフェラルの指定に使えます。
 
+~~~ {.objectivec}
     [myCentralManager retrievePeripherals:savedPeripheralUUIDs];
+~~~
 
 iOSデバイスが過去に接続したことがあるペリフェラルであれば、セントラル・マネージャーのretrievePeripherals:メソッドに、問い合わせたいペリフェラルのUUIDの配列を与えて呼び出します。UUIDはCFUUIDRefのインスタンスで表します。CBUUIDはBluetooth LEのサービスやキャラクタリスティクスの識別に使います。CBUUIDクラス自体がUUIDを表すのですが、これはBluetoothのために作られたクラスなので、ペリフェラルの識別のUUIDには、Bluetoothに関係がないCFUUIDRefが使われます。
 

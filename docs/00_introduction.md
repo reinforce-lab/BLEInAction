@@ -82,7 +82,7 @@ CoreBluetoothフレームワーク は Bluetooth Low Energy の無線通信を�
 
 ## サンプルコードのダウンロード  {.unnumbered}
 
-<TBD> 本書のサンプルソースコードは Github [https://github.com/reinforce-lab/BluetoothLowEnergyInAction](https://github.com/reinforce-lab/BluetoothLowEnergyInAction)  にあります。ライセンスは Apache License Version 2.0 です。バグや問題を見つけた場合は、pull requestを送ってください。
+<!--TBD--> 本書のサンプルソースコードは Github [https://github.com/reinforce-lab/BluetoothLowEnergyInAction](https://github.com/reinforce-lab/BluetoothLowEnergyInAction)  にあります。ライセンスは Apache License Version 2.0 です。バグや問題を見つけた場合は、pull requestを送ってください。
 
 ## 本書の問い合わせ先  {.unnumbered}
 
@@ -123,6 +123,5 @@ Bluetooth Low Energy の利用場面や企画での活用は、[株式会社 Mat
 - 本書の内容に基づき実施または運用したことで発生したいかなる損害も著者は一切の責任を負いません。
 - 本書の内容は2014年10月時点のものです。本書で紹介した製品およびサービスの名称や内容は執筆時点から変更される可能性があります。
 
-===
-<div style="text-align: center;"> この手に、魔法を </div>
-===
+<!-- <div style="text-align: center;"> この手に、魔法を </div> -->
+

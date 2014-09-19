@@ -1,3 +1,6 @@
+
+\putTableofcontents
+
 # Bluetooth Low Energy ってなに?
 
 Bluetooth Low Energy は、Bluetooth 3.0までの無線通信技術ではカバーできなかった分野にむけて開発された技術です。その特徴は、コイン型電池1つで年単位の無線通信がし続けられるほどの超低消費電力と多種多様な物との無線通信が実現できる通信方式にあります。Bluetooth Low Energy は、Bluetooth 4.0 で、その規格の1部として統合されました。
@@ -20,9 +23,9 @@ Bluetooth Low Energy が最初に活用されはじめた分野は、フィッ�
 
 Bluetooth Low Energy が体験できる最も身近な分野は、フィットネスです。フィットネスは、健康の維持、増進を目的とした運動のことです。この分野では、Bluetooth Low Energy が登場する以前から、適切なトレーニング効果を得るために、ランニングや屋内トレーニングでの運動強度や心拍数の計測がおこなわれています。
 
-フィットネスの用具を販売する [Wahoo Fitness](http://www.wahoofitness.com) の商品一覧を見ると、心拍計測デバイスや自転車の速度センサやバイク・トレイナーなどがあります。
+フィットネスの用具を販売する [Wahoo Fitness](http://www.wahoofitness.com) [^1010] の商品一覧を見ると、心拍計測デバイスや自転車の速度センサやバイク・トレイナーなどがあります。
 
-[^2010] [Wahoo Fitness](http://www.wahoofitness.com)
+[^1010] [Wahoo Fitness](http://www.wahoofitness.com)
 
 Bluetooth Low Energy が搭載されていないスマートフォンと連携しない単体の心拍センサと、スマートフォンにリアルタイムに心拍データを送信する心拍センサとの体験の違いを、運動中のデータ表示と、データの蓄積と分析の2点で見てみます。
 
@@ -95,9 +98,9 @@ Bluetooth Low Energy はクラシックBluetoothとは異なり、規格の範�
 
 例えば、キーボードやマウスなどの入力デバイスにはヒューマン・インターフェイス・デバイス・プロファイル (HID)が、ヘッドセットなど音楽を聞くデバイスには高度オーディオ配信プロファイル(A2DP)のように、用途それぞれにプロファイルが定義されています。
 
-クラシックBluetoothは、接続先であるiOSの振る舞いもプロファイルに含まれます。ですから、[iOS：iOS デバイス対応の Bluetooth プロファイル](http://support.apple.com/kb/HT3647?viewlocale=ja_JP) [^2010] の一覧表のように、1つ1つのプロファイルごとに規格に従っているかがチェックされています。iOSデバイスから使える周辺デバイスは、ここにあるプロファイルのものだけになります。
+クラシックBluetoothは、接続先であるiOSの振る舞いもプロファイルに含まれます。ですから、[iOS：iOS デバイス対応の Bluetooth プロファイル](http://support.apple.com/kb/HT3647?viewlocale=ja_JP) [^1010] の一覧表のように、1つ1つのプロファイルごとに規格に従っているかがチェックされています。iOSデバイスから使える周辺デバイスは、ここにあるプロファイルのものだけになります。
 
-[^2010]: [iOS：iOS デバイス対応の Bluetooth プロファイル http://support.apple.com/kb/HT3647?viewlocale=ja_JP](http://support.apple.com/kb/HT3647?viewlocale=ja_JP)
+[^1010]: [iOS：iOS デバイス対応の Bluetooth プロファイル http://support.apple.com/kb/HT3647?viewlocale=ja_JP](http://support.apple.com/kb/HT3647?viewlocale=ja_JP)
 
 iOSに実装されたプロファイルは、パソコンでいうデバイス・ドライバの働きをします。ですから、iOSアプリケーションは、Bluetoothか有線かの接続形式を気にせず、キーボードやヘッドセットといった単なる周辺デバイスとして扱えます。
 
@@ -143,10 +146,10 @@ Bluetooth4.0に統合された Bluetooth Low Energy は、コンビニエンス�
 
 Bluetooth4.0は、Bluetooth3.0に Bluetooth Low Energy を統合したものです。Blueooth LEは、Bluetooth3.0までの技術とは異なる技術です。そのため、 Bluetooth Low Energy だけに対応した周辺機器(シングルモードと呼びます)は、Bluetooth3.0までの対応機器とは接続できません。
 
-超低消費電力の無線通信技術には、Bluetooth Low Energy 以外にも [ZigBee](http://www.zbsigj.org) [^2110] や [ANT+](http://www.thisisant.com) [^2120] など、いくつもの超低消費電力無線通信技術がありますが、Bluetoothというブランドに統合されたこと、そしてiOS5から標準でサポートされたことで、一気に世界中に普及しました。
+超低消費電力の無線通信技術には、Bluetooth Low Energy 以外にも [ZigBee](http://www.zbsigj.org) [^1020] や [ANT+](http://www.thisisant.com) [^1030] など、いくつもの超低消費電力無線通信技術がありますが、Bluetoothというブランドに統合されたこと、そしてiOS5から標準でサポートされたことで、一気に世界中に普及しました。
 
-[^2110]: [ZigBee http://www.zbsigj.org](http://www.zbsigj.org)
-[^2120]: [ANT+ http://www.thisisant.com](http://www.thisisant.com)
+[^1020]: [ZigBee http://www.zbsigj.org](http://www.zbsigj.org)
+[^1030]: [ANT+ http://www.thisisant.com](http://www.thisisant.com)
 
 Bluetooth Low Energy の使い道は、たまにしか通信をしないが(低頻度)、必要があればすぐ通信ができる(通信の遅れ時間、レイテンシが小さい)、分野です。 応用分野は、例えば、テレビのリモコンのようなデバイスです。リモコンは、普段は使われることがなく、たまにボタンが押されます。ですが、ボタンが押されたら直ちにテレビが反応しなければなりません。
 
@@ -157,7 +160,7 @@ Bluetooth Low Energy デバイスには、ペアリングはありません。�
 Bluetooth Low Energy は、任意のオリジナルの機能を実装できる規格です。クラシックBluetooth規格は、ヘッドセットなど応用ごとに振る舞いを定義していました。そのため、規格の認証に、機器の振る舞いまでが含まれました。 Bluetooth Low Energy は、Generic Attribute Profile(ジェネリック アトリビュート プロファイル、GATT)までを規格として、このうえに実装されるデバイスの機能は規格に含みません。通信と機器の振る舞いを分離することで、ユーザは任意の機能の実装ができます。
 
 <!-- 近接検出、ブロードキャスト -->
-Bluetooth Low Energy デバイスは、近接検出や少量データのブロードキャストができます。 Bluetooth Low Energy は、そのデバイスをiPhoneに発見してもらうために、アドバタイズメント・パケットを送信します。このアドバタイズメント・パケットは、周囲の端末が受信できる、ブロードキャストです。このパケットの受信信号強度から、デバイスとの距離がおおまかに算出できます。また、このパケットには、20バイト程度の<!--TBD-->任意のバイト・データを入れられます。これを屋内測位や位置ビーコンに応用できます。
+Bluetooth Low Energy デバイスは、近接検出や少量データのブロードキャストができます。 Bluetooth Low Energy は、そのデバイスをiPhoneに発見してもらうために、アドバタイズメント・パケットを送信します。このアドバタイズメント・パケットは、周囲の端末が受信できる、ブロードキャストです。このパケットの受信信号強度から、デバイスとの距離がおおまかに算出できます。また、このパケットには、30バイト程度の任意のバイト・データを入れられます。これを屋内測位や位置ビーコンに応用できます。
 
 ### カスタム・プロファイルがもたらす柔軟さと多様性
 
@@ -165,13 +168,13 @@ Bluetooth Low Energy デバイスは、近接検出や少量データのブロ�
 
 クラシックBluetoothは、周辺デバイスの機能とその振る舞いをセットにして、プロファイルという1つの概念にしていました。Bluetooth Low Energy は、機器の振る舞いの定義をプロファイル、周辺デバイスの機能の定義をサービスと、振る舞いと機能を2つの概念に分離しています。
 
-例えば、鍵の置き忘れを防止するためのキーホルダーには [Find Me プロファイル](https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx) [^2020] が使われます。これは、キーホルダーを見つけたいときに、iOSデバイスから信号を送ると、キーホルダーからピーという音や振動が出るプロファイルです。
+例えば、鍵の置き忘れを防止するためのキーホルダーには [Find Me プロファイル](https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx) [^1040] が使われます。これは、キーホルダーを見つけたいときに、iOSデバイスから信号を送ると、キーホルダーからピーという音や振動が出るプロファイルです。
 
-Find Me プロファイルは[Immediate Alert サービス](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml) [^2030]を使います。このサービスはピーという音や振動を出すサービス、つまり周辺デバイスの機能を表します。
+Find Me プロファイルは[Immediate Alert サービス](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml) [^1050]を使います。このサービスはピーという音や振動を出すサービス、つまり周辺デバイスの機能を表します。
 
-[^2020]: [Find Me Profile https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx)
+[^1040]: [Find Me Profile https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx)
 
-[^2030]: [Immediate Alert Service https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml)
+[^1050]: [Immediate Alert Service https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml)
 
 この例をみると、キーホルダーを探すときに音や振動を出すFind Me プロファイルの振る舞い部分は、iOSアプリケーションに実装されます。その振る舞いに必要な振動や音の出力機能は、Immediate Alert サービスとして周辺デバイスに実装されます。
 
@@ -183,7 +186,7 @@ Bluetooth Low Energy は、データ・ストリームを提供する技術で�
 
 ですから、Bluetooth Low Energyの規格認証のもとで、カスタムなプロファイルとサービスを一般販売できます。これは、SPPしかなかったクラシックBluetoothとは大きな違いです。
 
-一方で、例えばキーボードなどの一般的な周辺デバイスは、規格として標準のサービスとプロファイルが定義されなければ周辺デバイス市場が立ち上がりません。クラシックBluetooth のプロファイルは、Bluetoohの規格開発を監督する [Bluetooth SIG](https://www.bluetooth.org) [^2040] が定義していましたが、Bluetooth Low Energyは、業界団体の企業が Bluetooth SIG に参加して、その業界でのプロファイルを取りまとめて標準化していくボトムアップ型をとっています。
+一方で、例えばキーボードなどの一般的な周辺デバイスは、規格として標準のサービスとプロファイルが定義されなければ周辺デバイス市場が立ち上がりません。クラシックBluetooth のプロファイルは、Bluetoohの規格開発を監督する [Bluetooth SIG](https://www.bluetooth.org) [^1040] が定義していましたが、Bluetooth Low Energyは、業界団体の企業が Bluetooth SIG に参加して、その業界でのプロファイルを取りまとめて標準化していくボトムアップ型をとっています。
 
  ^[2040]: [Bluetooth SIG https://www.bluetooth.org](https://www.bluetooth.org)
 
@@ -241,9 +244,9 @@ Bluetooth Low Energy のカスタム・プロファイルとサービスの柔�
 
 iOSアプリケーションとBluetooth Low Energy の周辺デバイスは、とても強く結びつきます。iOSアプリケーションは、表示機能の乏しい周辺デバイスの代替表示のようなおまけではありませんし、また周辺デバイスはiOSアプリケーションのセンサなどの単なる機能拡張ではありません。
 
-例えば、[Fitbit](http://www.fitbit.com/jp) [^2050] というサービスは、毎日の歩行数や階段の昇り降りを記録し続ける Bluetooth Low Energy の活動量計を販売しています。この活動量計は単体でも十分に魅力ある活動量計です。それがiOSアプリケーションと結びつくと、アプリケーションを通じてウェブ・ネットワークとも連携します。そして、Facebookなどのソーシャル・ネットワークで歩いた歩数を共有するなど、これまでになかったユーザ体験が提供されています。
+例えば、[Fitbit](http://www.fitbit.com/jp) [^1060] というサービスは、毎日の歩行数や階段の昇り降りを記録し続ける Bluetooth Low Energy の活動量計を販売しています。この活動量計は単体でも十分に魅力ある活動量計です。それがiOSアプリケーションと結びつくと、アプリケーションを通じてウェブ・ネットワークとも連携します。そして、Facebookなどのソーシャル・ネットワークで歩いた歩数を共有するなど、これまでになかったユーザ体験が提供されています。
 
-[^2050]: [Fitbit http://www.fitbit.com/jp](http://www.fitbit.com/jp)
+[^1060]: [Fitbit http://www.fitbit.com/jp](http://www.fitbit.com/jp)
 
 <!-- ここ編集すること -->
 iOSアプリケーションには、 Bluetooth Low Energy 専用のバックグラウンド・モードが用意されています。バックグラウンドで、 Bluetooth Low Energy デバイスと接続して通信しつづける、あるいはデバイスを発見して接続をすることができます。
@@ -264,12 +267,12 @@ iOSアプリケーションには、 Bluetooth Low Energy 専用のバックグ�
 
 iOS5およびiOS6では、ベンチャー企業が多種多様なアプセサリーを発表していましたが、iOSそれ自体がBluetooth Low Energyを使うことはありませんでした。iOS7からは、iOS自体が標準的なBluetooth Low Energy 周辺デバイスに対応したり、独自機能を提供しはじめています。
 
-iOSでBluetooth Low Energyをつかって、できること、それをするためにハードウェアおよびアプリケーション開発が不要か必要かを [#table-ios-and-ble] にまとめます。
+iOSでBluetooth Low Energyをつかって、できること、それをするためにハードウェアおよびアプリケーション開発が不要か必要かを [#table_ios_and_ble] にまとめます。
 
-Table: #table-ios-and-ble iOSでのBluetooth Low Energy活用
+Table: #table_ios_and_ble iOSでのBluetooth Low Energy活用
 
-番号 |したいこと                           | iOS対応 | ハードウェア | アプリケーション | MFi
-:+---:+----------------------------------:+--------:+-----------:+---------------:+----
+番号 | 使用目的                           | iOS対応 | ハードウェア | アプリケーション | MFi
+-----+-----------------------------------+--------+------------+----------------+----
 1|カスタムな周辺デバイスの販売               | iOS5    | 開発        | 開発           | 不要
 2|市販の周辺デバイスを使うアプリケーション開発 | iOS5    | 市販品       | 開発           | 不要
 3|iOSがサポートする周辺デバイス開発          | iOS7    | 開発        | 不要            | 不要
@@ -283,11 +286,11 @@ Table: #table-ios-and-ble iOSでのBluetooth Low Energy活用
 
 ### iOSと連携する周辺デバイス
 
-[#table-ios-and-ble]の1および2は、前節で述べたアプセサリーです。
+[#table_ios_and_ble] の1および2は、前節で述べたアプセサリーです。
 
 カスタムな周辺デバイスを販売したいならば、ハードウェアとその対応アプリケーション開発が必要です。市販の周辺デバイスを使うアプリケーション開発、例えば心拍センサーをつかったフィットネス・アプリケーション、もできます。その場合はハードウェアは製造を委託する、あるいは市販品を利用します。
 
-iOS7から標準的な周辺デバイスのサポートがはじまりました ([#table-ios-and-ble] 3) 。iOS7はヒューマン・インタフェース・デバイスの HID over GATT に対応したので、Bluetooth Low Energyのキーボードが使えます。iOS8は、MIDI over Bluetooth Low Energy に対応するので、音楽データのAPIで演奏データの送受信ができます。
+iOS7から標準的な周辺デバイスのサポートがはじまりました ([#table_ios_and_ble] 3) 。iOS7はヒューマン・インタフェース・デバイスの HID over GATT に対応したので、Bluetooth Low Energyのキーボードが使えます。iOS8は、MIDI over Bluetooth Low Energy に対応するので、音楽データのAPIで演奏データの送受信ができます。
 
 このようなiOSがサポートする周辺デバイスは、すでにAppStoreにある文字入力や音楽に対応したアプリケーションからすぐに使えるので、独自のアプセサリと違いiOSアプリケーションを開発する必要はありません。ハードウェアの製造販売だけで事業になります。
 
@@ -297,9 +300,10 @@ iOS7から標準的な周辺デバイスのサポートがはじまりました 
 
 ### 位置と近接および存在の検出
 
-[#table-ios-and-ble]の4は、[iBeacon](https://developer.apple.com/ibeacon/) [^2060]というApple社の新しい位置と近接の検出技術の活用です。これは、Bluetooth Low Energyのデバイス発見につかうアドバタイズメントという仕組みを利用して、周囲に識別子情報を送信しつづけるビーコンと、それをフォアグラウンドおよびバックグラウンドで検出しつづけるiOSデバイスを組み合わせた技術です。
+[#table_ios_and_ble] の4は、
+[iBeacon](https://developer.apple.com/ibeacon/) [^1070]というApple社の新しい位置と近接の検出技術の活用です。これは、Bluetooth Low Energyのデバイス発見につかうアドバタイズメントという仕組みを利用して、周囲に識別子情報を送信しつづけるビーコンと、それをフォアグラウンドおよびバックグラウンドで検出しつづけるiOSデバイスを組み合わせた技術です。
 
-[^2060]: [iBeacon https://developer.apple.com/ibeacon/](https://developer.apple.com/ibeacon/)
+[^1070]: [iBeacon https://developer.apple.com/ibeacon/](https://developer.apple.com/ibeacon/)
 
 iBeaconの活用は3つあります。
 
@@ -315,23 +319,23 @@ iBeaconを使うiOSアプリケーション開発には、ビーコンの詳細�
 
 ### ユーザを取り囲むデバイス群との連携
 
-[#table-ios-and-ble]の5から7は、ユーザを取り囲む様々なデバイス群とiOSとの連携です。ユーザが装着する、いわゆるウエアラブル・デバイスは、生体情報検出とユーザへの情報通知デバイスとして、2014年以降に成長すると期待される分野です。また、家電も、ユーザがその内部に入る環境制御装置としてみれば、広義のウエアラブル・デバイスと考えられます。
+[#table_ios_and_ble]の5から7は、ユーザを取り囲む様々なデバイス群とiOSとの連携です。ユーザが装着する、いわゆるウエアラブル・デバイスは、生体情報検出とユーザへの情報通知デバイスとして、2014年以降に成長すると期待される分野です。また、家電も、ユーザがその内部に入る環境制御装置としてみれば、広義のウエアラブル・デバイスと考えられます。
 
-iOS7から、iOSのロック画面に表示される通知情報を Bluetooth Low Energy で周辺デバイスに通知する [Apple Notification Center Service ,ANCS ](https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html) [^2070] というサービスが実装されて、そのサービスの仕様が公開されています。周辺デバイスが ANCS の仕様を実装すれば、腕時計型のウエアラブル・デバイスでよくあるメールやソーシャルメディアの通知情報の表示ができます。
+iOS7から、iOSのロック画面に表示される通知情報を Bluetooth Low Energy で周辺デバイスに通知する [Apple Notification Center Service ,ANCS ](https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html) [^1070A] というサービスが実装されて、そのサービスの仕様が公開されています。周辺デバイスが ANCS の仕様を実装すれば、腕時計型のウエアラブル・デバイスでよくあるメールやソーシャルメディアの通知情報の表示ができます。
 
 <!-- TBD 質問すること -->
 ANCSはiOSが提供するサービスなので、周辺デバイスを開発するだけです。iOSアプリケーションの開発は不要です。ただし設定や周辺デバイスの独自の機能を利用する場合は、専用のiOSアプリケーションを開発します。ANCSにMFiプログラムが必要かいなかは、Apple社に問い合わせてください。
 
 <!-- TBD 質問すること -->
-iOSとつながるBluetooth Low Energyデバイスの開発はMFiプログラムへの参加は不要です。ですが、Apple社のアクセサリ設計ガイドライン [Bluetooth Accessory Design Guidelines for Apple Products](https://developer.apple.com/hardwaredrivers/bluetoothdesignguidelines.pdf) [^2080]には、アクセサリ設計に認証機能を取り込むには、MFiプログラムで提供される認証仕様をサポートしなければならないとあります。周辺デバイスがiOSデバイスのANCSにアクセスするとき、iOSは認証を要求します。そのためANCSを使う周辺デバイスは、MFiプログラムの対象かもしれません。
+iOSとつながるBluetooth Low Energyデバイスの開発はMFiプログラムへの参加は不要です。ですが、Apple社のアクセサリ設計ガイドライン [Bluetooth Accessory Design Guidelines for Apple Products](https://developer.apple.com/hardwaredrivers/bluetoothdesignguidelines.pdf) [^1080]には、アクセサリ設計に認証機能を取り込むには、MFiプログラムで提供される認証仕様をサポートしなければならないとあります。周辺デバイスがiOSデバイスのANCSにアクセスするとき、iOSは認証を要求します。そのためANCSを使う周辺デバイスは、MFiプログラムの対象かもしれません。
 
-[^2070]: [Apple Notification Center Service https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html](https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html)
+[^1070A]: [Apple Notification Center Service https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html](https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html)
 
-[^2080]: [Bluetooth Accessory Design Guidelines for Apple Products https://developer.apple.com/hardwaredrivers/bluetoothdesignguidelines.pdf](https://developer.apple.com/hardwaredrivers/bluetoothdesignguidelines.pdf)
+[^1080]: [Bluetooth Accessory Design Guidelines for Apple Products https://developer.apple.com/hardwaredrivers/bluetoothdesignguidelines.pdf](https://developer.apple.com/hardwaredrivers/bluetoothdesignguidelines.pdf)
 
-iOS8から[HealthKit](https://developer.apple.com/healthkit/) [^2090] が導入されました。これはiOS自体が心拍や血糖値などプロファイルが規格化されているヘルスケア・デバイスからデータを取得してiOSのデータベースに集約します。集約されたデータは、iOSの標準アプリケーション Health で表示できます。また、一般のiOSアプリケーションもHealthKitフレームワークを通じて、データベースの参照や書き込みができます。
+iOS8から[HealthKit](https://developer.apple.com/healthkit/) [^1090] が導入されました。これはiOS自体が心拍や血糖値などプロファイルが規格化されているヘルスケア・デバイスからデータを取得してiOSのデータベースに集約します。集約されたデータは、iOSの標準アプリケーション Health で表示できます。また、一般のiOSアプリケーションもHealthKitフレームワークを通じて、データベースの参照や書き込みができます。
 
-[^2090]: [HealthKit https://developer.apple.com/healthkit/](https://developer.apple.com/healthkit/)
+[^1090]: [HealthKit https://developer.apple.com/healthkit/](https://developer.apple.com/healthkit/)
 
 iOS7までは、例えばフィットネスのiOSアプリケーションを開発しようとすると、心拍センサーなどの標準的なデバイスでも、iOSアプリケーションにデバイス・ドライバに相当する部分も実装しなければなりませんでした。さらに、iOSアプリケーションはそれぞれがデータを蓄積するもので、他のアプリケーションが蓄積されたデータを参照する標準の仕組みはiOSにはありませんでした。
 
@@ -341,9 +345,9 @@ iOSアプリケーションはHealthKitのデータベースに書き込むこ�
 
 HealthKitに対応した周辺デバイスの開発は、規格化されたプロファイル、およびカスタム・プロファイルを実装した Bluetooth LowEnergy 技術だけを使うデバイスであれば、MFiプログラムへの参加は不要です。HealthKitを使うiOSアプリケーション開発も、MFiプログラムは不要です。
 
-iOS8で導入された家のオートメーションをもたらす[HomeKit](https://developer.apple.com/homekit/) [^2100] は、Apple社の通信仕様と、iOSアプリケーションがデバイスと通信や制御をおこなうためのHomeKitフレームワークで構成されます。
+iOS8で導入された家のオートメーションをもたらす[HomeKit](https://developer.apple.com/homekit/) [^1100] は、Apple社の通信仕様と、iOSアプリケーションがデバイスと通信や制御をおこなうためのHomeKitフレームワークで構成されます。
 
-[^2100]: [HomeKit https://developer.apple.com/homekit/](https://developer.apple.com/homekit/)
+[^1100]: [HomeKit https://developer.apple.com/homekit/](https://developer.apple.com/homekit/)
 
 HomeKitフレームワークは、周辺デバイスのグループ化とアクションを設定するものです。例えば、1階にある家電群、2階にある家電群のようなグループを設定できます。また、昼の照明設定と夜の照明設定のように、アクションを設定できます。デバイス群の操作はSiriを通しておこないます。この例であれば「1階にある照明を夜の設定にしろ」と命令すれば、グループ化とアクションの設定から、1Fにある照明群に対して、夜の設定を適用する処理を、iOSがおこないます。
 
@@ -383,7 +387,7 @@ Windows Phone8は、2013年7月時点では、ハードウェア要件にBluetoo
 
 ## Bluetooth Low Energy の無線通信技術
 <!-- 個々イントロ -->
-通信規格、技術的に深堀り。
+<!--通信規格、技術的に深堀り。-->
 
 ### 規格成立までの歴史
 
@@ -398,9 +402,11 @@ Bluetooth Low Energy の研究は、2001年に始まりました。ノキア・�
 
 ### Bluetooth SMART READYとBluetooth SMARTロゴ
 
-Bluetooth4.0に統合されたBluetooth LEは、Bluetooth3.0までの技術とは互換性がありません。ですから、Bluetooth LEのみに対応しているデバイスは、Bluetooth3.0までの端末と接続できません。一部分、下位互換性がなくなったため、これまでのように、1つのロゴで相互接続性を表せなくなりました。<TBD Bluetoothロゴ>
+Bluetooth4.0に統合されたBluetooth LEは、Bluetooth3.0までの技術とは互換性がありません。ですから、Bluetooth LEのみに対応しているデバイスは、Bluetooth3.0までの端末と接続できません。一部分、下位互換性がなくなったため、これまでのように、1つのロゴで相互接続性を表せなくなりました。
 
-そこで、Bluetooth4.0では、クラシックBluetoothの1つのロゴから、Bluetooth SMART READYとBluetooth SMARTロゴという2つのロゴになりました。<ロゴの図> [https://www.bluetooth.org/ja-jp/bluetooth-brand/how-to-use-smart-marks](https://www.bluetooth.org/ja-jp/bluetooth-brand/how-to-use-smart-marks)
+<!--TBD 図 Bluetoothロゴ-->
+
+そこで、Bluetooth4.0では、クラシックBluetoothの1つのロゴから、Bluetooth SMART READYとBluetooth SMARTロゴという2つのロゴになりました。[https://www.bluetooth.org/ja-jp/bluetooth-brand/how-to-use-smart-marks](https://www.bluetooth.org/ja-jp/bluetooth-brand/how-to-use-smart-marks)
 
 Bluetooth SMART READYは、クラシックBluetoothとBluetooth LEの無線通信機能をもち、それらがどちらか一方または同時に動作するものを示します。パソコンや携帯電話などに搭載されるのは、このBluetooth SMART READYです。Bluetooth SMART READYのロゴがあるものは、クラシックBluetoothとBluetooth LEのデバイス、すべてのBluetoothと接続できます。
 
@@ -410,12 +416,12 @@ Bluetooth 4.0の登場で、周辺機器は、Bluetooth3.0までに対応した�
 
 ### Bluetooth Low Energy の無線通信
 
-<!--TBD-->に、Bluetoot LEの特徴を示します。
+[#table-ble-specification ]に、Bluetoot LEの特徴を示します。
 
-Bluetooth LEの無線通信の概要
+Table: #table-ble-specification Bluetooth LEの無線通信の概要
 
 項目               | 値                    
-:------------------|:----------------------
+------------------|----------------------
 周波数             |   2.400-2.4835 GHz    
 物理層のビットレート | 1 Mbps                
 通信送信電力        | 10ミリワット ~ 10マイクロワット
@@ -426,7 +432,7 @@ Bluetooth LEが利用する周波数は、クラシックBluetoothと同じで�
 
 通信のビットレートは、1Mbpsです。これは0,1というビットの通信速度です。Bluetooth LEでは、データは決められた時間周期ごとにパケットの送受信でやりとりします。パケット自体の通信速度は1Mbpsですが、常にパケットが流れ続けられる規格ではないので、パケットのやり取りによる実際の通信速度は、300kbps程度になります。Bluetooth LEデバイス間の通信速度は、通信パラメータで大きく異なります。iOSデバイスでの通信速度は、おおよそ10 Kバイト/秒です。
 
-Blueooth LEの送信電力は、最大10mW、最小10 μWです。最大出力電力時の通信距離は、見通し距離で150m程度になります。距離は、受信回路の感度や送受信アンテナの利得(高周波電力を電波にして空間に放つ効率)が高ければ、これより大きくなるかもしれません。また、建物の壁などの遮蔽物があったり、見通しではない環境では、通信距離は見通し距離よりもずっと短くなります。目安としてオフィスで30m程度は通信できます。<TBD 確認>
+Blueooth LEの送信電力は、最大10mW、最小10 μWです。最大出力電力時の通信距離は、見通し距離で150m程度になります。距離は、受信回路の感度や送受信アンテナの利得(高周波電力を電波にして空間に放つ効率)が高ければ、これより大きくなるかもしれません。また、建物の壁などの遮蔽物があったり、見通しではない環境では、通信距離は見通し距離よりもずっと短くなります。目安としてオフィスで30m程度は通信できます。<!--TBD 確認-->
 
 送信電力は、Bluetooth LEデバイス内部のソフトウェアから設定できます。ハードウェアで固定されないので、状況に合わせた、必要な通信距離が得られるような、送信電力の設定動作が可能です。例えば位置ビーコンであれば、位置を知らせたい範囲内に届く程度に送信電力を設定します。またiPhoneに取り付けるキーホルダのように、常に近距離にあるものならば、通信距離が数メートル程度になるように、送信電力を絞り込むこともできるでしょう。
 
@@ -438,7 +444,7 @@ Bluetooth LEのネットワークは、ネットワークを制御する1つの�
 
 この1つのネットワークを、ピコネット(Pico net)と呼びます。ピコは、イタリア語で小さいを意味するpiccoloからとられた、SI単位系で10<sup>-12</sup>を表す接頭辞ピコのことで、ピコネットは、とても小さいネットワークの意味です。中心から周囲に広がる接続の様態が星のようなので、スター型ネットワークと呼ばれます。
 
-<TBD: スター型の図、アドバタイズメント、iPhoneを中心にペリフェラル, iPhoneがペリフェラル>
+<!--TBD: スター型の図、アドバタイズメント、iPhoneを中心にペリフェラル, iPhoneがペリフェラル-->
 
 <!-- 接続手順 -->
 マスターとスレイブのの接続手順は:
@@ -452,11 +458,11 @@ Bluetooth LEのネットワークは、ネットワークを制御する1つの�
 
 まず、マスターがスレイブがあることを知らないといけません。スレイブは、機種情報や個体識別番号などが入ったアドバタイズメント・パケットを送出します。どのマスターでも、アドバタイズメント・パケットを受信できます。アドバタイズメント・パケットは、スレイブが、まだどのピコネットにも属していないときにだけ、送出できます。
 
-Bluetooth LEの特徴は、スレイブの発見がとても早いことです。アドバタイズメント・パケットは、最小20ミリ秒周期(1秒に50回)で送出できます。アドバタイズメント・パケットは、は、アドバタイズメントのために割り当てられた特定の周波数範囲で送信することで、マスターはほぼ確実にこのパケットを受信できます。実際に、デバイスの発見に1秒もかかりません。<TBD 実験>
+Bluetooth LEの特徴は、スレイブの発見がとても早いことです。アドバタイズメント・パケットは、最小20ミリ秒周期(1秒に50回)で送出できます。アドバタイズメント・パケットは、は、アドバタイズメントのために割り当てられた特定の周波数範囲で送信することで、マスターはほぼ確実にこのパケットを受信できます。実際に、デバイスの発見に1秒もかかりません。<!--TBD 実験-->
 
 アドバタイズメント・パケットを受信してスレイブを発見したマスターは、接続要求を出して接続を確立します。接続している間、スレイブはそのマスターのピコネットに属します。接続したマスターとスレイブは、そのマスターとスレイブだけが知っている切り替え順番で、通信に使う周波数領域を切り替えながら、通信します。これを適応周波数ホッピング方式と呼びます。
 
-同時に接続できるスレイブの上限数は、Bluetooth LEの規格では、およそ 2<sup>31</sup>(約21億)です。クラシックBluetoothでは、規格で7に制約されます。同時接続上限数は、実際には、Bluetooth LEのプロトコル・スタックの実装次第で決まります。iOSデバイスは10です。ただし、iPhoneは、10のスレイブと接続しているときでも、どのスレイブからのパケットでも、アドバタイズメント・パケットの受信はできます。<TBD 確認>
+同時に接続できるスレイブの上限数は、Bluetooth LEの規格では、およそ 2<sup>31</sup>(約21億)です。クラシックBluetoothでは、規格で7に制約されます。同時接続上限数は、実際には、Bluetooth LEのプロトコル・スタックの実装次第で決まります。iOSデバイスは10です。ただし、iPhoneは、10のスレイブと接続しているときでも、どのスレイブからのパケットでも、アドバタイズメント・パケットの受信はできます。<!--TBD 確認-->
 
 スレイブは、同時に2つ以上のピコネットに属することはできません。必ず1つのピコネットに属します。スレイブとの接続は特定のピコネットに縛られることはありません。任意のマスターと接続できます。スレイブが別のピコネットに接続するときは、まず接続を切断してから、別のマスターとの接続処理をおこないます。
 
@@ -526,14 +532,16 @@ iOSには、有線インタフェースと無線インタフェースがあり�
 
 ### 無線インタフェース
 
-iPhoneの無線インタフェースは、WiFi、Bluetooth(クラシックBluetoothとBluetooth LE)です。それぞれのビットレートとMFiプログラムの要不要をまとめます。<!--TBD-->
+iPhoneの無線インタフェースは、WiFi、Bluetooth(クラシックBluetoothとBluetooth LE)です。それぞれのビットレートとMFiプログラムの要不要をまとめます ( [#table-wireless-speed-list] )。
 
-<!-- 表 無線インタフェースの通信速度 -->
+Table: #table-wireless-speed-list 無線インタフェースの通信速度
+
 名称              | 物理層のビットレート | MFiプログラム | 接続設定
-*----------------|------------------*|-------------+---------
+-----------------|------------------|-------------+---------
 無線LAN (802.11g) |54Mbps             | 不要         | 必要
 Bluetooth2.0     | 3Mbps             | 必須         | 必要(※)
 Bluetooth LE     | 1Mbps             | 不要         | 不要
+
 ※Bluetoothの標準プロファイルを利用する場合はMFiは不要。
 
 #### 無線LAN
@@ -581,7 +589,6 @@ Bluetooth LE     | 1Mbps             | 不要         | 不要
 クラシックBluetoothでは、任意の通信には、SPP(Seerial Port Profile)を使います。このプロファイルは、端末間の通信を決めるものです。接続先に、端末内部で動作しているアプリケーションまでを指定する仕組みはありません。
 
 MFiプログラムに参加すると、iOSアプリケーションと接続するための認証チップを含むハードウェアなどの開発キットが提供されます。この認証チップは、Apple社が承認した周辺機器のみがiOSアプリケーションと接続できる排他的な振る舞いをしますが、同時に、SPPに欠けている、モバイル機器には必要な、周辺機器が指定されたiOSアプリケーションにのみ接続する仕組みも、提供しています。
-
 
 ## アプセサリを作るには
 

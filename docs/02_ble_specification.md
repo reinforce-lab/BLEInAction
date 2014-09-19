@@ -3,9 +3,9 @@
 
 Bluetooth Low Energy は、Bluetooth4.0 で Bluetooth に統合された超低消費電力無線通信技術です。
 
-その[規格書](https://www.bluetooth.org/en-us/specification/adopted-specifications) [^3010] は、だれでも無償で入手できます。しかしこの規格書は、2684ページもの膨大なページ数で、クラシックBluetooth と一緒に書かれているため、この規格書で  Bluetooth Low Energy を理解するのは大変です。
+その[規格書](https://www.bluetooth.org/en-us/specification/adopted-specifications) [^2010] は、だれでも無償で入手できます。しかしこの規格書は、2684ページもの膨大なページ数で、クラシックBluetooth と一緒に書かれているため、この規格書で  Bluetooth Low Energy を理解するのは大変です。
 
-[^3010]: [Specification Adopted Documents https://www.bluetooth.org/en-us/specification/adopted-specifications](https://www.bluetooth.org/en-us/specification/adopted-specifications)
+[^2010]: [Specification Adopted Documents https://www.bluetooth.org/en-us/specification/adopted-specifications](https://www.bluetooth.org/en-us/specification/adopted-specifications)
 
 この章は、Bluetooth Low Energy の無線通信技術と規格を解説していきます。規格書から Bluetooth Low Energy の部分を取り出しまとめるだけではなく、なぜそういう仕組みになっているのか、それがどんな利点につながるのかを、理由とあわせて述べます。
 
@@ -90,22 +90,24 @@ Bluetooth Low Energy の周辺デバイスを独自に設計するならば、�
 
 ですから、周辺デバイスを設計するためには、データ形式や機器の振る舞いまでが規格になっていなければなりません。アプリケーションまで包括した仕様が規格化されてはじめて、ヘッドセットやiOSデバイスなど様々な会社が設計製造したデバイス間での相互接続が保証できます。
 
-例えば、ヘッドセットは電話の着信や発信の操作、そして通話音声の双方向のやりとりをするハードウェアです。その機能や振る舞い、そしてデータ形式は [ハンズフリー・プロファイル (Hands-Free Profile)](https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx) [^3030] で決められています。
+例えば、ヘッドセットは電話の着信や発信の操作、そして通話音声の双方向のやりとりをするハードウェアです。その機能や振る舞い、そしてデータ形式は [ハンズフリー・プロファイル (Hands-Free Profile)](https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx) [^2030] で決められています。
 
-[^3030]: [Hands-Free Profile, https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx)
+[^2030]: [Hands-Free Profile, https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx)
 
 ヘッドセットに音楽を聞く機能も入れたければ、ハンズフリー・プロファイルに加えて高音質の音楽データを送る
-[Advanced Audio Distribution Profile (A2DP)](https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx) [^3040] も実装します。
+[Advanced Audio Distribution Profile (A2DP)](https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx) [^2040] も実装します。
 
-[^3040]: [Advanced Audio Distribution Profile (A2DP), https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx) 
+[^2040]: [Advanced Audio Distribution Profile (A2DP), https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx) 
 
-クラシックBluetoothは、用途ごとに様々なプロファイルが規格として決められており、通信の双方が同じプロファイルを実装することで相互接続が確保されます。プロファイルが定義されていない場面には、仮想シリアル通信のプロファイル [Serial Port Profile (SPP)](https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx) [^3050] を使います。
+クラシックBluetoothは、用途ごとに様々なプロファイルが規格として決められており、通信の双方が同じプロファイルを実装することで相互接続が確保されます。プロファイルが定義されていない場面には、仮想シリアル通信のプロファイル [Serial Port Profile (SPP)](https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx) [^2050] を使います。
 
-[^3050]: [Serial Port Profile (SPP), https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx)
+[^2050]: [Serial Port Profile (SPP), https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx)
 
 ##  Bluetooth Low Energy のアーキテクチャ
 
- Bluetooth Low Energy のアーキテクチャを階層表示したのが図<!--TBD  BLEのアーキテクチャ -->です。通信技術は異なる機種間でデータをやりとりする技術です。0/1のビット・データのやりとりにはじまり、接続管理やビット・データのかたまりの意味づけなど、いくつもの役割が組みあわさって、はじめて通信ができます。Bluetoothは、通信の手順やデータ構造をプロトコル、機器の振る舞いをプロファイル、と呼びます。
+ Bluetooth Low Energy のアーキテクチャを階層表示したのが [#fig_ble_protocol_stack] です。通信技術は異なる機種間でデータをやりとりする技術です。0/1のビット・データのやりとりにはじまり、接続管理やビット・データのかたまりの意味づけなど、いくつもの役割が組みあわさって、はじめて通信ができます。Bluetoothは、通信の手順やデータ構造をプロトコル、機器の振る舞いをプロファイル、と呼びます。
+
+![ #fig_ble_protocol_stack Bluetooth Low Energyのプロトコル・スタック](fig/ch02_ble_protocol_stack.png)
 
 物理層からGATTまでの階層は、それぞれ下層の機能を使って、相手の同じ階層のプロトコルと通信します。ジェネリック・アクセス・プロファイルは、機器の振る舞いを定義します。機器の振る舞いは、物理層からGATTまでのレイヤそれぞれの役割を通じて実現されるので、ジェネリック・アクセス・プロファイルは、特定のレイヤのものではなく、物理層からGATTまでの全てのレイヤに影響を与えます。物理層からGATTまでの階層は、相手の同じ階層のプロトコルと通信します。レイヤの役割は以下のとおりです:
 
@@ -173,10 +175,12 @@ Bluetoothデバイスは、コントローラが対応していれば、この4�
 
 ## 隣接デバイスとの無線通信
 
-コントローラの機能は、隣接するデバイスとの通信です。 Bluetooth Low Energy のコントローラは、電波を送受信する物理層、隣接するデバイスとの接続とパケット通信を管理するリンク・レイヤ、そしてホストのインタフェースHCIで構成されます。 Bluetooth Low Energy の物理層の特性を<!--TBD  表を参照 -->に示します。
+コントローラの機能は、隣接するデバイスとの通信です。 Bluetooth Low Energy のコントローラは、電波を送受信する物理層、隣接するデバイスとの接続とパケット通信を管理するリンク・レイヤ、そしてホストのインタフェースHCIで構成されます。 Bluetooth Low Energy の物理層の特性を[#table-ble-phy-specification] に示します。
+
+Table: #table-ble-phy-specification Bluetooth Low Energyの物理層の特性
 
  項目              | 値                    
-:-----------------|:----------------------
+-------------------+----------------------
  周波数            |   2.400-2.4835 GHz    
  物理層のビットレート | 1 Mbps               
  通信送信電力       | 10 ミリワット ~ 10 マイクロワット
@@ -194,16 +198,15 @@ Bluetooth Low Energy が利用する周波数は、クラシックBluetoothと�
 
 Bluetoothが利用する周波数帯はBluetooth専用ではありません。無線LANをはじめとする様々な通信装置や電子レンジも利用していますから、他の機器からの混信が常に生じうる、賑やかな周波数帯です。
 
-Bluetooth Low Energy は、同じ周波数帯を利用する無線機器があることを前提に設計されています。混信を与えないように、また通信が頻繁に切断しないように、80MHzの周波数帯を2MHz幅に分割したチャネルと、適応周波数ホッピング方式を導入しています<!--TBD / -->。
+Bluetooth Low Energy は、同じ周波数帯を利用する無線機器があることを前提に設計されています。混信を与えないように、また通信が頻繁に切断しないように、80MHzの周波数帯を2MHz幅に分割したチャネルと、適応周波数ホッピング方式を導入しています。
 
 ### 変調方式
 
 情報を送るために電波の波形を変化させることを変調と言います。変調は、送信する電波、情報を搬送する波なので搬送波と呼びます、の波の大きさ(振幅)または周波数および位相を時間変化させることです。この変調は0/1のデジタルデータを、四方八方に広がっていく電波にのせる技術です。
 
-Bluetooth Low Energy の変調方式は、<!--TBD  波形 -->に示すGaussian Frequency Shift Keying (ガウシアン周波数シフトキーイング、GFSK) という連続位相周波数偏移変調方式の1つです。周波数シフトキーイングは、0/1のビット・データごとに、一定の周期で周波数の遷移(シフト)量を切り替える(キーイング)変調方式です。
+Bluetooth Low Energy の変調方式は、Gaussian Frequency Shift Keying (ガウシアン周波数シフトキーイング、GFSK) という連続位相周波数偏移変調方式の1つです。周波数シフトキーイングは、0/1のビット・データごとに、一定の周期で周波数の遷移(シフト)量を切り替える(キーイング)変調方式です。
 
-<!--TBD  波形 -->のように、250kHzの周波数偏移では、1マイクロ秒後に搬送波の位相が90度変化します。250kHzの周期は4マイクロ秒ですから、1マイクロ秒は1/4周期だからです。搬送波に比べればごく僅かな周波数遷移ですが、1マイクロ秒後たてば振幅の符号が正負に分かれるため、容易に情報を取り出せます。この1つの信号をシンボルと呼びます。 Bluetooth Low Energy のシンボル・レートは1Mbpsです。1シンボルは、振幅が正負どちらかにわかれる2状態なので、1シンボルで1ビットが伝送できます。ですからビット・レートは1Mbpsになります。
-<!-- 例えば、ビット1なら+250kHz、ビット0ならば-250kHzの周波数遷移とします。-->
+250kHzの周波数偏移では、1マイクロ秒後に搬送波の位相が90度変化します。250kHzの周期は4マイクロ秒ですから、1マイクロ秒は1/4周期だからです。搬送波に比べればごく僅かな周波数遷移ですが、1マイクロ秒後たてば振幅の符号が正負に分かれるため、容易に情報を取り出せます。この1つの信号をシンボルと呼びます。 Bluetooth Low Energy のシンボル・レートは1Mbpsです。1シンボルは、振幅が正負どちらかにわかれる2状態なので、1シンボルで1ビットが伝送できます。ですからビット・レートは1Mbpsになります。
 
 GFSKのガウシアンは、0/1の信号をガウスフィルタを通して滑らかにした波形で、周波数遷移をおこなうことから名づけられています。0/1の変化そのままで周波数遷移をすると、0/1の変化点で搬送波が急激に変化して、周波数占有幅が大きくなります。これは周波数帯域を効率よく使うための技術です。
 
@@ -217,7 +220,7 @@ Bluetooth Low Energy は、心拍センサや時計などの一般に普及す�
 
 Bluetooth Low Energy は、2.400 GHzから2.480GHzまでの80MHzの帯域を、2MHz幅で分割して、40のチャンネルとします。送信側と受信側が同じチャネルを使っていれば、同じ周波数をつかうことになります。また、あるチャンネルの通信は、周波数が十分離れていますから、隣接するチャンネルまたその他のチャンネルの通信に影響しません。ですから、違うチャンネルを利用すれば、複数の機器が同時に通信をしていても混信が生じません。
 
-40のチャンネルには、それぞれ0から39までの番号が割り振られます<!--TBD / -->。チャンネルは2種類にわけられます。チャンネル37からチャンネル39までの3チャンネルをアドバタイジング・チャンネル、チャンネル0からチャンネル36までの37チャンネルをデータ・チャンネルと呼びます。
+40のチャンネルには、それぞれ0から39までの番号が割り振られます。チャンネルは2種類にわけられます。チャンネル37からチャンネル39までの3チャンネルをアドバタイジング・チャンネル、チャンネル0からチャンネル36までの37チャンネルをデータ・チャンネルと呼びます。
 
 アドバタイジング・チャンネルは、デバイスの発見と接続に使います。データ・チャンネルは、接続が完了したデバイス同士の通信に使います。アドバタイジング・チャンネルは、3つのうちどれか1つのチャンネルで通信ができるならば、機能します。データ・チャンネルは、適応周波数ホッピング方式と呼ばれる、通信につかうチャンネルを時間で次々に切り替えていく方式をつかうので、一部のチャンネルで混信をうけても通信は断絶しません。
 
@@ -225,14 +228,16 @@ Bluetooth Low Energy を搭載するモバイル機器は、たいてい無線LA
 
 無線LANは、1チャンネルあたりの帯域が20MHz、14のチャネルを、5MHzづつずらして、隣接するチャンネルと帯域を重ねて配置されています。無線LANでよく使われるチャンネルは、1、6，および11で、それぞれの中心周波数は2.412 GHz、2.437 GHz、および2.462 GHzです。
 
-これに Bluetooth Low Energy のチャンネルを重ねると<!-- BLE handbookの p.86の図 -->になります。
+これに Bluetooth Low Energy のチャンネルを重ねると(TBD 図 チャンネル)になります。
 無線LANにかぎらず任意の無線通信の混信を避けるには、2．4GHzの帯域内の、なるべく離れたチャンネルを使うしかありません。チャンネル37 (2.402 GHz)とチャンネル39 (2.426 GHz)は、帯域の端に割り当ててあります。もう1つのチャンネル38 (2.480 GHz)は、帯域のなるべく中央で、かつ無線LANのチャンネルと重ならないものが選ばれています。
 
 アドバタイジング・チャンネルの数が3よりも多ければ、より混信を避けられそうです。しかしそうすると、非接続時の周辺機器の電池消費量が、チャネル数分だけ増えてしまいます。周辺機器は、自分の存在を周囲に伝えるために、アドバタイズメント・パケットを送信します。アドバタイズメント・パケットは、一定の周期ごとに、3チャネルそれぞれで送信します。ですから、もしもアドバタイジング・チャネルを、2倍の6チャネルにすると、非接続時の周辺機器の電池消費量も単純に2倍になるでしょう。
 
 ### パケット・フォーマット
 
-通信でつかわれる、制御情報とデータを含む連続したビットのかたまりを、パケットと呼びます。 Bluetooth Low Energy のパケットのフォーマットは<!--TBD / -->です。オクテットは8ビットの情報を表す単位です。通常使うバイトと同じ意味ですが、機種によっては8ビットではないバイトもありうるのです。そのため、通信では、曖昧さがない8を表すオクテットを使います。
+通信でつかわれる、制御情報とデータを含む連続したビットのかたまりを、パケットと呼びます。 Bluetooth Low Energy のパケットのフォーマットは [#fig_ble_packet_format] です。オクテットは8ビットの情報を表す単位です。通常使うバイトと同じ意味ですが、機種によっては8ビットではないバイトもありうるのです。そのため、通信では、曖昧さがない8を表すオクテットを使います。
+
+![ #fig_ble_packet_format パケット・フォーマット](fig/ch02_ble_packet_format.png)
 
 パケットは、アクセス・アドレス、上位階層が送受信するデータであるプロトコル・データ・ユニット(Protocol Data Unit, PDU)とその誤り検出用の巡回検査符号(Cyclic Reundancy Check, CRC)の3つのエンティティで、構成されます。
 
@@ -262,7 +267,9 @@ CRC(Cyclic Redundancy Check, CRC)は、PDUのエラー検出のための巡回�
 
 ### デバイスの発見とピコネットへの参加
 
-デバイスの発見と接続の流れは、リンク層の状態遷移図<!--TBD  図表番号 -->を使うとわかりやすくなります。リンク層には5つの状態:
+![ #fig_link_layer_state_machine リンク層の状態遷移](fig/ch02_ble_link_layer_state_machine.png)
+
+デバイスの発見と接続の流れは、リンク層の状態遷移図を使うとわかりやすくなります。リンク層には5つの状態:
 
 - スタンドバイ(Standby)
 - アドバタイジング(Acvertising)
@@ -289,8 +296,6 @@ CRC(Cyclic Redundancy Check, CRC)は、PDUのエラー検出のための巡回�
 1. 同時にマスターかつスレーブには、なれない。
 2. スレーブは同時に2つ以上のマスターと接続しない。
 
-<!-- 3. マスターと接続したスレーブは、接続のためのアドバタイジング・パケットを送信しません。-->
-
 スキャナやアドバタイザといった役割は、リンク層の制御機能で作られます。ですから、たいていの Bluetooth Low Energy の半導体では、ソフトウェアでどの役割をもたせるかが決められます。スマートフォンがアドバタイザになることも、また周辺機器がマスターでスマートフォンがスレーブになるピコネットを作ることもできます。
 
 また、1つのコントローラが同時にスレーブかつマスターになることはできません。コネクション状態に遷移したスレイブはアドバタイジング・パケットを送出しませんから、スレーブは同時に2つ以上のマスターとは接続しません。スレーブは、かならず1つのピコネットに属します。
@@ -303,7 +308,9 @@ CRC(Cyclic Redundancy Check, CRC)は、PDUのエラー検出のための巡回�
 
 アドバタイジングでの通信は、非接続の同報通信です。リンク層のアクセス・アドレスは、固定値 10001110100010011011111011010110b (0x8E89BED6) が使われます。
 
-アドバタイジング・パケットは、一定周期のアドバタイジング・イベントごとに送出されます<!--TBD アドバタイジングイベントのタイミング -->。アドバタイジング・イベントごとに、アドバタイジング・パケット(ADV_IND と表記している)が、チャンネルごとに送出されます。チャンネルごとのパケット送出時間は10ミリ秒以下です。
+![ #fig_advertising_timing アドバタイジング・イベントのタイミング](fig/ch02_advertising_timing.png)
+
+アドバタイジング・パケットは、一定周期のアドバタイジング・イベントごとに送出されます( [#fig_advertising_timing] ) 。アドバタイジング・イベントごとに、アドバタイジング・パケット(ADV_IND と表記している)が、チャンネルごとに送出されます。チャンネルごとのパケット送出時間は10ミリ秒以下です。
 
 イベントの周期 T_advEvent は:
 
@@ -319,7 +326,7 @@ advDelayは0から10ミリ秒のランダムな値です。もしも、全く同
 
 アドバタイジング・パケットのペイロードは37オクテットの情報を送れます。しかしアドバタイザの情報は、たいてい、このペイロードだけでは不足します。アドバタイザからより多くのデバイス情報を引き出すのが、スキャンです。
 
-<!--TBD  状態遷移図 -->のスキャニングには、パッシブ・スキャンとアクティブ・スキャンがあります。パッシブ・スキャンはアドバタイザのパケットを受信するだけのスキャンです。アクティブ・スキャンは、アドバタイジング・パケットの終了から150マイクロ秒後に、SCAN_REQパケットを送信します。スキャン・リクエスト(SCAN\_REQ)パケットを受信したアドバタイザは、アドバタイジング・パケットと同じ37オクテットのペイロードがあるスキャン・レスポンス(SCAN\_RES)パケットを、150マイクロ秒後に返します。
+スキャニングには、パッシブ・スキャンとアクティブ・スキャンがあります。パッシブ・スキャンはアドバタイザのパケットを受信するだけのスキャンです。アクティブ・スキャンは、アドバタイジング・パケットの終了から150マイクロ秒後に、SCAN_REQパケットを送信します。スキャン・リクエスト(SCAN\_REQ)パケットを受信したアドバタイザは、アドバタイジング・パケットと同じ37オクテットのペイロードがあるスキャン・レスポンス(SCAN\_RES)パケットを、150マイクロ秒後に返します。
 
 アドバタイジング・パケットとSCAN\_RESパケットは同じデータフォーマットに従います。ここで、アクティブ・スキャンは、パケットをやり取りする分だけ電力を消費します。そこでSCAN\_RESパケットは、時間で変化しない情報を納めるものとします。スキャナが読み取ったSCAN\_RESパケットをキャッシュすることで、スキャンは1度だけですむようにします。SCAN\_RESパケットには、アドバタイザが持っている機能を表すサービスの識別子やデバイスの名称などが置かれます。
 
@@ -327,30 +334,41 @@ advDelayは0から10ミリ秒のランダムな値です。もしも、全く同
 
 #### ペイロードのフォーマット
 
-アドバタイジング・パケットのPDUは、2オクテットのヘッダと6〜37オクテットのペイロードがあります<!--TBD パケットフォーマット -->。このヘッダの、PDU TypeはPDUの種類を示します。TxAdd, RxAddはPDU Typeにより異なる意味を持ちます。Lengthはペイロードの長さをオクテット単位で示します。
+アドバタイジング・パケットのPDUは、2オクテットのヘッダと6〜37オクテットのペイロードがあります。このヘッダの、PDU TypeはPDUの種類を示します。TxAdd, RxAddはPDU Typeにより異なる意味を持ちます。Lengthはペイロードの長さをオクテット単位で示します。
 
-<!-- PDUタイプ -->
-PDUタイプ| 役割                                     | 略語
-b3b2b1b0|                                         | 
-:--------+:---------------------------------------+:------------
- 0000    | Connectable undirected advertising     | ADV_IND
- 0001    | Connectable directed advertising       | ADV\_DIRECT_IND
- 0010    | Non connectable undirected advertising | ADV\_NONCONN_IND
- 0011    | Scan request                           | SCAN_REQ
- 0100    | Scan response                          | SCAN_RSP
- 0101    | Connection request                     | CONNECT_REQ
- 0110    | Scannable undirected advertising       | ADV\_SCAN_IND
+Table: #table-pdu-type  PDUタイプ
 
-ヘッダのPDU Typeは7タイプあります<!--TBD  PDUタイプの表 -->。このうち、アドバタイジングにつかうのは4タイプです。PDUタイプは、わかりやすく、短い略語であらわします。役割にあるConnectableは、接続要求ができることを、undirectedは不特定多数のデバイスへのアドバタイジング、directedは特定デバイスへのアドバタイジング、またScannnableは、のちに述べるスキャン要求ができること、を示しています。
++----------+-----------------------------------------+------------+
+|PDUタイプ  | 役割                                    | 略語        |
+|b3b2b1b0  |                                         |            |
++==========+=========================================+============+
+|0000    | Connectable undirected advertising     | ADV_IND       |
++--------+-----------------------------------------+-------------------+
+|0001    | Connectable directed advertising       | ADV\_DIRECT_IND    |
++--------+-----------------------------------------+-------------------+
+|0010    | Non connectable undirected advertising | ADV\_NONCONN_IND   |
++--------+-----------------------------------------+-------------------+
+|0011    | Scan request                           | SCAN_REQ           |
++--------+-----------------------------------------+-------------------+
+|0100    | Scan response                          | SCAN_RSP           |
++--------+-----------------------------------------+-------------------+
+|0101    | Connection request                     | CONNECT_REQ        |
++--------+-----------------------------------------+-------------------+
+|0110    | Scannable undirected advertising       | ADV\_SCAN_IND      |
++--------+-----------------------------------------+-------------------+
+
+ヘッダのPDU Typeは7タイプあります ( [#table-pdu-type] )。このうち、アドバタイジングにつかうのは4タイプです。PDUタイプは、わかりやすく、短い略語であらわします。役割にあるConnectableは、接続要求ができることを、undirectedは不特定多数のデバイスへのアドバタイジング、directedは特定デバイスへのアドバタイジング、またScannnableは、のちに述べるスキャン要求ができること、を示しています。
+
+Table: #table_pdu_type_and_connectivity PDUタイプと接続可能性
 
 PDUタイプ           | 無向/有向  | スキャン要求 | 接続要求
-:------------------+:----------+:------------+:----------
+-------------------+-----------+-------------+-----------
 ADV_IND            | 無向       | できる      | できる
 ADV\_DIRECT\_IND   | 有向       | できない     | できる(特定デバイス)
 ADV\_NONCONN\_IND  | 無向       | できない    | できない
 ADV\_SCAN\_IND     | 無向       | できる      | できない
 
-PUDタイプごとの機能をまとめたものが<!--TBD  PDUタイプと機能 -->です。
+PUDタイプごとの機能をまとめたものが [#table_pdu_type_and_connectivity] です。
 
 ADV\_INDとADV\_DIRECT\_INDは、接続を受け入れるタイプです。ADV\_INDが、いわゆる通常のアドバタイジングです。不特定多数のデバイスにそのデバイスの存在をつたえて、接続要求があればそれを受け入れます。ADV\_DIRECT_INDは、以前に接続したことのあるデバイスと高速に接続するためのタイプです。
 
@@ -358,12 +376,14 @@ ADV\_NONCONN_IND と ADV\_SCAN\_IND は、接続要求を受け入れないタ�
 
 #### パブリック・デバイス・アドレスとランダム・デバイス・アドレス
 
-ADV_INDタイプのペイロードは、6オクテットのアドバタイザのアドレスと、0から31オクテットのアドバタイジング・データとで構成されます<!--TBD  ADV_INDPDUフォーマット -->。
+ADV\_INDタイプのペイロードは、6オクテットのアドバタイザのアドレスと、0から31オクテットのアドバタイジング・データとで構成されます ( [#fig_adv_ind_pdu_format] )。
+
+![ #fig_adv_ind_pdu_format ADV\_IND PDUフォーマット](fig/ch02_adv_ind_pdu_format.png)
 
 パケットのアクセス・アドレスは、通信ごとにランダムな値です。ADV_INDのペイロードにある、この48ビットのアドレス AdvA は、デバイスを特定するアドレスです。このアドレスには、
 パブリック・デバイス・アドレス(Public device address)とランダム・デバイス・アドレス(Random device address)の2種類があります。AdvAがいずれかは、ヘッダのTxAddの値で示します。TxAddrが0ならばパブリック・デバイス・アドレス、1ならばランダム・デバイス・アドレスです。
 
-<!--TBD  アドレスのビット構成 -->の、パブリック・デバイス・アドレスは、Bluetooth SIGが企業ごとに発行した24ビットの識別子と、企業が製品1つづつに割り振る24ビットの識別子から構成されます。このアドレスは、製造時に書き込まれるデバイスに固有で唯一の値です。ランダム・デバイス・アドレスは、ハッシュ値とランダム値から構成されます。ランダム値は適当な一定時間ごとに変更されます。ハッシュ値は、デバイスが持っている128ビットのIRK(Identity Resolving Key)とランダム値から指定されたハッシュ関数で計算される値です。
+パブリック・デバイス・アドレスは、Bluetooth SIGが企業ごとに発行した24ビットの識別子と、企業が製品1つづつに割り振る24ビットの識別子から構成されます。このアドレスは、製造時に書き込まれるデバイスに固有で唯一の値です。ランダム・デバイス・アドレスは、ハッシュ値とランダム値から構成されます。ランダム値は適当な一定時間ごとに変更されます。ハッシュ値は、デバイスが持っている128ビットのIRK(Identity Resolving Key)とランダム値から指定されたハッシュ関数で計算される値です。
 
 ランダム・デバイス・アドレスはプライバシーを守るためにあります。パブリック・デバイス・アドレスは、デバイスそれぞれに割り振られた固有の値です。個人が持っているデバイスが、何かのきっかけでマスターとの接続が切断したとします。すると、デバイスは再接続をするためにアドバタイジングを始めます。このアドバタイジング・パケットは、誰でも傍受できます。ですから、アドバタイジング・パケットのアドレス AdvA から特定のデバイスの追跡が可能です。
 
@@ -373,7 +393,9 @@ ADV_INDタイプのペイロードは、6オクテットのアドバタイザの
 
 Generic Access Profile(ジェネリック・アクセス・プロファイル、GAP)は、デバイスの発見と接続、そして通信データを暗号化するときは、鍵の交換をどのように行なうかを定義するものです。このGAPは、振る舞いを定義するものなので、リンク層から後に登場するGeneric Attribute Protocol(GATT)まで、層をまたいだ定義になります。次節のアドバタイジング・データのフォーマットは、GAPのシナリオから定義されています。
 
-<!--TBD  ADV\_INDのフォーマット/>のAdv Dataのフォーマットは<!--TBD  Adv Dataのフォーマット -- -->です。アドバタイジングの1つの情報をAD structureという単位で、それらの配列になっています。AD Structureは、1オクテットのLengthと、それに続く_Length_オクテットのDataです。Adv Datの長さは、1パケットのペイロードの制約で、31オクテットまでです。
+![ #fig_adv_data_format Adv Dataのフォーマット](fig/ch02_adv_data_format.png)
+
+アドバタイジングの1つの情報をAD structureという単位で、それらの配列になっています。AD Structureは、1オクテットのLengthと、それに続く_Length_オクテットのDataです。Adv Datの長さは、1パケットのペイロードの制約で、31オクテットまでです。
 
 AD structureのDataは、1オクテットのAD typeと_(Length-1)_オクテットのAd Dataで構成されます。AD typeは、いくつもありますが、知っておくべきものは次の5つです:
 
@@ -385,16 +407,25 @@ AD structureのDataは、1オクテットのAD typeと_(Length-1)_オクテッ�
 
 ##### Flags
 
-デバイスがもつ発見や接続の機能を示すのがFlagsです<!--TBD  Flagsのビット割り当て  -->。AD typeの値は0x01です。ビット0/1は、それぞれ論理値false/trueに対応します。Flagsは、アドバタイジング・パケットに1つだけ含めます。
+デバイスがもつ発見や接続の機能を示すのがFlagsです。AD typeの値は0x01です。ビット0/1は、それぞれ論理値false/trueに対応します。Flagsは、アドバタイジング・パケットに1つだけ含めます。
 
-AD type |ビット | 記述
-:-------+:-----+:----------------------------------------------------------------
-0x01    |0     | LE Limited Discoverable Mode
-        |1     | LE General Discoverable Mode
-        |2     | BR/EDR Not Supported
-        |3     | Simultaneous LE and BR/EDR to Same Device Capable (Controller)
-        |4     | Simultaneous LE and BR/EDR to Same Device Capable (Host)
-        |5..7  | Reserved
+Table: Flagsのビット割り当て
+
++--------+------+-----------------------------------------------------------------+
+|AD type |ビット | 記述                                                             |
++========+======+=================================================================+
+|0x01    |0     | LE Limited Discoverable Mode                                    |
++--------+------+-----------------------------------------------------------------+
+|        |1     | LE General Discoverable Mode                                    |
++--------+------+-----------------------------------------------------------------+
+|        |2     | BR/EDR Not Supported                                            |
++--------+------+-----------------------------------------------------------------+
+|        |3     | Simultaneous LE and BR/EDR to Same Device Capable (Controller)  |
++--------+------+-----------------------------------------------------------------+
+|        |4     | Simultaneous LE and BR/EDR to Same Device Capable (Host)        |
++--------+------+-----------------------------------------------------------------+
+|        |5..7  | Reserved                                                        |
++-------+------+------------------------------------------------------------------+
 
  Bluetooth Low Energy のみをサポートするシングルモード・デバイスは、BR/EDR Not Supported は'1'、Simultaneous LE and BR/EDR to Same Device Capable は、ホストとコントローラいずれも'0'になります。
 
@@ -404,23 +435,25 @@ Limited Discoverable Modeは、デバイスを発見できる時間制限があ�
 
 Local name(ローカル ネーム)は、ユーザ・インタフェースの表示名などに使われる、ユーザが読めるデバイスの名称を示します。これはアドバタイジング・データかスキャン・データのいずれかに1つだけ含めます。文字列はUTF-8で符号化されます。C言語の'\\0'のような、文字列の終端記号は必要ありません。
 
-AD typeは、Shortened local name(ショーテンド ローカル ネーム)とComplete local name(コンプリート ローカル ネーム)の2つがあります<!--TBD  ローカルネームのAD type -->。
+AD typeは、Shortened local name(ショーテンド ローカル ネーム)とComplete local name(コンプリート ローカル ネーム)の2つがあります。
+
+Table: ローカルネームのAD type
 
 AD type | 記述
-:-------+:---------------------------
+--------+---------------------------
 0x08    |Shortened local name
 0x09    |Complete local name
 
 Complete local nameは、デバイスの完全な名前です。しかしAdv Dataは最大31オクテットですから、ローカルネームが29バイトよりも大きいと、収まりません。この場合には、Shortened local nameを使います。これは完全なデバイス名の先頭部分を取り出したものです。例えば、完全なローカルネームが‘BT\_Device\_Name’ならば、短縮したローカルネームは、例えば‘BT_Dev’となります。人間が読んで意味がわかる区切りで切り出すとよいです。
 
-Shortened local nameが使われた時、完全なローカルネームは、上位層のGATTを通して、Device name characteristic から読み出せます<!--TBD  節への参照 -->。
+Shortened local nameが使われた時、完全なローカルネームは、上位層のGATTを通して、Device name characteristic から読み出せます。
 
 ##### Manufacturer Specific Data
 
 Manufacturer Specific Data(マニュファクチャラ スペシフィック データ)は、それぞれの企業の任意データに使われます。AD type は 0xFFです。Ad Dataは、先頭2オクテットが
-Bluetooth SIGが企業に発行した識別子、そして任意長のバイナリ・データが続きます。企業の識別子は [Company Identifiers documents](https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers) [^3010] にリストがあります。
+Bluetooth SIGが企業に発行した識別子、そして任意長のバイナリ・データが続きます。企業の識別子は [Company Identifiers documents](https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers) [^2060] にリストがあります。
 
-[^3010]: [Company Identifiers documents https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers](https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers)
+[^2060]: [Company Identifiers documents https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers](https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers)
 
 位置ビーコンのような、非接続で周囲の不特定多数の Bluetooth Low Energy デバイスに同報するときに、データの格納に使えます。
 
@@ -438,11 +471,12 @@ $$ 伝搬損失 = Tx Power Level – RSSI $$
 
 Bluetooth Low Energy のサービスは、機能を表します。例えば、エアコンであれば、温度設定といった制御値の入力機能、あるいは現在の室温といった計測機能が、それぞれ独立したサービスになります。機能の識別子にはUUID（Universally Unique Identifier)という128ビットの値が使われます。しかし128ビットそのままでは通信に時間がかかるので、Bluetooth SIGが承認したサービスには16ビットに短縮したUUIDが割り当てられています。
 
-<!--TBD  Service UUIDs のAd type -->のAD typeは、アドバタイザが持っているサービスのUUIDの配列を示します。31オクテットに収まる範囲で、主たる機能を表すサービスのリストを列挙します。
+AD typeは、アドバタイザが持っているサービスのUUIDの配列を示します。31オクテットに収まる範囲で、主たる機能を表すサービスのリストを列挙します。
 
-<!--TBD  スキャンの様子、リアルで確認 -->
+Table: AD type
+
 値    | 概要                   | 備考
-:-----+:----------------------+:-------------------------------------
+------+-----------------------+-------------------------------------
 0x02  | 16-bit Service UUIDs  | More 16-bit UUIDs available
 0x03  | 16-bit Service UUIDs  | Complete list of 16-bit UUIDs available
 0x04  | 32-bit Service UUIDs  |  More 32-bit UUIDs available
@@ -452,15 +486,17 @@ Bluetooth Low Energy のサービスは、機能を表します。例えば、�
 
 ### 接続と通信
 
-アドバタイザが送信したアドバタイジング・パケットに、イニシエータがコネクション・リクエスト・パケット(CONNECT\_REQ)を返信すると、接続状態になります。接続した2つのデバイスの役割は、イニシエータがマスターに、アドバタイザがスレイブに、それぞれ切り替わり、接続状態(<!--TBD  状態遷移図 -->のCONNECTED)に遷移します。
+アドバタイザが送信したアドバタイジング・パケットに、イニシエータがコネクション・リクエスト・パケット(CONNECT\_REQ)を返信すると、接続状態になります。接続した2つのデバイスの役割は、イニシエータがマスターに、アドバタイザがスレイブに、それぞれ切り替わり、接続状態(図のCONNECTED)に遷移します。
 
 アドバタイジングはアドバタイザがパケットの送出タイミングを制御していました。接続後はマスターがタイミングを制御します。接続後、マスターは一定期間ごとに、スレイブにパケットを送信します。スレイブはマスターからのパケットに返信する形で、データを送ります。マスターは複数のスレイブと接続します。マスターがスレイブに最初に送るパケットの送信タイミングで、スレイブそれぞれとの通信タイミングが重ならないようにします。
 
 #### 通信のタイミング
 
-く図<!--TBD  接続のパケット -->が接続確立と通信のタイミング図です。アドバタイジング・パケットの送信完了から150マイクロ秒後に、イニシエータはCONNECT\_REQを送信します。イニシエータはアドバタイザがCONNECT\_REQを受信できたかを、確認しません。もしもアドバタイザがCONNECT\_REQを受信しておらず、接続状態に遷移していない場合は、マスターがしばらく通信できないので、接続が切断したと判断します。
+![ #fig_ble_connection_timing 接続時のパケット通信](fig/ch02_ble_connection_timing.png)
 
-CONNECT\_REQパケットには、<!--TBD  表 -->の接続パラメータが入っています。パラメータの複合語は、先頭は小文字につづく単語は先頭を大文字にして連結(CamelCase、キャメルケース)します。
+接続確立と通信のタイミング図です。アドバタイジング・パケットの送信完了から150マイクロ秒後に、イニシエータはCONNECT\_REQを送信します。イニシエータはアドバタイザがCONNECT\_REQを受信できたかを、確認しません。もしもアドバタイザがCONNECT\_REQを受信しておらず、接続状態に遷移していない場合は、マスターがしばらく通信できないので、接続が切断したと判断します。
+
+CONNECT\_REQパケットには、表の接続パラメータが入っています。パラメータの複合語は、先頭は小文字につづく単語は先頭を大文字にして連結(CamelCase、キャメルケース)します。
 
 transmitWindowOffset(transmit window offset、トランスミット・ウィンドウ・オフセット)は、CONNECT_REQを送信してから、次のtransmit window sizeが始まるまでの、オフセット時間を示します。
 
@@ -472,17 +508,25 @@ connSlaveLatency(connection slave latency、コネクション・スレイブ・
 
 connSupervisionTimeout(connection supversion timeout、コネクション・スーパービジョン・タイムアウト)は、接続が失われたと判断する、コネクション・イベントの失敗回数を示します。
 
-名称                    | 値の制約     | 値の範囲
-:----------------------+:------------+:-----------------------------------------------
-transmitWindowOffset   | 1.25 ms 単位 | 0 ms 以上 connInterval 以下
-transmitWindowSize     | 1.25 ms 単位 | 1.25 ms 以上、10 ms、
-                       |             | もしくは(connInterval - 1.25 ms) 以下
-connInterval           | 1.25ms 単位  | 7.5 ms 以上 4.0 s 以下
-connSlaveLatency       | 整数         | 0以上最大値以下 *1
-connSupervisionTimeout | 10ms 単位    | 100ms 以上 32秒 以下 *2
+Table: 接続パラメータ
 
-1 最大値は ((connSupervisionTimeout / connInterval) - 1) かつ 500以下。
-2 (1 + connSlaveLatency) * connInterval よりも大きいこと
++-----------------------+-------------+-----------------------------------------------+
+|名称                    | 値の制約     | 値の範囲                                       |
++=======================+==============+==============================================+
+|transmitWindowOffset   | 1.25 ms 単位 | 0 ms 以上 connInterval 以下                    |
++-----------------------+-------------+-----------------------------------------------+
+|transmitWindowSize     | 1.25 ms 単位 | 1.25 ms 以上、10 ms、                          |
+|                       |             | もしくは(connInterval - 1.25 ms) 以下           |
++-----------------------+-------------+-----------------------------------------------+
+|connInterval           | 1.25ms 単位  | 7.5 ms 以上 4.0 s 以下                         |
++-----------------------+-------------+-----------------------------------------------+
+|connSlaveLatency       | 整数         | 0以上最大値以下 *1                              |
++-----------------------+-------------+-----------------------------------------------+
+|connSupervisionTimeout | 10ms 単位    | 100ms 以上 32秒 以下 *2                        |
++-----------------------+-------------+-----------------------------------------------+
+
+- *1 最大値は ((connSupervisionTimeout / connInterval) - 1) かつ 500以下。
+- *2 (1 + connSlaveLatency) * connInterval よりも大きいこと
 
 マスターは、CONNECT\_REQを送信してから、(1.25ミリ秒 + transmitWindowOffset)あと、transmitWindowSize の期間中に、最初のデータ・パケットを送信します。マスターは、この最初のデータ・パケットから、一定期間ごとに、スレイブにデータ・パケットを送信します。マスターは複数のスレイブと接続するので、他のスレイブと通信タイミングが重ならないように、この最初のデータ・パケットの送信タイミングで調整します。その調整幅が transmitWindowSize になります。
 
@@ -504,34 +548,17 @@ connSupervisionTimeout | 10ms 単位    | 100ms 以上 32秒 以下 *2
 
 #### CONNECT_REQ PDUペイロード
 
-イニシエータがアドバタイザに送るCONNECT_REQのPDUのフォーマットは<!--TBD   -->です。InitAおよびAdvAは、それぞれイニシエータとアドバタイザのアクセス・アドレスです。アドバタイザはAdvAが自分宛であることを確認して、接続状態に遷移します。LLDataは22オクテットの接続パラメータです。
+[#fig_connection_req_pdu_format]は、イニシエータがアドバタイザに送るCONNECT_REQのPDUのフォーマットです。InitAおよびAdvAは、それぞれイニシエータとアドバタイザのアクセス・アドレスです。アドバタイザはAdvAが自分宛であることを確認して、接続状態に遷移します。LLDataは22オクテットの接続パラメータです。
 
-<!-- これの図
-Payload
-InitA (6 octets) AdvA (6 octets) LLData (22 octets)
--->
 
-<!-- これの図
-LLData
-AA
-(4 octets)
-CRCInit (3 octets)
-WinSize (1 octet)
-WinOffset (2 octets)
-Interval (2 octets)
-Latency (2 octets)
-Timeout (2 octets)
-ChM (5 octets)
-Hop (5 bits)
-SCA (3 bits)
--->
+![ #fig_connection_req_pdu_format CONNECT\_REQ PDUフォーマット](fig/ch02_connection_req_pdu_format.png)
 
-AA は、接続した後のデータ・パケットのアクセス・アドレスです。アドバタイジング・パケットのアクセス・アドレスは固定値でした。データ・パケットのアクセス・アドレスには、イニシエータがランダムに生成したアクセス・アドレスの制約条件<!--TBD   -->を満たす値が使われます。
+AA は、接続した後のデータ・パケットのアクセス・アドレスです。アドバタイジング・パケットのアクセス・アドレスは固定値でした。データ・パケットのアクセス・アドレスには、イニシエータがランダムに生成したアクセス・アドレスの制約条件を満たす値が使われます。
 
 CRCInit はパケットのチェックサムを検査するシフトレジスタの初期値を指定します。CRCInitは、イニシエータがランダムに生成します。シフトレジスタは巡回検査符号を計算するためのハードウェアです。 Bluetooth Low Energy の巡回検査符号は、
 多項式 $ x^24 +x^10 +x^9 +x^6 +x^4 +x^3 +x +1 $ を24個のシフトレジスタで実装した回路で計算されます。パケットの受信処理を開始する都度、これらのシフトレジスタは、CRCInitの値で初期化されます。ちなみに、アドバタイジングのときは、シフトレジスタは固定値 0x555555 で初期化されます。
 
-WinSize、WinOffset、Interval、LatencyおよびTimeoutは、それぞれ前節のtransmitWindowSize、transmitWindowOffsetvalue、connInterval、connSlaveLatency、およびconnSupervisionTimeの値を表します。WinSizeなどの値は2オクテットの整数です。接続パラメータの物理値は、これらの整数値それぞれに<!--TBD   -->の値の制約の単位をかけたものです。例えば、$ transmitWindowSize = WinSize * 1.25ミリ秒 $ です。
+WinSize、WinOffset、Interval、LatencyおよびTimeoutは、それぞれ前節のtransmitWindowSize、transmitWindowOffsetvalue、connInterval、connSlaveLatency、およびconnSupervisionTimeの値を表します。WinSizeなどの値は2オクテットの整数です。接続パラメータの物理値は、これらの整数値それぞれに値の制約の単位をかけたものです。例えば、$ transmitWindowSize = WinSize * 1.25ミリ秒 $ です。
 
 ChMは、チャネルマッピングを表します。コネクション・イベントでどのデータ・チャネルを使うかを指定します。WiFiなどの、干渉するとわかっている周波数帯域のデータ・チャンネルを使わないようにして、干渉を回避するのに使います。ChMは4オクテットの値で、それぞれのビットがチャンネルに対応します。最下位ビットがチャンネル0、下位から36ビット目がチャンネル36に対応します。チャンネルを指定するときは、チャンネル10とチャンネル11の間には、アドバタイジング・チャンネル38があり、データ・チャンネルだけをみると周波数帯域が1つ飛ぶことに、注意します。
 
@@ -544,26 +571,36 @@ SCAはマスターのスリープ・クロックの精度を表します。こ�
 
 ## 通信
 
-接続したマスターとスレーブのデータ・パケットのPDUののフォーマットは<!--TBD   -->です。2オクテットのヘッダと、0~33オクテットのペイロード、そして通信を暗号化していてペイロードが0より大きいときは、4オクテットのMessage Integrity Check(MIC)がつきます。
+[#fig_data_channel_format]は、接続したマスターとスレーブのデータ・パケットのPDUののフォーマットです。2オクテットのヘッダと、0~33オクテットのペイロード、そして通信を暗号化していてペイロードが0より大きいときは、4オクテットのMessage Integrity Check(MIC)がつきます。
+
+![ #fig_data_channel_format データチャネル PDUフォーマット](fig/ch02_data_channel_format.png)
 
 データチャネルPDUの最大長さは、パケットフォーマット(<!--TBD   -->)のPDUの最大長さ39オクテットで制約されます。暗号化をしていないならば、MICの4オクテットをペイロードとして使えそうなものですが、暗号化の有無でバッファ長が変化しない設計になっています。
 
-データ・チャネルPDUは、上位層 Logical Link Control and Adaptation Protocol (L2CAP)のパケットを分割送信します<!--TBD   -->。
+データ・チャネルPDUは、上位層 Logical Link Control and Adaptation Protocol (L2CAP)のパケットを分割送信します。
 
-データ・チャネルPDUのヘッダは次の<!--TBD  表 -->のフォーマットです。
+データ・チャネルPDUのヘッダは次の表のフォーマットです。
 
-フィールド名  | 記述
-:-----------+:----------------------------------------------
-LLID        | ロジカル・リンクID (Logical Link Identifier)
-            | パケットの種類を示す。
-            | 00b = Reserved
-            | 01b = LL Data PDU (Continuation)
-            | 10b = LL Data PDU (Start) 
-            | 11b = LL Control PDU
-NESN        | Next Expected Sequence Number
-SN          | シーケンス番号 (Sequence Number)
-MD          | モア・データ (More Data)
-Length      | ペイロードとMICのオクテット単位の長さ
+Table: データ・チャネルPDUのヘッダ
+
++------------+----------------------------------------------+
+|フィールド名  | 記述                                          |
++============+===============================================+
+|LLID        | ロジカル・リンクID (Logical Link Identifier)     |
+|            | パケットの種類を示す。                           |
+|            | 00b = Reserved                                 |
+|            | 01b = LL Data PDU (Continuation)              |
+|            | 10b = LL Data PDU (Start)                     |
+|            | 11b = LL Control PDU                          |
++------------+-----------------------------------------------+          
+|NESN        | Next Expected Sequence Number                 |
++------------+----------------------------------------------+
+|SN          | シーケンス番号 (Sequence Number)                |
++------------+----------------------------------------------+
+|MD          | モア・データ (More Data)                       |
++------------+----------------------------------------------+
+|Length      | ペイロードとMICのオクテット単位の長さ              |
++------------+----------------------------------------------+
 
 データチャンネルPDUは、LLIDの値で、ロジカル・リンク・データPDU(LL Data PDU)と、ロジカル・リンク・コントロールPDU(LL Control PDU)の2種類にわけられます。
 
@@ -571,7 +608,9 @@ Length      | ペイロードとMICのオクテット単位の長さ
 
 ロジカル・リンク・データPDUは、上位層( Bluetooth Low Energy ではL2CAP)のパケットの分割転送と受信時の再構築に使われます。
 
-上位層(L2CAP)のパケット長がデータ・チャネルPDUのペイロードよりも長いとき、上位層からのパケットは複数のロジカル・リンク・データ PDUに分割して送信されます<!--TBD   -->。一連のパケットの列は、最初のパケットのLLIDが 10b(Start、始めの) 、それに続くパケットの LLIDを 01b (Continuation、続きの)にして判別します。
+上位層(L2CAP)のパケット長がデータ・チャネルPDUのペイロードよりも長いとき、上位層からのパケットは複数のロジカル・リンク・データ PDUに分割して送信されます。一連のパケットの列は、最初のパケットのLLIDが 10b(Start、始めの) 、それに続くパケットの LLIDを 01b (Continuation、続きの)にして判別します。
+
+![ #fig_logical_link_data_pdu_format ロジカル・リンク・データ PDUフォーマット](fig/ch02_logical_link_data_pdu_format.png)
 
 上位層のパケット長がデータ・チャネルPDUのペイロードにおさまるときは、LLID 01bのパケット1つだけで、その後にLLID 01bのロジカル・リンク・データPDUは続きません。
 
@@ -585,7 +624,7 @@ Lengthはペイロードのオクテット長を示します。LLID 10b (Start)�
 <!-- 4.5.9 Acknowledgement and Flow Control vol.6 -->
 Sequence number(シーケンス番号、SN)とNext expected sequence number(ネクスト・イクスペクテッド・シーケンス番号、NESN)は、信頼できるパケット通信とフロー制御に使われます。
 
-SNとNESNは1ビットの値です。マスターとスレーブはコネクション状態<!--TBD  状態遷移の図 -->に入るときに、SNとNESNをそれぞれ0に初期化します。SNは自分が送信するパケットのシーケンス番号を、NESNは相手に次に送ってほしいパケットのシーケンス番号を設定します。
+SNとNESNは1ビットの値です。マスターとスレーブはコネクション状態に入るときに、SNとNESNをそれぞれ0に初期化します。SNは自分が送信するパケットのシーケンス番号を、NESNは相手に次に送ってほしいパケットのシーケンス番号を設定します。
 
 マスターがコネクションイベントで、(SN = 0, NESN = 0)のデータ・チャネルPDUをスレーブに送ったとします。スレーブがこのパケットを受信して、次のパケットの送信を求めるならば、スレーブは NESN = 1 のデータ・チャネルPDUを送信します。マスターは、スレーブが NESN = 1 を送ってきたのをみて、直前に送信したSN＝0のパケットをスレーブに送信できたと確認できます。マスターは次はSN = 1のパケットを送信します。
 
@@ -601,10 +640,12 @@ MD(モア・データ、More Data)は、接続先デバイスに送信すべき�
 
 ### ロジカル・リンク・コントロールPDU
 
-ロジカル・リンク・コントロールPDUは、リンク層の接続制御に用います。ロジカル・リンク・コントロールPDUのフォーマットは、1オクテットのopcode(オペコード)と0から22オクテットのCtrData(コントロール・データ、control data)で構成されます<!--TBD  />。<!--TBD  次の表 -- -->は、オペコードの値とその意味です。
+ロジカル・リンク・コントロールPDUは、リンク層の接続制御に用います。ロジカル・リンク・コントロールPDUのフォーマットは、1オクテットのopcode(オペコード)と0から22オクテットのCtrData(コントロール・データ、control data)で構成されます。次の表は、オペコードの値とその意味です。
+
+Table: オペコードの値とその意味
 
 オペコード | コントロールPDU 名
-:---------+:-------------------
+----------+--------------------
 0x00      | LL\_CONNECTION\_UPDATE_REQ
 0x01      | LL\_CHANNEL\_MAP_REQ
 0x02      | LL\_TERMINATE_IND
@@ -621,15 +662,15 @@ MD(モア・データ、More Data)は、接続先デバイスに送信すべき�
 0x0D      | LL\_REJECT_IND
 0x0E-0xFF | 将来のために予約
 
-LL\_CONNECTION\_UPDATE\_REQ と LL\_CHANNEL\_MAP\_REQ は、コネクションのパラメータおよびチャンネル・マッピングを更新するオペコードです。やり取りするパラメータは、コネクション時のLL Data <!--TBD   -->と同じものです。これらのオペコードは、マスターのみが使えます。それは、これらの接続パラメータの値を決められるのは、ピコネットの通信を制御しているマスターのみだからです。もしもスレーブが接続パラメータを更新したいときは、リンク層の上位層のL2CAPの、LE signaling channnel を使います。
+LL\_CONNECTION\_UPDATE\_REQ と LL\_CHANNEL\_MAP\_REQ は、コネクションのパラメータおよびチャンネル・マッピングを更新するオペコードです。やり取りするパラメータは、コネクション時のLL Data と同じものです。これらのオペコードは、マスターのみが使えます。それは、これらの接続パラメータの値を決められるのは、ピコネットの通信を制御しているマスターのみだからです。もしもスレーブが接続パラメータを更新したいときは、リンク層の上位層のL2CAPの、LE signaling channnel を使います。
 
-LL\_CONNECTION\_UPDATE\_REQ のCtrlDataのフォーマット<!--TBD  />の WinSize、WinOffset、Interval、Latency、および Timeout は、それぞれ <!--TBD   -- -->の transmitWindowSize、transmitWindowOffset、connInterval、connSlaveLatency、および connSupervisionTimeout と同じ意味を持ちます。
+LL\_CONNECTION\_UPDATE\_REQ のCtrlDataのフォーマットの WinSize、WinOffset、Interval、Latency、および Timeout は、それぞれ transmitWindowSize、transmitWindowOffset、connInterval、connSlaveLatency、および connSupervisionTimeout と同じ意味を持ちます。
 
-Instant は、どのコネクション・イベントで、接続パラメータを更新するかを指定します。マスターとスレーブはそれぞれ、コネクション状態になってからのコネクション・イベントの数を connEventCount というカウンタで計測しています。Instantが示すコネクション・イベントのタイミングで、<!--TBD   -->の接続開始時の処理を行い、アンカー・ポイントの再設定を行います。 LL\_CHANNEL\_MAP\_REQ も、これと同様です。
+Instant は、どのコネクション・イベントで、接続パラメータを更新するかを指定します。マスターとスレーブはそれぞれ、コネクション状態になってからのコネクション・イベントの数を connEventCount というカウンタで計測しています。Instantが示すコネクション・イベントのタイミングで、接続開始時の処理を行い、アンカー・ポイントの再設定を行います。 LL\_CHANNEL\_MAP\_REQ も、これと同様です。
 
 オペコード 0x03 (LL\_ENC\_REQ) から0x0B (LL\_PAUSE\_ENC\_RSP) は、パケットの暗号化のコマンド群です。LL\_ENC\_REQとLL\_ENC\_RSPは、暗号/復号処理に必要な情報をやり取りします。LL\_START\_ENC\_REQ と LL\_START\_ENC\_RSP は暗号化の開始を、LL\_PAUSE\_ENC\_REQ と LL\_PAUSE\_ENC\_RSP は暗号化の中断のコマンドです。
 
-データ・チャネルPDU <!--TBD   -->のヘッダのLengthフィールドは、ペイロードとMICを合わせた長さを示します。またパケットが暗号化されている/いないを示すフラグはありません。ですが、マスターとスレーブは、ロジカル・リンク・コントロールPDUで、今の通信が暗号化されている/いないがお互いにわかるので、暗号化を示すフラグは必要ありません。
+データ・チャネルPDUのヘッダのLengthフィールドは、ペイロードとMICを合わせた長さを示します。またパケットが暗号化されている/いないを示すフラグはありません。ですが、マスターとスレーブは、ロジカル・リンク・コントロールPDUで、今の通信が暗号化されている/いないがお互いにわかるので、暗号化を示すフラグは必要ありません。
 
 LL\_FEATURE\_REQ および LL\_FEATURE\_RSP は、マスターおよびスレーブのリンク層の機能を示すデータをやりとりします。いまの規格は、暗号化サポートの1ビットのみを定めています。 Bluetooth Low Energy のリンク層の機能は、デフォルトですべての機能が有効になっています。接続時に、機能サポートを調べる必要はありません。もしも機能がサポートされていなければ、そのコマンドはリジェクトされます。そのエラー原因は、リジェクトで返される LL\_REJECT\_IND の、CtrDataにあるエラーコードから取得できます。
 
@@ -650,7 +691,9 @@ L2CAPは、チャンネルという考え方で通信を多重化します。上
 しかし Bluetooth Low Energy は、コネクションを維持するものではありません。簡単に接続して、簡単に切断してしまうものです。これにL2CAPを対応させるために、 Bluetooth Low Energy のL2CAPは、固定されたチャンネルのみが提供されます。この固定チャンネルでは、接続時のパラメータのやりとりはありません。
 
 <!-- [Vol 3] page 38 of 656 2.1 CHANNEL IDENTIFIERS-->
- Bluetooth Low Energy のL2CAPのチャンネルは、<!--TBD   -->の3つの固定チャンネルだけです。
+Bluetooth Low Energy のL2CAPのチャンネルは、3つの固定チャンネルだけです。
+
+Table: L2CAPのチャンネル
 
 Channel ID    | 説明
 --------------+--------------------------------------
@@ -660,7 +703,9 @@ Channel ID    | 説明
 
 ### パケット構造
 
-L2CAPのパケット構造<!--TBD   -->は、2バイトのLengthとChannel ID、それに0から65535バイトまでのinformation payloadが続きます。
+L2CAPのパケット構造は、2バイトのLengthとChannel ID、それに0から65535バイトまでのinformation payloadが続きます。
+
+![ #fig_l2cap_packet_format L2CAP パケット・フォーマット](fig/ch02_l2cap_packet_format.png)
 
 チャンネルID 0x0005 のシグナリング・チャンネルのフォーマットは、1バイトのコードと識別子、2バイトの長さと任意長のデータが続きます。コードは次の3つだけです:
 
@@ -671,7 +716,7 @@ L2CAPのパケット構造<!--TBD   -->は、2バイトのLengthとChannel ID、
 
 Connection Parameters Update Request/Responseは、スレーブからホストへの接続パラメータの変更要求に使われます。このConnection Parameters Update Requestは、スレーブはいつでもマスターに送信できます。マスターは送信できません。もしもサポートされていないコマンドを受信したり、データ長が期待した長さ(23バイト)ではない場合は、Command rejectが返されます。
 
-このリクエストを受信したマスターは、その変更パラメータを受け付けるならば、レスポンスで受け付けること(accepted) を返してから、ロジカル・コントロールPDUから接続パラメータを更新します<!--TBD   -->。変更パラメータを受け付けないならば、レスポンスで受付拒否(rejected)を返します。マスターには、その他のスレーブとの接続や、WiFiやクラシックBluetoothとの共存などの制約があります。スレーブは、変更パラメータの値の範囲をなるべく広くとって、マスターが受け入れられるパラメータを選べるようにすべきです。
+このリクエストを受信したマスターは、その変更パラメータを受け付けるならば、レスポンスで受け付けること(accepted) を返してから、ロジカル・コントロールPDUから接続パラメータを更新します。変更パラメータを受け付けないならば、レスポンスで受付拒否(rejected)を返します。マスターには、その他のスレーブとの接続や、WiFiやクラシックBluetoothとの共存などの制約があります。スレーブは、変更パラメータの値の範囲をなるべく広くとって、マスターが受け入れられるパラメータを選べるようにすべきです。
 
 スレーブからのコネクション・パラメータのアップデート要求は、通信速度と省電力の両立に利用できます。マスターは接続時にスレーブから、ATT/GATTのサービスおよびキャラクタリスティクスを読み出します。ですから接続直後に通信速度が高いパラメータを選択すれば、素早い接続処理ができます。接続が完了した後は、アプリケーションに応じた通信頻度で、より低消費電力のパラメータに切り替えることで、省電力化ができます。これらの、パラメータの設定や切り替えは、スレーブの設計次第です。コネクション・インターバルが小さい値でも、スレーブ・レイテンシが高くできるならば、パラメータの変更は必要ないかもしれません。
 
@@ -705,21 +750,23 @@ Attribute Protocol(アトリビュート・プロトコル、ATT)は、アトリ
 
 #### アトリビュート
 
-サーバが公開するアトリビュートの、サーバ内での論理表現は、アトリビュート・ハンドル (attribute handle)、アトリビュート・タイプ(attribute type)そしてアトリビュート・バリュー(attribute value)、アトリビュート・パーミッション(attribut permission)の4つで構成されます<!--TBD   -->。
+サーバが公開するアトリビュートの、サーバ内での論理表現は、アトリビュート・ハンドル (attribute handle)、アトリビュート・タイプ(attribute type)そしてアトリビュート・バリュー(attribute value)、アトリビュート・パーミッション(attribut permission)の4つで構成されます。
+
+![ #fig_attribute_format アトリビュートのフォーマット](fig/ch02_attribute_format.png)
 
 アトリビュート・ハンドルは、ATTクライアントがATTサーバのアトリビュートにアクセスするときに使われます。アトリビュート・ハンドルは、2オクテットの0x0001から0xffffまでの値です。
 
 アトリビュート・タイプは、アトリビュートのデータの型を示します。これは128ビット(16オクテット)のUUID (Universally Unique IDentifier)
-[RFC 4122](http://tools.ietf.org/html/rfc4122) [^3020] です。しかし、128ビットのUUIDそのままを通信でやりとりすると、通信時間が長くなり電力を使います。そこで、Bluetooth SIGが、よく使うものには16ビット(2オクテット)のUUIDを割り当てています [Assigned Numbers](https://www.bluetooth.org/ja-jp/specification/assigned-numbers) [^3030] 。この16ビットのUUIDは、次の128ビットのUUIDのxxxx部分を抜き出した短縮したUUIDです。
+[RFC 4122](http://tools.ietf.org/html/rfc4122) [^2070] です。しかし、128ビットのUUIDそのままを通信でやりとりすると、通信時間が長くなり電力を使います。そこで、Bluetooth SIGが、よく使うものには16ビット(2オクテット)のUUIDを割り当てています [Assigned Numbers](https://www.bluetooth.org/ja-jp/specification/assigned-numbers) [^2080] 。この16ビットのUUIDは、次の128ビットのUUIDのxxxx部分を抜き出した短縮したUUIDです。
 
-[^3020]: [RFC 4122 http://tools.ietf.org/html/rfc4122](http://tools.ietf.org/html/rfc4122)
-[^3030]: [Assigned Numbers https://www.bluetooth.org/ja-jp/specification/assigned-numbers](https://www.bluetooth.org/ja-jp/specification/assigned-numbers)
+[^2070]: [RFC 4122 http://tools.ietf.org/html/rfc4122](http://tools.ietf.org/html/rfc4122)
+[^2080]: [Assigned Numbers https://www.bluetooth.org/ja-jp/specification/assigned-numbers](https://www.bluetooth.org/ja-jp/specification/assigned-numbers)
 
- 0000xxxx-0000-1000-8000-00805F9B34FB
+	0000xxxx-0000-1000-8000-00805F9B34FB
 
 16ビットのUUIDを128ビットのUUIDに戻すには、この128ビットのUUIDのxxxx部分を16ビットのUUIDで置き換えます。例えば 0x1801 ならば:
 
- 00001801-0000-1000-8000-00805F9B34FB
+	00001801-0000-1000-8000-00805F9B34FB
 
 となります。
 
@@ -729,7 +776,10 @@ Attribute Protocol(アトリビュート・プロトコル、ATT)は、アトリ
 
 #### リクエストとインディケーション
 
-アトリビュート・プロトコルのアトリビュート・プロトコルPDU (Protocol Data Unit)のやりとりには、リクエスト、インディケーション、コマンド、そしてノーティフィケーションの4つがあります 図<!--TBD  />。たいていのアトリビュート・プロトコルPDUは、図<!--TBD   -- --> (a)の、シーケンシャルなリクエスト-レスポンス・プロトコルを使います。
+アトリビュート・プロトコルのアトリビュート・プロトコルPDU (Protocol Data Unit)のやりとりには、リクエスト、インディケーション、コマンド、そしてノーティフィケーションの4つがあります。
+  たいていのアトリビュート・プロトコルPDUは、図(a)の、シーケンシャルなリクエスト-レスポンス・プロトコルを使います。
+
+![ #fig_attribute_protocol アトリビュート・プロトコル](fig/ch02_attribute_protocol.png)
 
 クライアントからサーバにリクエストするときには、アトリビュート・リクエスト(ATTリクエスト)とアトリビュート・レスポンス(ATTレスポンス)のペアを、サーバからクライアントに通知するにはアトリビュート・インディケーション(ATTインディケーション)とアトリビュート・コンファメーション(ATTコンファメーション)のペアを使います。これらのやりとりをトランザクションと呼びます。
 
@@ -751,7 +801,8 @@ Attribute Protocol(アトリビュート・プロトコル、ATT)は、アトリ
 
 #### コマンドとノーティフィケーション
 
-アトリビュート・プロトコルには、クライアントからサーバへのアトリビュート・コマンド(ATTコマンド)、そしてサーバからクライアントへのアトリビュート・ノーティフィケーション(ATTノーティフィケーション)があります 図<!--TBD   -->。これらはリクエスト/インディケーションと異なり、トランザクションもフロー制御もありません。トランザクションと無関係に、任意のタイミングで任意の回数の送信ができます。
+アトリビュート・プロトコルには、クライアントからサーバへのアトリビュート・コマンド(ATTコマンド)、そしてサーバからクライアントへのアトリビュート・ノーティフィケーション(ATTノーティフィケーション)があります。
+これらはリクエスト/インディケーションと異なり、トランザクションもフロー制御もありません。トランザクションと無関係に、任意のタイミングで任意の回数の送信ができます。
 
 例えば、クライアントがATTリクエストを送信して、まだレスポンスを受信していない時、トランザクションが終了していない時でも、クライアントはサーバにATTコマンドを送信できます。また、サーバも同様にトランザクションの途中でも、クライアントにATTノーティフィケーションを送信できます。
 
@@ -763,7 +814,10 @@ ATTコマンドとATTノーティフィケーションは、任意のタイミ�
 
 #### アトリビュートPDUフォーマット
 
-アトリビュートPDFは、アトリビュート・オペコード(Attribute opcode)、アトリビュート・パラメータ、オーセンティケーション・シグネチャ(Authentication signature)が続きます <!--TBD  図 -->。図のATT\_MTUは、アトリビュートPDUの最大長 Maximum Transfer Unit(MTU)を表し、デフォルト値は23オクテットです。
+アトリビュートPDFは、アトリビュート・オペコード(Attribute opcode)、アトリビュート・パラメータ、オーセンティケーション・シグネチャ(Authentication signature)が続きます。
+図のATT\_MTUは、アトリビュートPDUの最大長 Maximum Transfer Unit(MTU)を表し、デフォルト値は23オクテットです。
+
+![ #fig_attribute_pdu_format アトリビュート PDUフォーマット](fig/ch02_attribute_pdu_format.png)
 
 アトリビュート・オペコードは、オーセンティケーション・シグネチャ・フラグ(Authentication signature flag)、コマンド・フラグ(Command flag)そしてメソッド(Method)から構成されます。コマンド・フラグが1ならば、そのPDUはコマンドです。6ビットのメソッドにより、アトリビュート・パラメータのフォーマットとその意味が決まります。
 
@@ -889,6 +943,8 @@ GATTは、サーバとクライアントの2つの役割を決めます。サー
 
 #### サービスとキャラクタリスティクス
 
+![ #fig_service_and_char サービスとキャラクタリスティクス](fig/ch02_service_and_char.png)
+
 クラシックBluetoothでは、プロトコルは通信手順とデータ表現の仕様を、プロファイルは接続した機器の振る舞いの仕様を表します。Bluetoothのロゴがついていれば、製品やメーカを問わずに相互に接続できるのは、ヘッドフォンや着信通知といったアプリケーションごとに、機器の振る舞いまでを含めて仕様が決められて、規格認証の厳格な運用があるからです。
 
 クラシックBluetoothには、オーディオのストリーミングや大容量のデータ・ファイル交換など、求められるネットワークの特性もデータ形式もまるで異なるアプリケーションがあります。そのために、プロトコルとプロファイルはアプリケーションごとに決められ、論理的通信チャンネルを提供するL2CAP層の上に作られます。
@@ -907,7 +963,7 @@ GATTは、その機器の機能それぞれをサービスという単位で切�
 
 #### サービスとキャラクタリスティクスの例
 
-懐中電灯を例にして、サービスとキャラクタリスティクスの使われ方を述べます<!--TBD   -->。懐中電灯は、ライトのオンオフ状態などのデータを持っていますから、GATTでの役割はサーバになります。懐中電灯のサービスは、ライトの点灯状態の取得とそのオンオフ設定、そして明るさセンサーからの検出値の取得ができるものとします。
+懐中電灯を例にして、サービスとキャラクタリスティクスの使われ方を述べます。懐中電灯は、ライトのオンオフ状態などのデータを持っていますから、GATTでの役割はサーバになります。懐中電灯のサービスは、ライトの点灯状態の取得とそのオンオフ設定、そして明るさセンサーからの検出値の取得ができるものとします。
 
 サーバ側のサービスとキャラクタリスティクス、そしてクライアントのプロファイルの設計するかは、Bluetooth SIGが定義しているものがあれば、それを使います。該当するものがない場合は、独自に設計します。該当するプロファイルがない場合でも、そのプロファイルに必要なサービスがBluetooth SIGで定義されていれば、その定義を利用すれば工程が少なくなる場合があります。
 
@@ -925,17 +981,18 @@ GATTは、その機器の機能それぞれをサービスという単位で切�
 
 スイッチのキャラクタリスティクスは、外部からの操作を書き込むものですから、パーミッションは書き込みのみ読み出し不可に設定されているでしょう。ここにオン、オフに対応する値を書き込めば、サーバである懐中電灯がライトを制御します。オンオフを表す値をどうするかなどは、開発者が仕様を作り定義します。
 
-ステータスのキャラクタリスティクスは、懐中電灯の制御プログラムの内部状態を表します。ライトの制御プログラムの動作は、状態遷移図で表現されます<!--TBD   -->。スイッチの操作により、オンとオフの2状態を遷移します。このステータスは、スイッチのキャラクタリスティクスへの書き込み値で遷移するかもしれませんが、サーバの内部の変数の値ですから、このステータス自体が外部から書き込まれることは決してありません。ですから、パーミッションは読み出しのみに設定されます。
+ステータスのキャラクタリスティクスは、懐中電灯の制御プログラムの内部状態を表します。ライトの制御プログラムの動作は、状態遷移図で表現されます。スイッチの操作により、オンとオフの2状態を遷移します。このステータスは、スイッチのキャラクタリスティクスへの書き込み値で遷移するかもしれませんが、サーバの内部の変数の値ですから、このステータス自体が外部から書き込まれることは決してありません。ですから、パーミッションは読み出しのみに設定されます。
 
 最後の明るさのキャラクタリスティクスは、実際のライトの明るさの検出値を表します。ライトの明るさは、ランプの劣化や乾電池の残量低下などで変化するでしょうから、実際の明るさを検出したくなるでしょう。検出値は読みだすだけで、書き込むものではありません。ですから、パーミッションは読み込みのみに設定されます。また、一定の時間間隔で、サーバからクライアントに通知(ノーティフィケーションまたはインディケーション)が必要かもしれません。GATTのキャラクタリスティクスには、クライアントに通知をする、しないを設定する機能があります。
 
-ここまでの懐中電灯のサービスを定義したあとで、クライアントから乾電池の残量も知りたいと要求が出されたとします。このときに、懐中電灯のサービスにバッテリー残量を表すキャラクタリスティクスを追加する必要はありません。Bluetooth SIGには、バッテリー状態を公開する [Battery Service](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml) [^3040] が定義されていますから、このサービスを追加します。懐中電灯のサービスと、このバッテリー状態のサービスを組み合わせて使うことで、追加要求を満たすプロファイルが実現できます。
+ここまでの懐中電灯のサービスを定義したあとで、クライアントから乾電池の残量も知りたいと要求が出されたとします。このときに、懐中電灯のサービスにバッテリー残量を表すキャラクタリスティクスを追加する必要はありません。Bluetooth SIGには、バッテリー状態を公開する [Battery Service](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml) [^2090] が定義されていますから、このサービスを追加します。懐中電灯のサービスと、このバッテリー状態のサービスを組み合わせて使うことで、追加要求を満たすプロファイルが実現できます。
 
-[^3040]: [Battery Service https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml)
+[^2090]: [Battery Service https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml)
 
 #### サービス
 
-GATTのサービスは、データと関連付けられた機器の振る舞いや機能をあらわすものです。GATTのプロファイルはサービスの集合です <!--TBD  サービスの構造 -->。サービスの内容は、他のサービスへの参照とキャラクタリスティクスの集合です。サービスの定義は、サービスに必須のキャラクタリスティクスと、オプションのキャラクタリスティクスを定義します。
+GATTのサービスは、データと関連付けられた機器の振る舞いや機能をあらわすものです。GATTのプロファイルはサービスの集合です。
+サービスの内容は、他のサービスへの参照とキャラクタリスティクスの集合です。サービスの定義は、サービスに必須のキャラクタリスティクスと、オプションのキャラクタリスティクスを定義します。
 
 GATTのサービスとキャラクタリスティクスは、オブジェクト指向プログラミングのクラスとプロパティに例えられます。1つの独立した機能がクラスの定義です。アトリビュート・プロトコルのアトリビュートには、ちょうどプログラミングでいうメモリ・アドレスに相当する、ハンドルがあります。GATTは、サーバの複数のアトリビュートで、サービスの定義にしたがったサービスのインスタンスを公開しているようなものです。
 
@@ -949,15 +1006,22 @@ GATTのサービスとキャラクタリスティクスは、オブジェクト�
 
 サービスには、プライマリ・サービスとセカンダリ・サービスの2タイプがあります。プライマリ・サービスは外部に公開されるサービスです。プライマリ・サービスは他のサービスのincluded serviceにもなれます。セカンダリ・サービスは外部に公開されず、他のサービスのincluded serviceとして使われるのみのサービスです。セカンダリ・サービスは、複数のサービスで定義を共有したいバリューをまとめるのに用いて、他のプライマリ・サービスから参照される使われ方をします。
 
-アトリビュート・タイプ      | アトリビュート・バリュー 
-:------------------------+:-------------------------------------------------------
-0x2800, プライマリ・サービス| サービスのUUID(16もしくは128ビット)
-0x2801, セカンダリ・サービス| サービスのUUID(16もしくは128ビット)
-0x2802, Includedサービス  |  Included Service Attribute Handle
-                         |  End Group Handle
-                         |  Service UUID (16ビットの場合のみ)
+Table: サービスのアトリビュート
 
-アトリビュートをグループ化するサービスは、プライマリおよびセカンダリ・サービスの宣言から始まります<!--TBD   -->。アトリビュート・ハンドルは任意の値が取れます。サービスの宣言は、バリューにそのサービスのUUIDを含みます。
++---------------------------+-------------------------------------------------------+
+|アトリビュート・タイプ        | アトリビュート・バリュー                                  |
++===========================+=======================================================+
+|0x2800,プライマリ・サービス  | サービスのUUID(16もしくは128ビット)                      |
++---------------------------+-------------------------------------------------------+
+|0x2801,セカンダリ・サービス  | サービスのUUID(16もしくは128ビット)                       |
++---------------------------+-------------------------------------------------------+
+|0x2802,Includedサービス     | Included Service Attribute Handle                    |
+|                           |  End Group Handle                                     |
+|                           |  Service UUID (16ビットの場合のみ)                      |
++----------------------------+-------------------------------------------------------+
+
+アトリビュートをグループ化するサービスは、プライマリおよびセカンダリ・サービスの宣言から始まります。
+アトリビュート・ハンドルは任意の値が取れます。サービスの宣言は、バリューにそのサービスのUUIDを含みます。
 
 そのサービスが他のサービスを参照している場合は、サービス宣言の次に、インクルード・ディフィニション(include definition)が続きます。インクルード・ディフィニションのバリューは、参照するサービス宣言のアトリビュート・ハンドル、それにそのサービス宣言の末尾を表すアトリビュート・ハンドルが続きます。もしも参照するサービスのUUIDが16ビットならば、そのUUIDが続きます。
 
@@ -975,21 +1039,27 @@ GATTのサービスとキャラクタリスティクスは、オブジェクト�
 
 ##### キャラクタリスティクス・デクラレーション
 
-キャラクタリスティクス・デクラレーションは、アトリビュート・タイプ 0x2803 のアトリビュートで表します<!--TBD   -->。アトリビュート・ハンドラは任意の値が取れます。アトリビュート・バリューは、キャラクタリスティクス・プロパティ、そのキャラクタリスティクスのバリューのアトリビュート・ハンドラ、およびキャラクタリスティクスのUUIDで構成されます。
+キャラクタリスティクス・デクラレーションは、アトリビュート・タイプ 0x2803 のアトリビュートで表します。アトリビュート・ハンドラは任意の値が取れます。アトリビュート・バリューは、キャラクタリスティクス・プロパティ、そのキャラクタリスティクスのバリューのアトリビュート・ハンドラ、およびキャラクタリスティクスのUUIDで構成されます。
 
-アトリビュート・タイプ      | アトリビュート・バリュー 
-:------------------------+:--------------------------------------------------------
-0x2803                   | Characteristic Properties
-                         | Characteristic Value Attribute Handle
-                         | Characteristic UUID
+Table: キャラクタリスティクス・デクラレーション
 
-このプロパティは、キャラクタリスティクスのパーミションをビット・フィールドで表す1オクテットの値です<!--TBD   -->。クライアントは、このプロパティから、キャラクタリスティクス・バリューに使える
++-------------------------+------------------------------------------+
+|アトリビュート・タイプ      |  アトリビュート・バリュー                   |
++========================+===========================================+
+|0x2803                   | Characteristic Properties                 |
+|                         | Characteristic Value Attribute Handle     |
+|                         | Characteristic UUID                       |
++------------------------+--------------------------------------------+
+
+このプロパティは、キャラクタリスティクスのパーミションをビット・フィールドで表す1オクテットの値です。クライアントは、このプロパティから、キャラクタリスティクス・バリューに使える
 アトリビュート・プロトコルを知ることができます。
 
 プロパティののBroadcastは、アトリビュート・プロパティにはないものです。もしもこのビットが1ならば、キャラクタリスティクス・デスクリプタに対応する値を書き込めば、キャラクタリスティクス・バリューがアドバタイズメント・データでブロードキャストされます。
 
+Table: キャラクタリスティクス・デクラレーション
+
 プロパティ名                  | 値       | 概要
-:---------------------------+:---------+:------------------------------
+----------------------------+----------+------------------------------
 Broadcast                   | 0x01     | アドバタイズメントでのブロードキャスト
 Read                        | 0x02     | 読み出し可能
 Write Without Response      | 0x04     | レスポンスなしの書き込み
@@ -1075,9 +1145,9 @@ Formatは、変数の型を表します。次のような型があります:
 - 主に医療機器で使われる、2つの、固定サイズの固定小数点
 - UTF-8 / UTF-16
 
-Unitは単位を表す16ビットのUUIDです。この割当は、Bluetooth SIGの [assigned numbers](https://developer.bluetooth.org/gatt/units/Pages/default.aspx) [^3050] に列挙されています。
+Unitは単位を表す16ビットのUUIDです。この割当は、Bluetooth SIGの [assigned numbers](https://developer.bluetooth.org/gatt/units/Pages/default.aspx) [^2100] に列挙されています。
 
-[^3050]: [assigned numbers https://developer.bluetooth.org/gatt/units/Pages/default.aspx](https://developer.bluetooth.org/gatt/units/Pages/default.aspx)
+[^2100]: [assigned numbers https://developer.bluetooth.org/gatt/units/Pages/default.aspx](https://developer.bluetooth.org/gatt/units/Pages/default.aspx)
 
 <!-- 
 のこる2つのフィールドは、合わせて1つの値とみなすべき。
