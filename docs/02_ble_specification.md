@@ -1,5 +1,5 @@
 
-# Bluetooth Low Energy の無線通信技術と通信規格
+# Bluetooth Low Energy の無線通信技術
 
 Bluetooth Low Energy は、Bluetooth4.0 で Bluetooth に統合された超低消費電力無線通信技術です。
 
@@ -1172,10 +1172,3 @@ Write Long Characteristic Valuesを使うと。
 UUID、未定義なものはクライアントは無視していい。
 -->
 
-**書くべき項目**
-セキュリティ・モデル、Lv1,2,3
-ペアリングとボンディングについての詳細、
-暗号化のまとめ、通信路、AuthenticationとAuthorization、書き込み時の認証、読み出しの暗号化
-BT4.1との差分、簡潔なまとめ。リンク層、32-bit UUID、IPv6、 LTEとの共存
- 後方互換。
-BTの仕様書のどこをどう読めばいいか

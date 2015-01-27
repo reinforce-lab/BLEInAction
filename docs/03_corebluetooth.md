@@ -1,4 +1,3 @@
-
 # iOSアプリケーション開発
 
 この章は、iOSアプリケーション開発にBluetooth LEを提供するCore Bluetoothフレームワークを解説します。
@@ -570,10 +569,10 @@ iOSアプリケーションが、内部のデータを外部に公開するに�
 まずCBMutableCharacteristcクラスのインスタンスを生成します。CBMutableCharacteristicクラスのinitWithType:properties:value:permissions:メソッドを使います。
 
 ~~~ {.objectivec}
-	myCharacteristic =
-    	[[CBMutableCharacteristic alloc] initWithType:myCharacteristicUUID
-	     properties:CBCharacteristicPropertyRead
-    	 value:myValue permissions:CBAttributePermissionsReadable];
+    myCharacteristic =
+        [[CBMutableCharacteristic alloc] initWithType:myCharacteristicUUID
+         properties:CBCharacteristicPropertyRead
+         value:myValue permissions:CBAttributePermissionsReadable];
 ~~~
 
 initWithType:properties:value:permissions:メソッドには引数が4つあります。最初の引数initWithTypeはキャラクタリスティクスのUUIDを表すCBUUIDのインスタンスを与えます。引数valueは、キャラクタリスティクスの値を表すNSDataのインスタンスを与えます。引数propertiesには、キャラクタリスティクスの属性をCBCharacteristicProperties列挙型の値で与えます。引数permissionsには、キャラクタリスティクスのパーミションをCBAttributePermissions列挙型の値で与えます。この2つの列挙型は、いずれも列挙型の複数の値を論理和でまとめて指定できます。
@@ -585,7 +584,7 @@ initWithType:properties:value:permissions:メソッドには引数が4つあり�
 サービスは、キャラクタリスティクスの集合です。CBMutableServiceクラスのinitWithType:primary:メソッドでインスタンスを生成します。
 
 ~~~ {.objectivec}
-	myService = [[CBMutableService alloc] initWithType:myServiceUUID primary:YES];
+    myService = [[CBMutableService alloc] initWithType:myServiceUUID primary:YES];
     myService.characteristics = @[myCharacteristic];
 ~~~
 
@@ -637,7 +636,7 @@ emailCharacteristic = [[CBMutableCharacteristic alloc]
 キャラクタリスティクスを設定したCBMutableCharacteristcクラスのインスタンスができれば、次はペリフェラル・マネージャーのデータベースに、それらのサービスを追加します。これには、CBPeripheralManagerクラスのaddService:メソッドを使います。
 
 ~~~ {.objectivec}
-	[myPeripheralManager addService:myService];
+    [myPeripheralManager addService:myService];
 ~~~
 
 ペリフェラル・マネージャーにaddService:メソッドでサービスとキャラクタリスティクスを追加すると、その内容はペリフェラル・マネージャーにキャッシュされて、変更することはできません。複数のサービスが複数ある場合はaddService:メソッドを繰り返し呼び出します。
@@ -920,7 +919,7 @@ iOSアプリケーションがバックグラウンド状態になったとき�
 iOSアプリケーションの設計段階で、ユースケースに求められるペリフェラルのサービスとキャラクタリスティクスは決まります。ですから、検索は利用するものだけに限定することを勧めます。サービスを検索するCBPeripheralクラスのdiscoverServices:メソッドには、検索したいサービスのUUIDsを引数に指定できます。同様に、CBperipheralクラスのscanForPeripheralsWithServices:options:メソッドも、検索したいキャラクタリスティクスのUUIDsを引数に指定できます。
 
 ~~~ {.objectivec}
-	[peripheral discoverServices:@[firstServiceUUID, secondServiceUUID]];
+    [peripheral discoverServices:@[firstServiceUUID, secondServiceUUID]];
 ~~~
 
 ### サブスクライブと読み出しの使いかた
