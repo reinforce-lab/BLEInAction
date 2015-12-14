@@ -1,0 +1,1010 @@
+## CBCentralManager Class
+これは、Apple社のCBCentralManagerクラスドキュメント [http://developer.apple.com/library/ios/#documentation/CoreBluetooth/Reference/CBCentralManager_Class/](http://developer.apple.com/library/ios/#documentation/CoreBluetooth/Reference/CBCentralManager_Class/)から、CoreBluetooth開発の理解に必要最低限の情報を日本語に意訳したものです。
+
+### プロパティ
+#### @property(assign, nonatomic) id<CBCentralManagerDelegate> delegate;
+セントラル・マネージャのイベントを受け取るデリゲートを設定します。
+
+#### @property(readonly) CBCentralManagerState state;
+セントラル・マネージャの状態を表します。セントラル・マネージャをインスタンスしたときは初期値CBCentralStateUnknownです。この値が変化した瞬間に、デリゲートのコールバック - (void)centralManagerDidUpdateState:(CBCentralManager *)central が呼ばれます。
+
+CBCentralManagerState列挙型は、以下の値を取ります。
+
+```
+typedef NS_ENUM(NSInteger, CBCentralManagerState) {
+	CBCentralManagerStateUnknown = 0,
+	CBCentralManagerStateResetting,
+	CBCentralManagerStateUnsupported,
+	CBCentralManagerStateUnauthorized,
+	CBCentralManagerStatePoweredOff,
+	CBCentralManagerStatePoweredOn
+};
+```
+
+- CBCentralManagerStateUnknown = 0,
+	- 初期値です。すぐに更新されます。
+- CBCentralManagerStateResetting,
+	- システムサービスとの接続が一時的に失なわれました。すぐに更新されます。
+- CBCentralManagerStateUnsupported,
+	- Bluetooth Low EnergyのCentral/Clientをサポートしていません。
+- CBCentralManagerStateUnauthorized,
+	- このアプリケーションは、Bluetooth Low EnergyのCentral/Client使う認可がありません。
+- CBCentralManagerStatePoweredOff,
+	- Bluetoothがオフになっています。
+- CBCentralManagerStatePoweredOn
+	- Bluetoothがオンで、かつ、いま利用できます。
+
+### インスタンスメソッド
+#### - (void)cancelPeripheralConnection:(CBPeripheral *)peripheral;
+ペリフェラルへの、ペンディング状態もしくは接続している接続を、キャンセルします。
+
+connectPeripheral:options:
+Establish a connection to the peripheral.
+
+#### - (void)connectPeripheral:(CBPeripheral *)peripheral options:(NSDictionary *)options;
+
+ペリフェラルへの接続を確立します。引数optionsで接続のオプションを指定出来ます。
+CBConnectPeripheralOptionNotifyOnIiscoonectionKey を参照してください。
+
+このメソッドはタイムアウトをしません。ペンディングされた接続をキャンセルするには、cancelPeripheralConnections: を使います。
+
+#### - (CBCentralManager *)initWithDelegate:(id<CBCentralManagerDelegate>)delegate queue:(dispatch_queue_t)queue;
+指定したデリゲートとディスパッチキューで、セントラルマネージャを初期化します。
+
+- queue
+	- イベントを処理するキューを指定します。nilならばメインキューがデフォルトでつかわれます。
+
+#### - (void)retrieveConnectedPeripherals;
+システムに今在接続しているペリフェラルの一覧を取得するようにセントラルに問い合わせます。
+問い合わせ結果はデリゲートを通して通知されます。
+
+#### - (void)retrievePeripherals:(NSArray *)peripheralUUIDs;
+UUIDで指定したペリフェラルの一覧をセントラルに問い合わせます。
+
+- peripheralUUIDs
+	- 取得するCBPeripheralの CFUUIDRef のリスト。
+
+問い合わせ結果はデリゲートを通して通知されます。
+
+#### - (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options;
+
+セントラルにペリフェラルのスキャンを要求します。
+
+- serviceUUIDs
+	- アプリケーションが興味があるサービスの CBUUIDs の配列。
+- options
+	- スキャンを指定するオプションを指定した辞書。 CBCentralManagerScanOptionAllowDuplicatesKey を参照。
+
+ペリフェラルそれぞれを発見する都度、デリゲートのコールバックが呼ばれます。"serviceUUIDs"でCBUUIDの配列が指定されている場合は、セントラルはそのサービス、もしくはそれらのサービスをアドバタイズしているペリフェラルのみを返します(推奨)。
+"seriviceUUIDs"がnilの場合は、発見したすべてのペリフェラルを返します(非推奨)。
+セントラルが、すでに異なるパラメータでスキャンしている場合は、指定したパラメータがそれを置換します。
+
+#### - (void)stopScan;
+セントラルにペリフェラルのスキャンを停止するよう問い合わせます。
+
+### 定数
+
+
+#### CBCentralManagerScanOptionAllowDuplicatesKey
+
+このキーにはNSNumber(Boolean)の値が対応します。値がYESのとき、
+ペリフェラルのスキャンで、重複したデバイスをフィルタリングをしません。デフォルトでは、同じペリフェラルを複数回発見したときは、1回の発見イベントに集約します。このフィルタリングを無効にすると、バッテリーの稼働時間に不利な影響をもたらすかもしれませんから、必要なときにだけ利用します。
+
+scanForPeripheralsWithServices:options: を参照してください。
+
+#### CBConnectPeripheralOptionNotifyOnConnectionKey
+*iOS6から有効*です。
+
+このキーには、NSNumber(Boolean)の値が対応します。値は、アプリケーションがサスペンドしている時に、
+あるペリフェラルとの接続が確立したならば、
+それをシステムがアラート表示すべきことを示します。
+
+この設定は、アプリケーションが
+bluetooth-central バックグラウンド・モード
+を指定していないために、アプリケーションが自分でアラート表示できないときに便利です。
+
+あるペリフェラルに対して、2つ以上のアプリケーションがこの通知を要求していたならば、フォアグラウンドで最も最近に要求をしたアプリケーションが、通知を受け取ります。
+
+#### CBConnectPeripheralOptionNotifyOnDisconnectionKey
+このキーには、NSNumber(Boolean)の値が対応します。この値は、アプリがサスペンドしている時に、
+あるペリフェラルが切断したならば、それをシステムがアラート表示すべきことを示します。
+
+この設定は、アプリケーションが
+bluetooth-central バックグラウンド・モード
+を指定していないために、アプリケーションが自分でアラート表示できないときに便利です。
+
+あるペリフェラルに対して、2つ以上のアプリケーションがこの通知を要求していたならば、フォアグラウンドで最も最近に要求をしたアプリケーションが、通知を受け取ります。
+
+#### CBConnectPeripheralOptionNotifyOnNotificationKey
+このキーには、NSNumber(Boolean)の値が対応します。この値は、アプリがサスペンドしている時に、
+あるペリフェラルから受信したすべてののティフィケーション(ここでのノティフィケーションは、iOSのそれではなく、Bluetooth Low Energyの規格でいうノティフィケーションを示す)に対して、
+それをシステムがアラート表示すべきことを示します。
+
+この設定は、アプリケーションが
+bluetooth-central バックグラウンド・モード
+を指定していないために、アプリケーションが自分でアラート表示できないときに便利です。
+
+あるペリフェラルに対して、2つ以上のアプリケーションがこの通知を要求していたならば、フォアグラウンドで最も最近に要求をしたアプリケーションが、通知を受け取ります。
+
+
+## CBCentralManagerDelegate Protocol 
+
+これは、Apple社のCBCentralManagerクラスドキュメント [http://developer.apple.com/library/mac/#documentation/CoreBluetooth/Reference/CBCentralManagerDelegate_Protocol/translated_content/CBCentralManagerDelegate.html](http://developer.apple.com/library/mac/#documentation/CoreBluetooth/Reference/CBCentralManagerDelegate_Protocol/translated_content/CBCentralManagerDelegate.html)
+から、CoreBluetooth開発の理解に必要最低限の情報を日本語に意訳したものです。
+
+CBCentralManagerDelegate プロトコルは、CBCentralのデリゲートのプロトコルです。
+
+CBCentralManagerDelegateは、-[centralManagerDidUpdateState:] のみがrequiredです。その他は optional です。
+
+### インスタンス・メソッド
+#### - (void)centralManagerDidUpdateState:(CBCentralManager *)central;
+セントラル・マネージャのステートが更新された時に、呼ばれます。
+
+引数:
+
+- central
+	- ステートが変化したセントラルマネージャ。
+
+議論:
+
+詳細は "state" プロパティを参照してください。
+
+#### - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral;
+ペリフェラルとの接続が確立したときに、呼ばれます。
+
+<<<<<<< HEAD
+#### - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
+ペリフェラルとの既存の接続が切断した時に、呼ばれます。
+
+=======
+centralManager:didDisconnectPeripheral:error:
+Invoked whenever an existing connection with the peripheral is torn down.
+
+#### - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
+ペリフェラルとの既存の接続が切断した時に、呼ばれます。
+
+centralManager:didDiscoverPeripheral:advertisementData:RSSI:
+Invoked when the central discovers a peripheral while scanning.
+
+#### - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI;
+
+セントラルがスキャン中にペリフェラルを発見した時に、呼ばれます。
+
+議論:
+
+アドバタイズメント / スキャン・レスポンス・データは、"advertisementData"に収納され、CBAdvertisementData * キーを通して読み出すことができる。 (訳者注:BLEの規格ではアドバタイズメント・パケットには、デバイス名、デバイスが提供するサービスのUUID、メーカ独自の拡張データを収納することができます。最後の拡張データがiOSで読み取れるかは、未確認。)
+この引数のperipheralは、このペリフェラルに対して、なにかのコマンドを実行する場合は、必ずリテインしなければならない。(訳者注:リテインしないと、ペリフェラルは開放されて、接続が切断します。)
+
+centralManager:didFailToConnectPeripheral:error:
+Invoked whenever the central manager fails to create a connection with the peripheral.
+
+#### - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
+
+セントラル・マネージャがペリフェラルと接続を確立するのに失敗した時に、呼ばれます。
+
+議論:
+
+失敗した原因は"error"に格納されます。
+
+centralManager:didRetrieveConnectedPeripherals:
+Invoked when the central manager retrieves the list of peripherals currently connected to the system.
+
+#### - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals;
+
+セントラル・マネージャが、現在システムと接続しているペリフェラルの一覧を取得した時に、呼び出されます。
+
+議論:
+
+詳細は -[retrieveConnectedPeripherals] メソッドを参照してください。
+
+centralManager:didRetrievePeripherals:
+Invoked when the central manager retrieves the list of known peripherals.
+
+#### - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals;
+
+セントラル・マネージャが、既知のペリフェラルの一覧を取得した時に、呼び出されます。
+
+議論: 
+
+詳細は -[retrievePeripherals:] メソッドを参照してください。
+
+See Also:
+
+centralManager:didRetrievePeripheral:
+
+### 定数(CBAdvertisementData.h)
+CBAdvertisementData.h は -[centralManager:didDiscoverPeripheral:advertisementData:RSSI:] のadvertisementDataの辞書の鍵を定義しています。
+
+#### CBAdvertisementDataServiceUUIDsKey;
+CBServiceのUUIDを表す、1つもしくはそれ以上のCBUUIDのリスト。
+
+#### const CBAdvertisementDataOverflowServiceUUIDsKey
+*iOS6以降*
+アドバタイズメントデータの"overflow"領域で見つけられたCBService UUIDを表す、1つもしくはそれ以上のCBUUIDのリスト。
+この領域のUUIDは"ベストエフォート"であるため、常に正確とは限らない。
+
+参照:
+
+startAdvertising:
+
+#### CBAdvertisementDataLocalNameKey
+ペリフェラルのローカル名を表す、NSString。
+
+#### CBAdvertisementDataTxPowerLevelKey
+ペリフェラルの送信電力を表す、NSNumber。
+
+#### CBAdvertisementDataManufacturerDataKey
+ペリフェラルの製造者データを表す、NSDataオブジェクト。
+
+#### CBAdvertisementDataServiceDataKey
+サービス特有のアドバタイズメントデータを含む辞書。
+その辞書の鍵は、CBService UUIDを表す、CBUUIDオブジェクト。値はNSDataオブジェクト。
+
+## CBUUID Class
+### 定数
+
+#### CB_EXTERN NSString * const CBUUIDCharacteristicExtendedPropertiesString;
+extended properties descriptorのUUIDの文字列表現です。
+このデスクリプタに対応する値は、NSNumber オブジェクトです。
+
+#### CB_EXTERN NSString * const CBUUIDCharacteristicUserDescriptionString;
+user description descriptorのUUIDの文字列表現です。
+このデスクリプタに対応する値は、NSString オブジェクトです。
+
+#### CB_EXTERN NSString * const CBUUIDClientCharacteristicConfigurationString;
+client configuration descriptor
+のUUIDの文字列表現です。
+このデスクリプタに対応する値は、NSNumber オブジェクトです。
+
+#### CB_EXTERN NSString * const CBUUIDServerCharacteristicConfigurationString;
+server configuration descriptor
+のUUIDの文字列表現です。
+このデスクリプタに対応する値は、NSNumber オブジェクトです。
+
+#### CB_EXTERN NSString * const CBUUIDCharacteristicFormatString;
+presentation format descriptor
+のUUIDの文字列表現です。
+このデスクリプタに対応する値は、NSData オブジェクトです。
+
+#### CB_EXTERN NSString * const CBUUIDCharacteristicAggregateFormatString;
+server configuration descriptor
+のUUIDの文字列表現です。
+
+#### CB_EXTERN NSString * const CBUUIDGenericAccessProfileString;
+GAP
+のUUIDの文字列表現です。
+
+#### CB_EXTERN NSString * const CBUUIDGenericAttributeProfileString;
+GATT
+のUUIDの文字列表現です。
+
+#### CB_EXTERN NSString * const CBUUIDDeviceNameString;
+GAP device name
+のUUIDの文字列表現です。
+
+#### CB_EXTERN NSString * const CBUUIDAppearanceString;
+GAP appearance UUID
+のUUIDの文字列表現です。
+
+#### CB_EXTERN NSString * const CBUUIDPeripheralPrivacyFlagString;
+GAP privacy flag UUID
+の文字列表現です。
+
+#### CB_EXTERN NSString * const CBUUIDReconnectionAddressString;
+GAP reconnection address UUID
+の文字列表現です。
+
+#### CB_EXTERN NSString * const CBUUIDPeripheralPreferredConnectionParametersString;
+GAP preferred connection parameter UUID
+の文字列表現です。
+
+#### CB_EXTERN NSString * const CBUUIDServiceChangedString;
+GATT service changed UUID
+の文字列表現です。
+
+
+### CBUUID クラス
+16-bitまたは128-bitのBluetooth UUIDを表すクラスです。
+16-bit UUIDは、いうまでもなく、Bluetooth Base UUIDで事前に満たされています。
+(訳者注:Bluetooth Low EnergyのUUIDは、128-bitが基本です。しかし、Bluetooth SIGが定義したものは16-bitの短縮形UUIDが使えます。この16-bitのUUIDは、Bluetooth Base UUIDという128-bit のUUIDの先頭の末尾16-bitを使うことで、実現しています。)
+
+### プロパティ
+
+
+#### @property(nonatomic, readonly) NSData *data;
+NSDataとしてのUUID
+
+/*!
+ * @method UUIDWithString:
+ *
+ *  @discussion
+ *      Creates a CBUUID with a 16-bit or 128-bit UUID string representation.
+ *      The expected format for 128-bit UUIDs is a string punctuated by hyphens, for example 68753A44-4D6F-1226-9C60-0050E4C00067.
+ *
+ */
+
+### メソッド
+
+#### + (CBUUID *)UUIDWithString:(NSString *)theString;
+16-bitもしくは128-bitのUUID文字列表記からCBUUIDを作ります。
+128-bit UUIDはハイフンで区切られた文字列フォーマットを期待します。例: 68753A44-4D6F-1226-9C60-0050E4C00067 。
+(訳者注:16-bitのUUIDは、4桁の16進表記文字列で与えます。先頭に0xをつける必要は、ありません。)
+ 
+#### + (CBUUID *)UUIDWithData:(NSData *)theData;
+16-bitもしくは128-bitのデータコンテナからCBUUIDを作ります。
+
+#### + (CBUUID *)UUIDWithCFUUID:(CFUUIDRef)theUUID;
+CFUUIDRef からCBUUIDを作ります。
+
+
+## CBPeripheral Class
+### プロパティ
+
+#### @property(assign, nonatomic) id<CBPeripheralDelegate> delegate;
+ペリフェラルのイベントを受信するデリゲートです。
+
+#### @property(readonly, nonatomic) CFUUIDRef UUID;
+ペリフェラルが、少なくとも一度システムから接続されたことがあれば、ペリフェラルにはUUIDが割り当てられます。(訳者注:逆にこれまで一度も接続したことがないペリフェラルでは、nilになります。接続は、他のアプリでの接続、iPhoneの電源オン/オフ、再起動に関係なく、一度でも接続したことがあるペリフェラルであれば、UUIDが割り当てらています。)
+
+ペリフェラルを取得するために、後に
+BCentralManager
+に与えるために、このUUIDを保存しておけます。
+
+#### @property(retain, readonly) NSString *name;
+ペリフェラルの名前です。(訳者注:アドバタイズメント・データのローカル名を示します。通常は型番が与えらています。)
+
+#### @property(retain, readonly) NSNumber *RSSI;
+接続している間、接続のRSSIをデシベルで表します。
+
+(訳者注:RSSIは、Received Signal Strength Indicatorの略称で、受信信号強度を表します。このRSSIは、RF送受信の半導体が出力する信号値をそのまま使っていると推測されます。物理的に絶対値が正しい値とは限りませんが、目安としては利用できるでしょう。信号レベルは対数で、デシベル(10log 信号電力)で表します。通常、-40 ~ -90dB程度の範囲です。マイナスになるほど、信号が弱いことを示します。)
+
+#### @property(readonly) BOOL isConnected;
+ペリフェラルが現在接続しているかを、示します。
+
+#### @property(retain, readonly) NSArray *services;
+ペリフェラルで発見されたサービスの、CBServiceオブジェクトのリストです。
+
+### メソッド
+
+#### - (void)readRSSI;
+接続の現在のRSSIを取得します。
+
+see		peripheralDidUpdateRSSI:error:
+
+#### - (void)discoverServices:(NSArray *)serviceUUIDs;
+ペリフェラルで有効なサービスを発見します。
+
+- serviceUUIDs
+	- 発見すべきサービスのUUIDを表す、CBUUIDオブジェクトのリストです。もしもnilを与えると、ペリフェラルのすべてのサービスが発見されるでしょうが、とても遅くなり、従って推奨しません。
+
+see peripheral:didDiscoverServices:	
+
+#### - (void)discoverIncludedServices:(NSArray *)includedServiceUUIDs forService:(CBService *)service;
+指定したサービスのincluded serviceを発見します。
+(訳者注: Bluetooth low energyのサービスは、オブジェクト指向でいうクラスの概念に相当します。いまあるサービスはそのまま提供しつつ、そのサービスの機能を拡張する仕組みが、included serviceで、ちょうどクラス継承の概念に相当します。)
+
+- includedServiceUUIDs 
+	- 発見すべきincluded serviceのUUIDを表すCBUUIDオブジェクトのリストです。もしもnilならば、サービスのすべてのincluded serviceが発見されますが、とても遅くなり、従って推奨しません。
+- service	
+	- プライマリGATTサービス
+
+see						peripheral:didDiscoverIncludedServicesForService:error:
+
+#### - (void)discoverCharacteristics:(NSArray *)characteristicUUIDs forService:(CBService *)service;
+サービスの指定したcharacteristicを発見します。
+
+- charactertisticsUUIDs
+	- 発見すべきcharacteristicのUUIDを表すCBUUIDオブジェクトのリストです。もしnilならば、サービスのすべてのcharacteristicsが発見されますが、とても遅くなり、従って推奨しません。
+- service
+	- GATTサービス
+	
+see						peripheral:didDiscoverCharacteristicsForService:error:
+
+#### - (void)readValueForCharacteristic:(CBCharacteristic *)characteristic;
+characteriticの値を読みます。
+
+- characteristic
+	- GATT characteristic
+	
+see					peripheral:didUpdateValueForCharacteristic:error:
+
+#### - (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type;
+characteristicの値として、valueを書き込みます。
+
+- data
+	- 書き込む値
+- characteristic
+	- 	書き込み対象のcharacteristic
+- type
+	- 書き込みタイプ。characteristicへの書き込み完了を報告する/しないが設定できる。
+	
+see					peripheral:didWriteValueForCharacteristic:error:
+ 
+see					CBCharacteristicWriteType
+
+#### - (void)setNotifyValue:(BOOL)enabled forCharacteristic:(CBCharacteristic *)characteristic;
+characteristicの値の、notification/indicationの有効/無効を背呈します。
+
+characterisitcが、notification/indicationの両方を許可しているならば、notificationが使われます。
+notification/indicationが有効になったとき、characteristicの値更新は、デリゲート
+peripheral:didUpdateValueForCharacteristic:error: 
+に通知されます
+
+更新を送るのは、選択したペリフェラルが行うものなので、
+notification/indicationが有効である間、アプリケーションはその変更を処理できるように備えるべきです。
+
+(訳者注:Bluetooth low energyは、接続先の装置の値更新をiPhone側にプッシュする仕組みがあります。それがnotificationとindicationです。この2つの違いは、通知の信頼性です。
+
+- notification
+	- 接続先の装置からiPhoneに、値の更新を通知します。
+	- notificationは通知だけの、信頼性のない通知です。iPhoneが接続先の装置に、値更新通知を受信したことを返しません。
+- indication
+	- notificationと同じく、接続先の装置からiPhoneに、値の更新を通知します。
+	- indicationは、iPhoneが接続先装置に値更新を受信したことを返信する、信頼性が確保された通知方法です。
+	
+例えば、室温やバッテリー残量のように、センサーなどの値変化を通知するが、一定周期で送信するため、通知データを取りこぼしても問題がない場合は、notificationを用いるなどします。
+
+notification/indicationのいずれを実装しているかは、装置のファームウェア設計によります。readできるcharacteristicが、notification/indicationを実装しているとは限りません。iPhone側は、configutaionをみて、そのcharacteristicがnotification/indicationに対応しているかをみることしかできません。)
+
+- enabled
+	- notification/indication を有効にすべきか、否かを設定します
+- characteristic
+	- クライアントcharacteristic configuration descriptorを保持しているcharacteristic
+
+	
+see					peripheral:didUpdateNotificationStateForCharacteristic:error:
+
+seealso                CBConnectPeripheralOptionNotifyOnNotificationKey
+
+#### - (void)discoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic;
+characteristicのdescriptor(s)を発見します。
+
+- characteristic
+	- GATT characteristic
+
+see					peripheral:didDiscoverDescriptorsForCharacteristic:error:
+
+#### - (void)readValueForDescriptor:(CBDescriptor *)descriptor;
+descriptorの値を読みます。
+
+- descriptor
+	- GATT characteristic descriptor
+
+see				peripheral:didUpdateValueForDescriptor:error:
+
+#### - (void)writeValue:(NSData *)data forDescriptor:(CBDescriptor *)descriptor;
+descriptorの値としてvalueを書き込みます。Client characteristic configuration descriptorはこのメソッドで書き込みはできません。
+それには、 setNotifyValue:forCharacteristic: を使うべきです。
+
+see				peripheral:didWriteValueForCharacteristic:error:
+
+#### 
+
+### 列挙型
+#### CBCharacteristicWriteType
+
+- CBCharacteristicWriteWithResponse = 0,
+- CBCharacteristicWriteWithoutResponse, 
+
+
+## CBPeripheralDelegate Protocol
+
+これはApple社の[http://developer.apple.com/library/ios/#documentation/CoreBluetooth/Reference/CBPeripheralDelegate_Protocol/translated_content/CBPeripheralDelegate.html](http://developer.apple.com/library/ios/#documentation/CoreBluetooth/Reference/CBPeripheralDelegate_Protocol/translated_content/CBPeripheralDelegate.html)のうち、CoreBluetoothを理解するために必要最小限の部分を日本語訳したものです。
+
+CBPeripheralDelegateプロトコルは、CBPeripheralのdelegateプロパティが実装すべきプロトコルです。
+CBPeripheralDelegateプロトコルの、すべてのメソッドはoptionalです。
+
+### インスタンス・メソッド
+#### - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error;
+-[discoverCharacteristics:forService:] リクエストが完了した時に、呼ばれます。
+
+もしも成功したら、"error"はnilで、発見されたcharacteriticsは、それがあったならば、サービスの"characteristics"プロパティにマージされています。もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+Invoked upon completion of a request.
+
+#### - (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error;
+-[discoverDescriptorsForCharacteristic:] リクエストが完了した時に、呼ばれます。
+
+もしも成功したら、"error"はnilで、発見されたdescriptorsは、それがあったならば、キャラクタリスティックの"descriptors"プロパティにマージされています。もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+Invoked upon completion of a -[discoverIncludedServices:forService:] request.
+
+#### - (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error;
+-[discoverIncludedServices:forService:] リクエストが完了した時に、呼ばれます。
+
+もしも成功したら、"error"はnilで、発見されたservicesは、それがあったならば、サービスの"includedServices"プロパティにマージされています。もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+#### - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error;
+-[discoverServices:] リクエストが完了した時に、呼ばれます。
+
+もしも成功したら、"error"はnilで、発見されたservicesは、それがあったならば、ペリフェラルの"services"プロパティにマージされています。もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+#### - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error;
+-[setNotifyValue:forCharacteristic:] リクエストが完了した時に、呼ばれます。
+
+もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+(訳者注:ここから先の説明があまりに素っ気いないのですが、原文そのままです。あまりにそっけないので、あとで解説を追加します。)
+
+#### - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error;
+-[readValueForCharacteristic:] リクエストが完了した、もしくはnotification/indicationを受信した時に、呼ばれます。
+
+もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+#### - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error;
+-[readValueForDescriptor:] リクエストが完了した時に、呼ばれます。
+
+もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+#### - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error;
+-[writeValue:forCharacteristic:] リクエストが完了した時に、呼ばれます。
+
+もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+#### - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error;
+-[writeValue:forDescriptor:] リクエストが完了した時に、呼ばれます。
+
+もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+#### - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error;
+-[readRSSI:] リクエストが完了した時に、呼ばれます。
+
+もしも成功したら、"error"はnilで、ペリフェラルの"RSSI"プロパティは更新されています。もしも成功しなかったら、"error"には、発生した失敗が設定されます。
+
+## CBService Class
+
+これはCBServiceクラスのドキュメントを、CoreBluetoothを理解するために必要最小限の部分について、日本語訳したものです。
+
+CBServiceクラスは、ペリフェラルのサービスまたはサービスのincluded serviceを表します。
+
+### プロパティ
+
+#### @property(readonly, nonatomic) CBPeripheral *peripheral;
+このサービスが属するペリフェラルへのポインタ。
+
+#### @property(readonly, nonatomic) CBUUID *UUID;
+サービスのBluetooth UUID
+
+#### @property(readonly, nonatomic) BOOL isPrimary;
+サービスのタイプ(primary または secondary)
+
+#### @property(retain, readonly) NSArray *includedServices;
+このサービスでこれまでに発見されたincluded serviceのリスト。
+
+#### @property(retain, readonly) NSArray *characteristics;
+このサービスでこれまでに発見されたcharacteristicのリスト。
+
+### CBMutableServiceクラス
+
+CBPeripheralManagerを通してローカルデータベースに追加できる、ローカルサービスもしくはincluded serviceを作るのに使います。
+一旦サービスが公開されたならば、キャッシュされて、それ以降は変更できません。
+このクラスはCBServiceのすべてのプロパティに書き込み属性を追加します。
+ 
+*iOS6以降で有効です。*
+
+#### @property(retain, readwrite, nonatomic) CBUUID *UUID;
+#### @property(readwrite, nonatomic) BOOL isPrimary;
+#### @property(retain, readwrite) NSArray *includedServices;
+#### @property(retain, readwrite) NSArray *characteristics;
+
+#### - (id)initWithType:(CBUUID *)UUID primary:(BOOL)isPrimary;
+サービスタイプとUUIDで初期化されたサービスを返します。
+
+- UUID
+	- サービスのBluetooth UUID
+- isPrimary
+	- サービスのタイプ(primary または secondary)
+
+
+## CBCharacteristics Class
+これはCBCharacteristicsクラスのうちCoreBlutoothを理解するために必要最小限の部分を日本語訳したものです。
+
+### CBCharacteristicsクラス
+
+
+#### プロパティ
+#### @property(readonly, nonatomic) CBService *service;
+このcharacteristicが属するサービスへのポインタです。
+
+#### @property(readonly, nonatomic) CBUUID *UUID;
+characteristicのBluetooth UUID。
+
+#### @property(readonly, nonatomic) CBCharacteristicProperties properties;
+characteristicのプロパテイです。
+
+#### @property(retain, readonly) NSData *value;
+characteristicsの値です。
+
+#### @property(retain, readonly) NSArray *descriptors;
+このcharacteristicで、これまでに発見されたCBDescriptorsのリストです。
+
+#### @property(readonly) BOOL isBroadcasted;
+このcharacteristcが現在ブロードキャストされているか、否かを示します。
+
+#### @property(readonly) BOOL isNotifying;
+このcharacteristicが現在ノーティフィケーションされているか否かを示します。
+
+### CBMutableCharacteristics クラス
+*iOS6から有効です。*
+CBMutableCharacteristicsクラスは、CBCharacteristicクラスを継承します。
+
+#### プロパティ
+#### @property(assign, readwrite, nonatomic) CBAttributePermissions permissions;
+characteristic valueの許可設定です。
+
+see		CBAttributePermissions
+
+#### @property(retain, readwrite, nonatomic) CBUUID *UUID;
+#### @property(assign, readwrite, nonatomic) CBCharacteristicProperties properties;
+#### @property(retain, readwrite) NSData *value;
+#### @property(retain, readwrite) NSArray *descriptors;
+
+### インスタンスメソッド
+
+#### - (id)initWithType:(CBUUID *)UUID properties:(CBCharacteristicProperties)properties value:(NSData *)value permissions:(CBAttributePermissions)permissions;
+返り値は、初期化されたcharacteristicです。
+
+- UUID
+	- characteristicのBluetooth UUIDです。
+- properties
+	- 	characteristicのプロパティです。
+- value	
+	- キャッシュされるcharacteristicの値です。もしもnilならば、値はダイナミックであり、オンデマンドで要求されます。
+- permissions
+	- charactersticの値のパーミションです。
+	
+### 列挙型
+
+#### CBAttributePermissions
+ATT attributeの読み出し/書き込み/暗号化許可属性です。論理和で結合できます。
+- CBAttributePermissionsReadable
+	- 読み出しのみ
+- CBAttributePermissionsWriteable
+	- 書き込みのみ
+- CBAttributePermissionsReadEncryptionRequired
+	- 信頼されたデバイスが、読み出し可能
+- CBAttributePermissionsWriteEncryptionRequired
+	- 信頼されたデバイスが、書き込み可能
+ 
+#### CBCharacteristicProperties
+CBCharacteristicPropertiesは、そのcharacteristicの値がどのように使えるか、またはdescriptor(s)がアクセスできるかを示します。
+論理和で結合させることができます。
+特に明記がない限り、
+CBPeripheralManager で公開されたローカルのcharacteristicsに対してプロパティは有効です。
+
+- CBCharacteristicPropertyBroadcast
+	- characteristic configuration descriptorを使って、characteristicの値をブロードキャすることを許します。
+	- local characteristcには許されていません。
+- CBCharacteristicPropertyRead	
+	 - characteristicの値を読むことを許します。
+- CBCharacteristicPropertyWriteWithoutResponse
+ 	- characteristicの値への、レスポンスがない書き込みを許可します。
+- CBCharacteristicPropertyWrite
+	- characteristicの値への、書き込みを許可します。
+- CBCharacteristicPropertyNotify
+	- characteristicの値の、レスポンスがないノーティフィケーションを許可します。
+- CBCharacteristicPropertyIndicate
+	- characteristicの値の、インディケーションを許可します。
+- CBCharacteristicPropertyAuthenticatedSignedWrites
+	- characteristicの値への、承認ありの書き込みを許可します。 
+- CBCharacteristicPropertyExtendedProperties
+	- もしも設定されていれば、追加のcharacteristicプロパティが、characteristic extended properties descriptorに定義されています。
+	- local characteristicsには許されていません。
+- CBCharacteristicPropertyNotifyEncryptionRequired
+	- もしも設定されていれば、信頼されたデバイスのみがcharacteristicの値のノーティフィケーションを有効に出来ます。
+- CBCharacteristicPropertyIndicateEncryptionRequired
+	- もしも設定されていれば、信頼されたデバイスのみがcharacteristicの値のインディケーションを有効に出来ます。
+
+
+
+## CBDescriptor Class
+
+
+### プロパティ
+
+
+#### @property(readonly, nonatomic) CBCharacteristic *characteristic;
+属するcharacteristicのポインタです。
+
+/*!
+ *  @property UUID
+ *
+ *  @discussion
+ *      The Bluetooth UUID of the descriptor.
+ *
+ */
+#### @property(readonly, nonatomic) CBUUID *UUID;
+DescriptorのBluetooth UUIDです。
+
+#### @property(retain, readonly) id value;
+Descriptorのあちあです。様々なデスクリプタに対応するvalue typeの詳細は、CBUUIDクラスで定義されています。
+
+### CBMutableDescriptorクラス
+*iOS6以降で有効です。*
+
+#### - (id)initWithType:(CBUUID *)UUID value:(id)value;
+サービスタイプとvalueで初期化されたdescriptorを返します。一旦親であるserviceが公開されたならば、valueは要求されて、ダイナミックに更新することはできません。
+
+- UUID
+	- DescriptorのBluetooth UUID
+- value
+	- Descriptorの値
+
+## CBPeripheralManager Class
+
+これはCBPeripheralManagerクラスのリファレンスを、CoreBluetoothを理解するために必要最小限の部分を日本語訳したものです。
+
+CBPeripheralManagerクラスは、peripheral roleへの入り口です。
+コマンドは、その状態がCBPeripheralManagerStatePoweredOn のときにだけ、発行されるべきです。
+2つ以上のCBPeripheralManagerを同時に使うことはサポートされませんし、そうした場合には不定の振る舞いをするでしょう。
+
+CBperipheralManagerクラスは、*iOS6以降で利用できます*。
+
+### プロパティ
+
+#### @property(assign, nonatomic) id<CBPeripheralManagerDelegate> delegate;
+Peripheralイベントを受信するデリゲート。
+
+#### @property(readonly) CBPeripheralManagerState state;
+Peripheralの現在の状態。初期値はCBPeripheralManagerStateUnknown。
+値更新は、required なデリゲートのメソッド
+peripheralManagerDidUpdateState: 
+に提供されます。
+
+#### @property(readonly) BOOL isAdvertising;
+Peripheralが、今データをアドバタイズしているか、いなかを示します。
+
+### インスタンス・メソッド
+
+#### - (id)initWithDelegate:(id<CBPeripheralManagerDelegate>)delegate queue:(dispatch_queue_t)queue;
+イニシャライザです。Peripheral roleのイベントは、指定されたキューで処理されます。
+もしもキューがnilならば、メインキューが使われるでしょう。
+
+- delegate
+	- Peripheral roleイベントを受け取るデリゲート。
+- queue
+	- イベントを処理するdispatch queue。
+
+#### - (void)startAdvertising:(NSDictionary *)advertisementData;
+アドバタイズメントを開始します。サポートされているアドバタイズメント・データ・タイプは、CBAdvertisementDataLocalNameKey と CBAdvertisementDataServiceUUIDsKey です。
+
+アプリケーションがフォアグランドのときは、
+初期のアドバタイズメント・データを、28バイトまで、
+サポートされているアドバタイズメント・データ・タイプの任意の組み合わせに使えます。
+もしこの領域を使い切ると、scan responseの10バイトを追加の領域として、ローカルネームに対してのみ、使えます。
+
+このサイズは、新しいデータタイプそれぞれに必要な2バイトのヘッダ情報を含まないことに、注意してください。
+
+割り当て領域に収まらなかったサービスUUIDsは、特別な"オーバフロー"領域に追加されます。したがって、それらのサービスUUIDは、
+iOSデバイスが、それらを明示的にスキャンしたときにだけ、発見されます。
+
+アプリケーションがバックグラウンドにあるときは、ローカルネームは使われず、すべてのサービスUUIDsは“オーバフロー”エリアに置かれます。
+
+see                        peripheralManagerDidStartAdvertising:error:
+
+seealso                    CBAdvertisementData.h	
+#### - (void)stopAdvertising;
+アドバタイズを停止します。
+
+#### - (void)setDesiredConnectionLatency:(CBPeripheralManagerConnectionLatency)latency forCentral:(CBCentral *)central;
+すでにあるセントラルとの接続の、コネクション・レイテンシを希望する値に設定します。
+コネクション・レイテンシの変更は保証されず、したがって結果として得られる遅延は、指定したものとは違うかもしれません。
+もしも望むレイテンシが設定されないなら、接続が確立した時にセントラルが選んだレイテンシが使われます。
+一般に、レイテンシを変更する必要はありません。
+
+see            CBPeripheralManagerConnectionLatency
+
+#### - (void)addService:(CBMutableService *)service;
+サービスと、それに関連付けられたcharacteristic(s)をローカルデータベースに公開します。もしもサービスがincluded serviceを含むなら、
+まずincluded serviceが最初に公開されねばなりません。
+
+- service
+	- GATTサービス
+
+see            peripheralManager:didAddService:error:
+
+#### - (void)removeService:(CBMutableService *)service;
+ローカルデータベースから、公開されたサービスを削除します。もしもサービスがincluded serviceを含むならば、まず最初にincluded serviceが削除されねばなりません。
+
+#### - (void)removeAllServices;
+ローカルデータベースから、すべての公開されているサービスを削除します。
+
+#### - (void)respondToRequest:(CBATTRequest *)request withResult:(CBATTError)result;
+peripheralManager:didReceiveReadRequest: もしくは peripheralManager:didReceiveWriteRequests: のデリゲートのメソッドで受信したリクエストに応答するのに使います。
+
+- request
+	- セントラルから受信されたオリジナルのリクエスト
+- result
+	- request を満たそうとした結果
+	
+see            peripheralManager:didReceiveReadRequest:
+
+see            peripheralManager:didReceiveWriteRequests:
+
+#### - (BOOL)updateValue:(NSData *)value forCharacteristic:(CBMutableCharacteristic *)characteristic onSubscribedCentrals:(NSArray *)centrals;
+1つもしくはそれ以上のセントラルに、更新されたcharacteristicの値を、notificationもしくはindicationで送信します。
+
+返り値は、アップデートが送信されたならばYES、送信キューが満杯ならばNO。
+もしNOが返ってきたら、スペースが有効になった時に1度、デリゲートの peripheralManagerIsReadyToUpdateSubscribers: メソッドが呼ばれる。したがって、もしも望むならば、アップデートを再送信する。
+
+- value
+	- notification/indicationで送信される値
+- characteristic
+	- 値が変化したcharacteristic。
+- centrals
+	- アップデートを受け取るCBCentralオブジェクトのリスト。characteristic を購読していないセントラルは無視されることに注意する。もしもnilならば、characteristicが購読するセントラルすべてが更新される。		
+see                    peripheralManager:central:didSubscribeToCharacteristic:
+
+see                    peripheralManager:central:didUnsubscribeFromCharacteristic:
+
+see                    peripheralManagerIsReadyToUpdateSubscribers:
+
+### 列挙型
+
+#### CBPeripheralManagerState
+CBperipheralManagerの現在の状態を表します。
+- CBPeripheralManagerStateUnknown
+	- 不明な状態。すぐに更新されます。
+- CBPeripheralManagerStateResetting
+	- システムサービス都の接続が、一時的に失われました。すぐにアップデートされます。
+- CBPeripheralManagerStateUnsupported
+	- そのプラットフォームはBluetooth Low Energy Peripheral/Server roleをサポートしません。
+- CBPeripheralManagerStateUnauthorized
+	- アプリケーションはBluetooth Low Energy Peripheral/Server roleを使う権限がありません。
+- CBPeripheralManagerStatePoweredOff
+	- Bluetoothは現在電源がオフです。
+- CBPeripheralManagerStatePoweredOn
+	- Bluetoothは現在電源がオンで、利用できます。
+
+#### CBPeripheralManagerConnectionLatency
+Peripheral-central接続の遅延時間は、メッセージがどれほどの頻度で交換できるか、を制御します。
+- CBPeripheralManagerConnectionLatencyLow 
+	- バッテリーの持ち時間よりも、素早い通信を優先します。
+- CBPeripheralManagerConnectionLatencyMedium
+	- 通信の頻度とバッテリーの持ち時間とのバランスを取ります。
+- CBPeripheralManagerConnectionLatencyHigh
+	- 素早い通信よりも、バッテリーの持ち時間を伸ばすことを優先します。
+
+
+### CBPeripheralManagerDelegate プロトコル
+CBPeripheralManager オブジェクトのデリゲートは、CBPeripheralManagerDelegate プロトコルを実装しなければならない。
+
+実装が必須の1つだけのメソッドは、ペリフェラル・マネージャーの能力を示す、一方のその他のオプションのメソッドは、ローカルデータベースに接続してアクセスするだろう、セントラルについての情報を提供する。
+
+#### peripheralManagerDidUpdateState:
+引数は、状態が変化したとき。ペリフェラル・マネージャー。
+
+ペリフェラル・マネージャーの状態が更新された都度、呼び出される。コマンドは
+CBPeripheralManagerStatePoweredOn の時のみ発行できる。
+CBPeripheralManagerStatePoweredOn状態の時は、
+アドバタイズメントはずっと停止したままで、いかなるセントラルも切断完了している状態。
+もしも、CBPeripheralManagerStatePoweredOff状態になったら、アドバタイズメントは停止されていて、明示的に再起動せねばならない、そして、ローカルデータベースはクリーンにされていて、すべてのサービスは再度追加されねばならない。
+
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral;
+
+
+#### peripheralManagerDidStartAdvertising:error:
+引数: peripheral 情報を提供するペリフェラル・マネージャー。
+引数: error エラーが発生したら、エラー内容を示す。
+このメソッドは、startAdvertising:メソッド呼び出しの結果を返す。
+もしもアドバタイズメントが開始できないならば、その原因は引数errorに詳細がある。
+
+- (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error;
+
+#### peripheralManager:didAddService:error:
+service      ローカルデータベースに追加するサービス。
+error       エラーが発生した時は、その原因。
+
+このメソッドは、addService:メソッドの呼び出し結果を返す。サービスがローカルデータベースに公開されなかったならば、その原因は引数errorで示される。
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error;
+
+#### peripheralManager:central:didSubscribeToCharacteristic:
+peripheral       The peripheral manager providing this update.
+central          このコマンドを発行したセントラル
+characteristic   ノーティフィケーションまたはインディケーションが有効になったキャラクタリスティクス。
+
+このメソッドは、セントラルがキャラクタリスティクスに、ノーティフィケーションまたはインディケーションを設定した時に呼び出される。
+これは、キャラクタリスティクスの値が変化した時に更新を送信するキューとして使われるべきで。
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic;
+
+#### peripheralManager:central:didUnsubscribeFromCharacteristic:
+peripheral       The peripheral manager providing this update.
+central          コマンドを発行したセントラル。
+characteristic   インディケーションまたはノーティフィケーションが不可にされたキャラクタリスティクス。
+
+セントラルがキャラクタリスティクスから、ノーティフィケーションまたはインディケーションをを削除した時に呼び出される。
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic;
+
+#### peripheralManager:didReceiveReadRequest:
+peripheral   The peripheral manager requesting this information.
+request      A <code>CBATTRequest</code> object.
+
+このメソッドは、peripheralが、値がダイナミックな、キャラクタリスティクスへのATTリクエストを受信した時に呼び出される。
+このメソッドが呼び出されるたび、respondToRequest:withResult:が呼び出される。
+@see                CBATTRequest
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request;
+
+#### peripheralManager:didReceiveWriteRequests:
+peripheral   The peripheral manager requesting this information.
+requests     CBATTRequestのインスタンスの配列
+
+このメソッドは、値がダイナミックな、1つもしくはそれ以上のキャラクタリスティクスに、peripheralがATTはリクエストもしくはコマンドを受信した時に呼び出される。
+正確に一度だけ
+respondToRequest:withResult:
+が呼びされるべきである。
+requestが複数のリクエストを含んでいれば、それらはアトミックなユニットとして扱われるべきである。
+それらのリクエストの1つの実行が失敗を引き起こしたならば、リクエストとエラーの理由は
+respondToRequest:withResult:に供給されて、1つのリクエストも実行されるべきではない。
+@see                CBATTRequest
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests;
+
+#### peripheralManagerIsReadyToUpdateSubscribers:
+peripheral   The peripheral manager providing this update.
+
+このメソッドは
+updateValue:forCharacteristic:onSubscribedCentrals:の呼び出しに失敗した後に呼び出される。
+peripheralがキャラクタの値更新を再び送信準備できるときに。
+
+- (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral;
+
+## CBATTRequest Class
+*iOS6以降で有効です。*
+CBATTRequestクラスは、セントラルからの読み出し/書き込み要求を表します。
+
+### プロパティ
+#### @property(readonly, retain, nonatomic) CBCentral *central;
+リクエストを発生させたセントラルです。
+
+#### @property(readonly, retain, nonatomic) CBCharacteristic *characteristic;
+値を読み書きするcharacteristicです。
+
+/*!
+ *  @property offset
+ *
+ *  @discussion The zero-based index of the first byte for the read or write.
+ *
+ */
+#### @property(readonly, nonatomic) NSUInteger offset;
+0から始まる、読み書きする最初のバイト位置です。
+
+#### @property(readwrite, copy) NSData *value;
+読み書きするデータです。
+読み出し要求では、value はnilで、respondToRequest:withResult: に返信する前に設定されるべきです。
+書き込み要求では、valueは書き込まれるべき値を含んでいます。
+## CoreBluetoothConstants 
+これはApple社のドキュメント
+[http://developer.apple.com/library/ios/#documentation/CoreBluetooth/Reference/CoreBluetooth_Constants/](http://developer.apple.com/library/ios/#documentation/CoreBluetooth/Reference/CoreBluetooth_Constants/)
+からCoreBluetoothフレームワークを理解するために必要最小限の部分のみを日本語訳したものです。
+
+### CBError.h
+
+Bluetoth low energyのトランザクションで生じうるエラーです。
+
+```
+enum {
+   CBATTErrorInvalidHandle = 0x01,
+   CBATTErrorReadNotPermitted = 0x02,
+   CBATTErrorWriteNotPermitted = 0x03,
+   CBATTErrorInvalidPdu = 0x04,
+   CBATTErrorInsufficientAuthentication = 0x05,
+   CBATTErrorRequestNotSupported = 0x06,
+   CBATTErrorInvalidOffset = 0x07,
+   CBATTErrorInsufficientAuthorization = 0x08,
+   CBATTErrorPrepareQueueFull = 0x09,
+   CBATTErrorAttributeNotFound = 0x0A,
+   CBATTErrorAttributeNotLong = 0x0B,
+   CBATTErrorInsufficientEncryptionKeySize = 0x0C,
+   CBATTErrorInvalidAttributeValueLength = 0x0D,
+   CBATTErrorUnlikelyError = 0x0E,
+   CBATTErrorInsufficientEncryption = 0x0F,
+   CBATTErrorUnsupportedGroupType = 0x10,
+   CBATTErrorInsufficientResources = 0x11,
+};
+```
+
+
