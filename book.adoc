@@ -1,0 +1,15 @@
+= たのしい!うれしい!びー・える・いー!
+上原 昭宏
+v0.1, 2016-03-10
+:doctype: book
+:producer: 上原 昭宏
+:keywords: Bluetooth Low Energy
+:copyright: CC-BY-SA 4.0
+:imagesdir: images
+:front-cover-image: image:ble_hyoushi_4500.jpg[Front Cover,3000,4500]
+
+//ifeval::["{scripts}" == "multilingual"]
+//include::i18n.adoc[]
+//endif::[]
+
+include::asciidoctor-epub3-readme.adoc[]
