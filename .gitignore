@@ -1,7 +1,5 @@
 #レポジトリに入れない、無視するトップレベルのディレクトリ
 misc/
-sample_codes/
-tweets/
 
 build/
 .DS_Store
