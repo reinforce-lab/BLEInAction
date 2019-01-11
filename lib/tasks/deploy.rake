@@ -25,8 +25,7 @@ require 'rake/clean'
 task :deploy do
 #WEBROOT
   #HTMLの生成タスクを実行する。WEBROOT に出力される。
-  Rake::Task["html_all"].execute
-
-  sh "echo #{WEBROOT}/"
-  #sh "echo /usr/local/bin/aws s3 sync --acl public-read --delete #{WEBROOT} s3://hoehoge.domain.name.com/ --storage-class STANDARD_IA --region ap-northeast-1 ;aws cloudfront create-invalidation --distribution-id hogehogeIdentifier --paths '/*'"
+  Rake::Task["web"].execute
+#  sh "echo #{WEBROOT}/"
+  sh "aws s3 sync --acl public-read #{WEBROOT} s3://bleinaction.reinforce-lab.com/ --storage-class STANDARD_IA; aws cloudfront create-invalidation --distribution-id E2XWFL7VN4T6CR --paths '/*'"
 end

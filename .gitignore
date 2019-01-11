@@ -69,3 +69,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# igonore generated html files.
+webroot/*
