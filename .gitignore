@@ -72,3 +72,6 @@ Temporary Items
 
 # igonore generated html files.
 webroot/*
+
+# ignore vscode settings
+.vscode/*
