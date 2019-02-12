@@ -1,0 +1,26 @@
+= たのしい!うれしい!びー・える・いー!
+上原 昭宏 <u-akihiro@reinforce-lab.com>
+v0.1, 2016-07-07
+
+:doctype: book
+:producer: 上原 昭宏
+:keywords: Bluetooth low energy
+:copyright: CC-BY-NC 4.0
+:imagesdir: images
+:front-cover-image: image:ble_hyoushi_4500.jpg[Front Cover,3000,4500]
+
+include::ch00_preface.adoc[]
+:numbered:
+toc::[]
+// include::ch01-WhatIsBLE.adoc[]
+// include::ch02-Specificaion.adoc[]
+// include::ch03-LinkLayer.adoc[]
+// include::ch04-HCI.adoc[]
+// include::ch05-GATT.adoc[]
+// include::ch06-CoreBluetooth.adoc[]
+// include::ch07-Hardware.adoc[]
+// include::ch08-Stack.adoc[]
+//
+// include::Appendix01.adoc[]
+// include::Appendix02.adoc[]
+// include::Appendix03.adoc[]
