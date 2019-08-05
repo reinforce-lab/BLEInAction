@@ -9,7 +9,7 @@
 	<key>Label</key>
 	<string>com.reinforce-lab.com.watch-progress.plist</string>
 	<key>Program</key>
-	<string>/Users/u_akihiro/Desktop/Books/BluetoothLowEnergy/watching_progress.sh</string>
+	<string>/Users/u_akihiro/Desktop/Books/BLEInAction/watching_progress.sh</string>
 	<key>StartCalendarInterval</key>
 	<array>
 		<dict>
