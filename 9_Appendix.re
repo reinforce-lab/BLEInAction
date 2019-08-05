@@ -1006,3 +1006,301 @@ enum {
    CBATTErrorInsufficientResources = 0x11,
 };
 ```
+
+# Bluetooth Accessory Design Guidelines for Apple Products (R6) 日本語訳
+これは、Apple社のBluetooth Accessory Design Guidelines for Apple Products (R6)
+[https://developer.apple.com/hardwaredrivers/BluetoothDesignGuidelines.pdf](https://developer.apple.com/hardwaredrivers/BluetoothDesignGuidelines.pdf)のうち、Bluetooth Low Eneryに関連する部分を日本語訳したものです。17ページ目から20ページ目までを訳しています。
+
+=== Bluetooth low energy
+
+Bluetooth4.0仕様は、バッテリーリソースが限られたアクセサリをターゲットにした新しい無線通信技術、Bluetooth low energyを含みます。
+もしBluetooth LEがサポートされていれば、アクセサリーはこの章のガイドラインに従うべきです。
+
+==== Role
+Bluetoothアクセサリーは、Bluetooth4.0仕様 Volume3, Part C, Section 2.2.2.3 に定義されているPeripheral role 、
+もしくはSection 2.2.2.1に定義されているBroadcaster roleの、いずれかを実装すべきです。
+
+==== Advertising Channels
+Bluetoothアクセサリーは、アドバタイズのイベントの都度、すべての3つのアドバタイジング・チャネル(37, 38, および39)でアドバタイズすべきです。
+Bluetooth 4.0 仕様, Volume 6, Part B, Section 4.4.2.1 を参照。
+
+==== Advertising PDU
+Bluetoothアクセサリーは、次のうちいずれか1つのアドバタイジングPDUを使うべきです:
+
+- ADV_IND
+- ADV_NOCONN_IND
+- ADV_SCAN_IND
+
+ADV_DIRECT_IND は使うべきではありません。
+Bluetooth 4.0 仕様, Volume 6, Part B, Section 2.3.1 を参照。
+
+==== Advertising Data
+Bluetoothアクセサリに送信されたアドバタイジング・データは、
+Bluetooth 4.0 仕様, Volume 3, Part C, Section 11 に記述されているように、
+次の情報の少なくとも1つを含むべきです:
+
+- Flags
+- TX Power Level
+- Local Name
+- Services
+
+例えば、もしも電力消費量を低減する必要がある、あるいはすべてのアドバタイズメント・データがアドバタイジングPDUに収まりきらなかったならば、
+アクセサリは、Local Name およびTX Power levelデータをSCAN_RSP PDUに置くかもしれません。
+Apple製品は、その状態によっては、常にアクティブスキャンをするとは限らないことに、注意してください。
+
+Primary servicesは常にアドバタイジングPDUでアドバタイズされるべきです。
+Secondary servicesはアドバタイズされるべきではありません。
+アクセサリの主たる利用方法で重要ではないサービスは、もしもアドバタイジングPDUの領域が限られているならば、無視されるかもしれません。
+
+アドバタイジング・データおよびSCAN_RSP PDUのスキャン・レスポンス・データは、
+Bluetooth 4.0 仕様, Volume 3, Part C, Section 18 のフォーマットガイドラインに従うべきです:
+長さフィールドの次に、AD TypeおよびAD Dataが続きます。
+
+==== Advertising Interval
+Bluetoothアクセサリのアドバタイジング間隔は、
+それがアクセサリの発見にかかる時間と接続パフォーマンスに影響するため、
+注意深く考慮されるべきです。
+電源がバッテリーのアクセサリでは、そのバッテリーリソースもまた考慮すべきでしょう。
+
+Apple製品に発見されるには、Bluetoothアクセサリは、まず最初に、すくなくとも30秒は推奨される20ミリ秒のアドバタイジング間隔を使うべきです。
+もしもアクセサリが最初の30秒以内に発見されなければ、アクセサリはバッテリー電力を節約することを選択して、アドバタイジング間隔を長くするかもしれません。
+Apple製品が発見する確率を上げるために、Appleはより以下のより長い間隔のいずれかを使うことを推奨します。
+
+- 645 ミリ秒
+- 768 ミリ秒
+- 961 ミリ秒
+- 1065 ミリ秒
+- 1294 ミリ秒
+
+注意: より長いアドバタイジング間隔は、通常、より長い発見時間と接続時間をもたらします。
+
+==== Connection Parameters
+Bluetoothアクセサリは、LE接続に使われた接続パラメータに責任があります。
+アクセサリーは、
+適切な時間にL2CAPコネクション・パラメータ・アップデート・リクエストを送信して、
+その利用方法にとて適切な接続パラメータを要求すべきです。
+詳細は、Bluetooth 4.0 仕様, Volume 3, Part A, Section 4.20 を参照してください。
+
+もしも次の全てのルールに従っていない場合は、その接続パラメータ要求は却下されるかもしれません:
+
+- IntervalMax *(Slve Latency +1) <= 2 秒
+- Interval Min >= 20 ミリ秒
+- Interval Min + 20ミリ 秒  <= Interval Max
+- Slave Latency <= 4
+- connSupervisionTimeout <= 6 秒
+- Interval Max *(Slave Latency +1) * 3 < connSupervisionTimeout
+
+Apple製品は、Peripheral Preferred Connection Parameters characteristic のパラメータを読んだり、利用したりしません。
+Bluetooth 4.0 仕様, Volume 3, Part C, Section 12.5 を参照。
+
+==== Privacy
+Bluetoothアクセサリーは、すべての状況で、Resolvable Private Addressを解決できるべきです。
+プライバシーへの懸念のため、Apple製品は
+Bluetooth 4.0 仕様, Volume 3, Part C, Section 10.8
+に定義されたランダムデバイスアドレスを使うでしょう。
+
+==== Permissions
+Bluetoothアクセサリーは、serviceとcharacteristicsを発見するために、
+ペアリング、認証、または暗号化といった特別な許可を求めるべきではありません。
+characteristicの値 または descriptorの値にアクセスするときに限り、それは特別な許可を求めるかもしれません。
+Bluetooth 4.0 仕様, Volume 3, Part G, Section 8.1, 5節を参照。
+
+==== Pairing
+Bluetoothアクセサリーはペアリングを要求すべきではありません。
+セキュリティの理由で、アクセサリーがCentralとbonded relationship を必要とするならば、
+適切であるように、
+PeripheralはATTリクエストをInsufficient Authenticaion error codeで却下するでしょう。
+Bluetooth 4.0 仕様, Volume 3, Part F, Section 4 を参照。
+
+結果として、Apple製品は必要なセキュリティ手順を進めるでしょう。
+
+ペアリングは、Apple製品次第で、ユーザの認証を要求するでしょう。
+
+==== Services
+===== Generic Access Profile Service
+BluetoothアクセサリーはDevice Name characteristic、
+Bluetooth 4.0 仕様, Volume 3, Part C, Section 12.1、
+を実装すべきです。Device Name Characteristicは書き込み可能であるべきです。
+
+===== Generic Attribute Profile Service
+Bluetoothアクセサリーは、もしもそのアクセサリーが製品寿命の間にサービスを変更する能力がある場合に限り、Service Changed Characteristicを実装すべきです。
+
+Apple製品は、
+アクセサリーから前回読み込み(キャッシュされている)情報に頼ることができるかを決めるために、
+Service Changed characteristicsを使います。
+Bluetooth 4.0 仕様, Volume 3, Part G, Section 7.1 を参照してください。
+
+===== Device Information Service
+Bluetoothアクセサリーは、Device Information Serviceを実装すべきです。このサービスのサービスUUIDは、
+アドバタイジング・データでアドバタイズされるべきではありません。
+次のcharacteristicsがサポートされるべきです:
+
+- Manufacturer Name String
+- Model Number String
+- Firmware Revision String
+- Software Revision String
+
+==== GATT Server
+iOS6では、
+iOSデバイスがBluetoothアクセサリーとして使えるように、
+アプリケーションがGATTサーバにserviceやcharacteristicsを提供するかもしれません。
+この章の推奨は、そのような場合のアクセサリーに適用します。
+
+iOSデバイスは、
+データベースの内容は任意の時点で変更できるので、
+GAP Service Changed characteristicsを実装します。
+したがって、Bluetoothアクセサリーは、
+このcharacteristicsの
+Characteristic Value Indication
+をサポートして、indicationを受信したときは、そのデータベースの対応するキャッシュを無効にします。
+Bluetooth 4.0 仕様, Volume 3, Part G, Section 7.1 を参照してください。
+
+Bluetoothアクセサリーは、ATT/GATTリクエストとコマンドの利用を最小に、そして必要な物だけを送信すべきです。
+例えば、
+アクセサリが特定のサービスを探している時に、
+GATT Discover All Services は使ってはなりません。
+より少ない送信時間は、より少ない電力消費と等価であり、したがって、アクセサリーとApple製品の両方にとって、よりよいパフォーマンスをもたらします。
+
+Bluetoothアクセサリーは、いかなるエラーも扱えるように十分に頑強であるべきです。
+もしも、あるサービスをもつアプリケーションがフォアグラウンドになく、かつ、バックグラウンドで実行されるように明記されていないならば、
+ペアリングとCharacteristicの値の読み込み/書き込みは、失敗するかもしれません。
+
+もしも ATT Prepare Write Request が使われたら、
+全てのキューイングされた属性は同じ
+GATT Service に含まれます。
+
+
+# UUIDとは
+
+UUID(Universally Unique Identifier), またはGUID (Globally Unique IDentifier) とも呼ばれる識別子は、時間と場所にかかわらず唯一であると保証できる128ビット長の識別子です。詳細な仕様は istributed Computing Environment (DCE) http://tools.ietf.org/html/rfc4122 にあります。
+
+UUIDの特徴は、識別子の発行を管理するサーバや認証機関のような仕組みがなくとも、ローカルで生成できることです。また、ネットワーク接続がない計算能力の小さいマイクロプロセッサでも生成できます。生成するコストがとても小さく、短時間に大量に生成すること、例えば1秒に1000万個、も容易にできます。
+
+識別子はネットワークやオペレーティング・システムなどの、様々な場面で使われます。通信のセッションの間だけ有効な一時的な識別子にも使えますし、データベースに保存されたりして永続化された情報の識別および参照にも使えます。
+
+UUIDを使う身近な例は、Bluetooth low energy の GATTレイヤは、サービスおよびキャラクタリスティクスにUUIDを使っています。またiOSシミュレータは、シミュレーションのデバイス識別にUUIDを使っています。iOSアプリケーション開発をしているなら、ディレクトリ ~/Library/Developer/CoreSimulator/Devices を開くと UUIDのフォルダ名がいくつか並んでいます。
+
+==== UUID の表記
+
+UUIDは、128ビットつまり16オクテットの長さがあるので、その値を16進数にすると32文字の英数で表記できます。16進の表記には、0から9の数字、またaからfあるいはAからFまでのアルファベットを使います。アルファベットは大文字でも小文字でもどちらでもよく、また1つのUUIDで混在してもかまいません。
+
+32文字の英数を並べただけでは、人間には読みづらいので、先頭から4オクテット、2オクテット、2オクテット、2オクテット、6オクテット、つまり英数文字で先頭から、8文字、4文字、4文字、4文字、12文字に区分して、その間をハイフン’-‘でつなげて表記します。
+
+例えば、Bluetooth low energyで 16ビットのUUID 0x1801が割り当てられているジェネリック・アトリビュート・サービスのUUIDは、
+
+ 00001801-0000-1000-8000-00805F9B34FB
+
+と表記されます。
+
+UUIDのバイトオーダは、ネットワーク・バイトオーダです。ですから、UUIDの一部分をフィールドとして区切り整数として扱うときは、左がUUIDの16進表記で言えば左が最上位バイト右が最下位バイトになる、ビッグ・エンディアンになります。
+
+ジェネリック・アトリビュート・サービスのUUIDを例に、仮にハイフンで区切られた48ビットの末尾部分を整数として扱う場合、その値は 0x00805F9B34FB になります。
+
+<!--
+あるいは OS X のターミナルでコマンド uuidgen を実行すると、生成されたUUIDが
+
+ 7F2FA9AB-9A57-49AF-A766-391D8B177D51
+
+のように表記されます。
+-->
+
+==== UUIDのvariantとバージョン
+
+UUIDのvariant(異体)フィールドは、過去の仕様との後方互換性を保つために定義されています。variantフィールドは、UUIDの先頭から9オクテット目の上位3ビットです。
+
+UUIDの表記を使うと、次のようにNで示した位置にvariantフィールドがあります。このNの上位3ビットがvariantフィールドになります。表記中のxは、UUIDの長さを表現するために使った文字で、任意の値です。
+
+ xxxxxxxx-xxxx-xxxx-Nxxx-xxxxxxxxxxxx
+
+variantフィールドの値とその説明
+
+MSB3| MSB2|MSB1|説明
+————+————+-————+——————————————————————————————————————
+0	 |*	|*	   |NCS後方互換性のために予約されてる。
+1	 |0	|*	   |ここで述べるUUIDに割り当てられている。
+1	 |1	|0	   |Microsoft社の後方互換性のために予約されている。
+1	 |1	|1	   |将来のために予約されている。
+
+表中の * は、任意の値、値が1でも0でもよいことを示します。したがって、ここで説明するUUIDは、Nの上位2ビットが10、つまりNの値は16新表記で8, 9, A, Bの、いずれかの値を取ります。
+
+ここで述べるUUIDには、5つのバージョンがあります。
+
+バージョン番号   |記述
+-———————————---+——————----------------------
+1  | 時間を基にするバージョン。
+2  | DCEセキュリティバージョン。
+3  | MD5ハッシュを使う、名前を基にするバージョン。
+4  | ランダムもしくは擬似乱数を基にするバージョン。
+5  | SHA-1ハッシュを使う、名前を基にするバージョン。
+
+このバージョン番号は、先頭から7オクテット目の上位4ビットに割り当てられています。variantフィールドと同じように、UUIDの表記を使うと、次のようにMで示した位置の16進表記がバージョン番号になります。
+
+ xxxxxxxx-xxxx-Mxxx-xxxx-xxxxxxxxxxxx
+
+Nil UUIDは、次の表記になる128ビットがすべてゼロのUUIDです。
+
+ 00000000-0000-0000-0000-000000000000
+
+またUUIDの値の正しさを検証する方法はありません。UUIDは一致するかしないかを判定するだけに使う識別子です。
+
+UUIDを、セキュリティに関わる用途に使うべきではありません。例えば、通信を開始する都度、乱数を基にUUIDを生成して、それを使い捨てのアクセスを許す識別子に使ったとします。
+
+アクセス権限がない人が、次に発行されるアクセスを許すUUIDの値を推測して、不正にアクセス権限を得ようとしているとします。その乱数の品質が高ければ、次に発行されるUUIDの推測は困難です。ですが、もしもアルゴリズムがわかっていれば次に出る乱数がわかる擬似乱数を使っていれば、次に発行するUUIDは容易に推測されてしまいます。
+
+==== 時間を基にしたUUID
+
+バージョン1もしくは2は、時刻を基にしたUUIDです。このUUIDは、グレゴリオ暦での1582年10月15日午前0時0分を基準点にした100ナノ秒単位の値に、その識別子を発行するノードを識別する値を組み合わせて生成します。タイムスタンプは、100ナノ秒単位の60ビットの値なので、3600年ほどでロールオーバーします。
+
+バージョン1もしくは2のUUIDは、次のように表記できます。
+
+ xxxxxxxx-xxxx-1xxx-Nxxx-KKKKKKKKKKKK (バージョン1)
+ xxxxxxxx-xxxx-2xxx-Nxxx-KKKKKKKKKKKK (バージョン2)
+
+xはタイムスタンプの値です。先頭から7オクテット目の値1は、バージョン1を示します。バージョン2では、この値が2になります。variantフィールドを含むNは、16進で 8, 9, A, B のいずれかの値をとります。48ビットのKはノードの識別子を示します。
+
+バージョン2は、ノードの識別子に、POSIXのユーザ識別子 UID (User Identifier)を使います。
+
+バージョン1では、ノードの識別子にネットワーク・カードがもつMACアドレスが使えます。
+
+MACアドレス(media access control address )は、イーサネットや無線LANなどの物理層でパケットをやりとりするときに使われるアドレスです。同じMACアドレスをもつ製品が存在しないように、事業者ごとに固有識別子を割り当てる登録制度で、MACアドレスの割り当ては管理されています。
+
+ネットワークに接続する機器は、たいていMACアドレスを取得できます。バージョン1のUUIDは、その固定値のMACアドレスと時刻を組み合わせるだけで唯一性が確保されたUUIDを生成できます。
+
+バージョン1は、ノード識別子に乱数または擬似乱数を使うこともできます。乱数が既存のネットワークのMACアドレスと衝突することを避けるために、ネットワークカードでは決して使われることがない、MACアドレスの最下位オクテットの最下位ビットの unicast/multicastビット を'1'に設定します。
+
+つまり、47ビットの乱数にビット'1'を追加した48ビットの値を、ノードの識別子とします。
+
+==== 名前および乱数を基にしたUUID
+
+バージョン3およびバージョン5は、名前を元にしたUUIDです。UUIDは次のように表記できます。
+
+ xxxxxxxx-xxxx-3xxx-Nxxx-xxxxxxxxxxxx (バージョン3)
+ xxxxxxxx-xxxx-5xxx-Nxxx-xxxxxxxxxxxx (バージョン5)
+
+バージョン番号およびvariantフィールドを除く部分は、名前を基にしたハッシュ値を代入します。この表記では、x部分およびNの最下位ビットにハッシュ値が代入されます。
+
+ハッシュ関数には、バージョン3はMD5、バージョン5はSHA-1を使います。後方互換性などの理由がないならば、SHA-1を使うバージョン5を採用することを勧めます。
+
+ハッシュ値は、RFC4122にある名前空間に割り当てられたUUIDと、その名前空間での識別子を連結して計算します。名前空間は、例えば完全修飾ドメイン名(fully-qualified domain name)やURLなどです。
+
+バージョン3および5は、時間が関係しない、永続化されるデータやネットワーク上のリソースを示す識別子に使えます。
+
+また乱数を基にUUIDを発行できます。次のUUIDの表記の、x部分およびNの最下位ビットに、乱数あるいは擬似乱数を代入して生成します。
+
+ xxxxxxxx-xxxx-4xxx-Nxxx-xxxxxxxxxxxx (バージョン4)
+
+他のバージョンと異なり、121ビットの乱数を基にするので、衝突する可能性はとても低いですがゼロとはいえません。ですから、品質の高い乱数を使うことが推奨されます。
+
+==== カスタム・プロファイルとUUID
+
+カスタム・プロファイルを実装するために、サービスおよびキャラクタリスティクスに割り当てるUUIDの生成方法をまとめます。
+
+16ビットおよび32ビットのUUIDは、Bluetooth SIGが管理しています。Bluetooth SIGのメンバーは、メンバーが定義したカスタムGATT基盤サービスで使うために、申請をして費用を支払うことで、16ビットのUUIDの割り当てを受けられます。
+
+Bluetooth SIGの管理をうけないならば、128ビットのUUIDを使うほかありません。他社製品とUUIDが重複しないかが気になります。仮に乱数を基にしたUUIDを使って、ビット数が十分大きいので、故意でない限りUUIDが重複することはまずありません。
+
+開発では、ぱっとみてわかりやすいUUIDが使いやすいです。Bluetooth SIGが行っているように、バージョン1のUUIDを使うと、わかりやすいUUIDの割り当てができます。
+
+もしもMACアドレス・ブロックに登録しているなら、自社で管理したMACアドレスを使えばいいでしょう。アドレス・ブロックを持たないならば、最下位ビットを1にした乱数を使えばいいでしょう。
+
+
