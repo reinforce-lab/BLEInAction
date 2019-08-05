@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StandardOutPth</key>
+	<string>/tmp/watch_progress_out.txt</string>
+	<key>StandardErrorPath</key>
+	<string>/tmp/watch_progress_error.txt</string>
+	<key>Label</key>
+	<string>com.reinforce-lab.watch-progress.plist</string>
+	<key>Program</key>
+	<string>/Users/u_akihiro/Desktop/Books/BLEInAction/watching_progress.sh</string>
+	<key>StartCalendarInterval</key>
+	<array>
+		<dict>
+			<key>Minute</key>
+			<integer>0</integer>
+			<key>Hour</key>
+			<integer>4</integer>
+		</dict>
+	</array>
+	<key>RunAtLoad</key>
+	<false/>
+</dict>
+</plist>
