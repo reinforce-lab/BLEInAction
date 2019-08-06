@@ -1,17 +1,17 @@
 PREDEF:
+  - 00_preface.re
 
 CHAPS:
-  - 00_preface.re
   - 01_whatIsBLE.re
   - 02_BLEOverView.re
   - 03_LinkLayer.re
-  -	04_HostControllerInterface.re
+  - 04_HostControllerInterface.re
   - 05_GATT.re
-  -	06_CoreBluetooth.re
-  -	07_Hardware.re  
-  -	08_ProtocolStack.re
-  -	09_Appendix.re
+  - 06_CoreBluetooth.re
+  - 07_Hardware.re
+  - 08_ProtocolStack.re
 
 APPENDIX:
+  - 09_Appendix.re
 
 POSTDEF:

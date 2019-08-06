@@ -1,3 +1,8 @@
+# ignore generated html files.
+webroot/*
+# ignore auto genrerated files.
+progress_data.csv
+
 *.gem
 *.rbc
 /.config
@@ -40,7 +45,6 @@ Gemfile.lock
 *~
 #.bak
 
-
 # MacOS
 # General
 .DS_Store
@@ -69,9 +73,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-# igonore generated html files.
-webroot/*
 
 # ignore vscode settings
 .vscode/*
