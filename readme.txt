@@ -4,3 +4,6 @@
 
 デプロイ: フォルダをS3に同期してCloudFrontのキャッシュをクリアする。
 % rake deploy
+
+% rake pub
+% rake text

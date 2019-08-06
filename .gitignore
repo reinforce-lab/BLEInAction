@@ -2,6 +2,8 @@
 webroot/*
 # ignore auto genrerated files.
 progress_data.csv
+BluetoothLowEnergyInAction-text/*
+BluetoothLowEnergyInAction.epub
 
 *.gem
 *.rbc
