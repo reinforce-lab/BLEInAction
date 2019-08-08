@@ -168,9 +168,9 @@ Bluetooth low energy で使われる暗号化方式は、AES-128と呼ばれる�
 
 DESはネットワーク技術を支える暗号化方式として広く使われてきました。しかし計算機の性能が桁違いに向上したことで、DESの鍵長56ビットでは短すぎるとして、より強力な暗号化方式が求められるようになりました。
 
-AES(Advanced Encryption Standard)は、DESに代わる次世代暗号化方式として、2001年にアメリカ国立標準技術研究所が [FIPS 197](http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf) [^ap-b-01] として公開したものです。
+AES(Advanced Encryption Standard)は、DESに代わる次世代暗号化方式として、2001年にアメリカ国立標準技術研究所が [FIPS 197](@<href>{http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf) [^ap-b-01])} として公開したものです。
 
-[^ap-b-01]: [http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf](http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf)
+[^ap-b-01]: [@<href>{http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf](http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf)}
 
 暗号化方式には、その暗号は十分に強力なのだろうか、また一般に発表されていない秘密の方法があり、それを発見している人はこっそり暗号を解読しているのではないだろうかという疑いもあります。
 

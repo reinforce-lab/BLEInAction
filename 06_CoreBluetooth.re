@@ -85,7 +85,7 @@ Core Bluetoothフレームワークは、iOSアプリケーションにBluetooth
 
 === UUIDとCBUUIDクラス
 
-UUIDは、サーバのように統合するものがなくとも生成できる一意に特定できる128ビットの識別子のことで、IETFの[RFC412](http://tools.ietf.org/html/rfc4122)に詳細があります。Bluetooth LEの通信はATT層のアトリビュートというデータの単位で通信をします。アトリビュートが表す様々なデータ型の識別子に、このUUID(Universally Unique Identifier)を使います。また個別のサービスやキャラクタリスティクスの識別にもUUIDを使います。
+UUIDは、サーバのように統合するものがなくとも生成できる一意に特定できる128ビットの識別子のことで、IETFの[RFC412](@<href>{http://tools.ietf.org/html/rfc4122)}に詳細があります。Bluetooth LEの通信はATT層のアトリビュートというデータの単位で通信をします。アトリビュートが表す様々なデータ型の識別子に、このUUID(Universally Unique Identifier)を使います。また個別のサービスやキャラクタリスティクスの識別にもUUIDを使います。
 
 このUUIDを表すのがCBUUIDクラスです。CBUUIDクラスのインスタンスは UUIDWithString:クラスメソッドで文字列から生成できます。
 
@@ -1245,7 +1245,7 @@ TBD
 
 
 == 参考文献
-https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html#//apple_ref/doc/uid/TP40013460-CH1-SW7
+@<href>{https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html#//apple_ref/doc/uid/TP40013460-CH1-SW7}
 
 そいえば、ANCS対応の周辺装置を実装するときは、Service changed、の実装は必須。iOSってアプリの起動時とか、iOSアプリがサービスを追加、削除するたび、ローカルデータベースが変化するから。
 posted at 09:37:47

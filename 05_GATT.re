@@ -37,10 +37,10 @@ Attribute Protocol(アトリビュート・プロトコル、ATT)は、アトリ
 アトリビュート・ハンドルは、ATTクライアントがATTサーバのアトリビュートにアクセスするときに使われます。アトリビュート・ハンドルは、2オクテットの0x0001から0xffffまでの値です。
 
 アトリビュート・タイプは、アトリビュートのデータの型を示します。これは128ビット(16オクテット)のUUID (Universally Unique IDentifier)
-[RFC 4122](http://tools.ietf.org/html/rfc4122) [^2070] です。しかし、128ビットのUUIDそのままを通信でやりとりすると、通信時間が長くなり電力を使います。そこで、Bluetooth SIGが、よく使うものには16ビット(2オクテット)のUUIDを割り当てています [Assigned Numbers](https://www.bluetooth.org/ja-jp/specification/assigned-numbers) [^2080] 。この16ビットのUUIDは、次の128ビットのUUIDのxxxx部分を抜き出した短縮したUUIDです。
+[RFC 4122](@<href>{http://tools.ietf.org/html/rfc4122)} [^2070] です。しかし、128ビットのUUIDそのままを通信でやりとりすると、通信時間が長くなり電力を使います。そこで、Bluetooth SIGが、よく使うものには16ビット(2オクテット)のUUIDを割り当てています [Assigned Numbers](@<href>{https://www.bluetooth.org/ja-jp/specification/assigned-numbers) [^2080]} 。この16ビットのUUIDは、次の128ビットのUUIDのxxxx部分を抜き出した短縮したUUIDです。
 
-[^2070]: [RFC 4122 http://tools.ietf.org/html/rfc4122](http://tools.ietf.org/html/rfc4122)
-[^2080]: [Assigned Numbers https://www.bluetooth.org/ja-jp/specification/assigned-numbers](https://www.bluetooth.org/ja-jp/specification/assigned-numbers)
+[^2070]: [RFC 4122 @<href>{http://tools.ietf.org/html/rfc4122](http://tools.ietf.org/html/rfc4122)}
+[^2080]: [Assigned Numbers @<href>{https://www.bluetooth.org/ja-jp/specification/assigned-numbers](https://www.bluetooth.org/ja-jp/specification/assigned-numbers)}
 
 	0000xxxx-0000-1000-8000-00805F9B34FB
 
@@ -265,9 +265,9 @@ GATTは、その機器の機能それぞれをサービスという単位で切�
 
 最後の明るさのキャラクタリスティクスは、実際のライトの明るさの検出値を表します。ライトの明るさは、ランプの劣化や乾電池の残量低下などで変化するでしょうから、実際の明るさを検出したくなるでしょう。検出値は読みだすだけで、書き込むものではありません。ですから、パーミッションは読み込みのみに設定されます。また、一定の時間間隔で、サーバからクライアントに通知(ノーティフィケーションまたはインディケーション)が必要かもしれません。GATTのキャラクタリスティクスには、クライアントに通知をする、しないを設定する機能があります。
 
-ここまでの懐中電灯のサービスを定義したあとで、クライアントから乾電池の残量も知りたいと要求が出されたとします。このときに、懐中電灯のサービスにバッテリー残量を表すキャラクタリスティクスを追加する必要はありません。Bluetooth SIGには、バッテリー状態を公開する [Battery Service](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml) [^2090] が定義されていますから、このサービスを追加します。懐中電灯のサービスと、このバッテリー状態のサービスを組み合わせて使うことで、追加要求を満たすプロファイルが実現できます。
+ここまでの懐中電灯のサービスを定義したあとで、クライアントから乾電池の残量も知りたいと要求が出されたとします。このときに、懐中電灯のサービスにバッテリー残量を表すキャラクタリスティクスを追加する必要はありません。Bluetooth SIGには、バッテリー状態を公開する [Battery Service](@<href>{https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml) [^2090]} が定義されていますから、このサービスを追加します。懐中電灯のサービスと、このバッテリー状態のサービスを組み合わせて使うことで、追加要求を満たすプロファイルが実現できます。
 
-[^2090]: [Battery Service https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml)
+[^2090]: [Battery Service @<href>{https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.battery_service.xml)}
 
 ==== サービス
 
@@ -421,9 +421,9 @@ Formatは、変数の型を表します。次のような型があります:
 - 主に医療機器で使われる、2つの、固定サイズの固定小数点
 - UTF-8 / UTF-16
 
-Unitは単位を表す16ビットのUUIDです。この割当は、Bluetooth SIGの [assigned numbers](https://developer.bluetooth.org/gatt/units/Pages/default.aspx) [^2100] に列挙されています。
+Unitは単位を表す16ビットのUUIDです。この割当は、Bluetooth SIGの [assigned numbers](@<href>{https://developer.bluetooth.org/gatt/units/Pages/default.aspx) [^2100]} に列挙されています。
 
-[^2100]: [assigned numbers https://developer.bluetooth.org/gatt/units/Pages/default.aspx](https://developer.bluetooth.org/gatt/units/Pages/default.aspx)
+[^2100]: [assigned numbers @<href>{https://developer.bluetooth.org/gatt/units/Pages/default.aspx](https://developer.bluetooth.org/gatt/units/Pages/default.aspx)}
 
 <!--
 のこる2つのフィールドは、合わせて1つの値とみなすべき。

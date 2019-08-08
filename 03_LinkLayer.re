@@ -270,9 +270,9 @@ Shortened local nameが使われた時、完全なローカルネームは、上
 ===== Manufacturer Specific Data
 
 Manufacturer Specific Data(マニュファクチャラ スペシフィック データ)は、それぞれの企業の任意データに使われます。AD type は 0xFFです。Ad Dataは、先頭2オクテットが
-Bluetooth SIGが企業に発行した識別子、そして任意長のバイナリ・データが続きます。企業の識別子は [Company Identifiers documents](https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers) [^2060] にリストがあります。
+Bluetooth SIGが企業に発行した識別子、そして任意長のバイナリ・データが続きます。企業の識別子は [Company Identifiers documents](@<href>{https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers)} [^2060] にリストがあります。
 
-[^2060]: [Company Identifiers documents https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers](https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers)
+[^2060]: [Company Identifiers documents @<href>{https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers](https://www.bluetooth.org/en-us/specification/assigned-numbers/company-identifiers)}
 
 位置ビーコンのような、非接続で周囲の不特定多数の Bluetooth low energy デバイスに同報するときに、データの格納に使えます。
 

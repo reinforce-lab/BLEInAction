@@ -46,9 +46,9 @@ USBのドングルと接続する
 
 === ドングルの動作確認
 
-* プラネックス BT-Micro4 http://www.planex.co.jp/products/bt-micro4/ 価格2000円、実売1100円(Amazon)
+* プラネックス BT-Micro4 @<href>{http://www.planex.co.jp/products/bt-micro4/} 価格2000円、実売1100円(Amazon)
  *  CSR8510
-* バッファロー BSHSBD08BK http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/adapter/bshsbd08/  価格2509円 実売1300円
+* バッファロー BSHSBD08BK @<href>{http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/adapter/bshsbd08/}  価格2509円 実売1300円
  * CSR8510
 
 === OS X Bluetooth ドライバの振る舞いを理解する

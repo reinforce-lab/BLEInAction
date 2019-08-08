@@ -53,7 +53,7 @@ Bluetooth Low Energy技術のプロファイルは、柔軟です。周辺機器
 
 Bluetooth Low Energy技術は、通信相手を探すために、デバイス名などの情報を表すパケットを周囲に送信するアドバタイジングという機能があります。そのデバイス名の代わりに、何かの識別情報をのせてアドバタイジングすれば、電波標識つまりビーコンになります。受信したアドバタイジング・パケットから識別情報を読み取れば、そのビーコンの電波が届く領域に入ったとわかります。また受信信号の強度から、ビーコンとの距離を大まかに推定できます。
 
-このビーコンの振る舞いは、iOSではiBeacon https://developer.apple.com/ibeacon/ 、AndroidではEddystone https://github.com/google/eddystone と、スマートホンのオペレーティング・システムごとに定義されています。つまり、オペレーティング・システムが決めるカスタム・プロファイルというわけです。
+このビーコンの振る舞いは、iOSではiBeacon @<href>{https://developer.apple.com/ibeacon/} 、AndroidではEddystone @<href>{https://github.com/google/eddystone} と、スマートホンのオペレーティング・システムごとに定義されています。つまり、オペレーティング・システムが決めるカスタム・プロファイルというわけです。
 もしもビーコンが、特定の1つのアプリケーションでだけ使えるものでは、そのビーコンの利用場面は1つだけです。ですが、オペレーティング・システムが機能を提供するならば、ビーコンと組み合わせる利用場面は無数にあり、多種多様な体験を生み出せます。
 
 例えば、美術館にビーコンを設置したとします。屋内配置図とビーコンの識別子と設置位置とを、屋内位置データとして提供すれば、地図アプリケーションが屋内案内に使うかもしれません。展示解説のアプリケーションを新規開発する時に、近くにある展示物の検出に活用できるでしょう。あるいは、iOSでクーポンやチケットを管理するPassbookは、チケットと関連づける位置情報としてビーコンの識別子が使えますから、オンラインで事前購入した入場券が入り口で自動的に表示される自然な体験にも使えるでしょう。
@@ -264,7 +264,7 @@ Bluetooth Low Energy技術の規格での最大通信距離は100メートルで
 
 === Bluetooth通信技術の規格の変遷
 
-Bluetooth規格の開発を監督しているのは、1998年に設立された非営利の非株式会社 Bluetooth Special Interest Group (SIG), Inc. (Bluetooth SIG) https://www.bluetooth.org footnote:[Bluetooth SIG について https://www.bluetooth.org/ja-jp/members/about-sig-overview] です。
+Bluetooth規格の開発を監督しているのは、1998年に設立された非営利の非株式会社 Bluetooth Special Interest Group (SIG), Inc. (Bluetooth SIG) @<href>{https://www.bluetooth.org} footnote:[Bluetooth SIG について @<href>{https://www.bluetooth.org/ja-jp/members/about-sig-overview} です。
 
 この Bluetooth SIG は Bluetooth対応製品の開発、製造、販売はしません。規格に参加するメンバーが多種多様な機器を接続するための望ましい無線技術を開発することより、Bluetoothブランドを強化することを使命としています。
 
@@ -288,9 +288,9 @@ Bluetooth SIGの主な任務は、次の4つです:
 
 //重要: 申告 (宣言) に複数の製品を含めることもできます。ただし、準拠宣言で参照される QDID を各製品が同様に実装している場合に限ります。これによって複数の DID を購入する必要がなくなります。
 
-// 製品の宣言 https://www.bluetooth.com/ja-jp/develop-with-bluetooth/qualification-listing/declare-your-product
+// 製品の宣言 @<href>{https://www.bluetooth.com/ja-jp/develop-with-bluetooth/qualification-listing/declare-your-product}
 
-Bluetooth無線技術は、時代の要求にあわせて、新しいバージョンの規格を発表してきました。電波をやりとりする物理層に新しい技術を導入するたびに、仕様のメイジャー・バージョン番号が増えています。バージョン1.0仕様は1999年に公開されました。そして、2004年にBluetoothコア仕様バージョン 2.0 Enhanced Data Rate (EDR)が、2009年には Bluetoothコア仕様バージョン 3.0 High Speed (HS)が公開されました footnote:[社歴 https://www.bluetooth.com/ja-jp/media/our-history]。
+Bluetooth無線技術は、時代の要求にあわせて、新しいバージョンの規格を発表してきました。電波をやりとりする物理層に新しい技術を導入するたびに、仕様のメイジャー・バージョン番号が増えています。バージョン1.0仕様は1999年に公開されました。そして、2004年にBluetoothコア仕様バージョン 2.0 Enhanced Data Rate (EDR)が、2009年には Bluetoothコア仕様バージョン 3.0 High Speed (HS)が公開されました footnote:[社歴 @<href>{https://www.bluetooth.com/ja-jp/media/our-history}]。
 
 2010年に公開された Bluetooth コ​​ア仕様バージョン4.0で、Bluetooth無線技術にBluetooth low energy技術が統合されました。この技術は、もともとは2006年にWibreeという規格として公開されたものです。その技術を、Bluetooth無線技術に、将来の発展も視野に入れて最小限の変更をして統合したものが、Bluetooth low energy技術です。
 
@@ -368,7 +368,7 @@ Bluetooth low energy技術は、少量のデータを低頻度でやりとりす
 
 ==== カスタム・プロファイルとアプセサリ
 
-Bluetooth無線技術は、無線通信を通じて機器とアプリケーションがお互いに関係して機能を提供するための規格です。Bluetooth無線技術では、通信でデータをやりとりする手順の仕様をプロトコル、機器の振る舞いの仕様をプロファイルと呼びます footnote:[プロファイルの概要 https://www.bluetooth.com/ja-jp/specifications/profiles-overview]。
+Bluetooth無線技術は、無線通信を通じて機器とアプリケーションがお互いに関係して機能を提供するための規格です。Bluetooth無線技術では、通信でデータをやりとりする手順の仕様をプロトコル、機器の振る舞いの仕様をプロファイルと呼びます footnote:[プロファイルの概要 @<href>{https://www.bluetooth.com/ja-jp/specifications/profiles-overview}]。
 
 スマートホンやモバイル機器があたりまえになった時代に登場したBluetooth low energy技術は、パーソナル・コンピュータの時代にはなかった利用場面を生み出しています。
 
@@ -426,7 +426,7 @@ IoTとは、あらゆる物や物事がネットワークにつながること�
 
 iOSを搭載するiPhone、iPod touchおよびiPadなどをiOSデバイスと総称します。iOSデバイスの従来版Bluetooth無線技術での周辺機器は、キーボードやヘッドセットなどの一般的な周辺機器か、特定のiOSアプリケーションとだけ通信する専用周辺機器かの、いずれかのみが開発できます。
 
-デバイス・ドライバをインストールして周辺機器を追加できるパーソナル・コンピュータとは異なり、iOSにユーザがインストールできるのは、アプリケーションのみです。ですから、iOSデバイスが対応するBluetoothプロファイルの周辺機器のみが利用できます footnote:[iOS：iOS デバイス対応の Bluetooth プロファイル, https://support.apple.com/ja-jp/HT204387]。
+デバイス・ドライバをインストールして周辺機器を追加できるパーソナル・コンピュータとは異なり、iOSにユーザがインストールできるのは、アプリケーションのみです。ですから、iOSデバイスが対応するBluetoothプロファイルの周辺機器のみが利用できます footnote:[iOS：iOS デバイス対応の Bluetooth プロファイル, @<href>{https://support.apple.com/ja-jp/HT204387}]。
 
 従来版Bluetooth無線技術で、プロファイルが定義されていない独自の機器には、シリアル・ポート・プロファイル ( Serial Port Profile, SPP )が使われます。シリアル・ポート・プロファイルは、その名前の通り、パーソナル・コンピュータのシリアル・ポートに相当する任意のバイナリ通信を提供します。
 
@@ -446,7 +446,7 @@ iOSとBluetooth Smart機器とのプロファイルには:
 
 の3つがあります。
 
-キーボードなどの入力機器には、HID Over GATT Profile (HOGP) footnote:[HID Over GATT Profile (HOGP), https://developer.bluetooth.org/TechnologyOverview/pages/hogp.aspx] という採択済みプロファイルがあります。このHOGPは、従来版Bluetoothの、ヒューマン・インターフェイス・デバイス・プロファイル (Human Interface Device Profile, HID)を、GATT基盤アーキテクチャに移植したものです。
+キーボードなどの入力機器には、HID Over GATT Profile (HOGP) footnote:[HID Over GATT Profile (HOGP), @<href>{https://developer.bluetooth.org/TechnologyOverview/pages/hogp.aspx} という採択済みプロファイルがあります。このHOGPは、従来版Bluetoothの、ヒューマン・インターフェイス・デバイス・プロファイル (Human Interface Device Profile, HID)を、GATT基盤アーキテクチャに移植したものです。
 
 iOSはこのHOGPに対応していて、キーボードの接続をiOSが受けつけます。アプリケーションは、タッチパネル入力かキーボード入力かを区別することなく、文字入力機能を利用できます。また、iOSが管理しているプロファイルは、一般アプリケーションからは、CoreBluetoothフレームを通じても見えません。
 
@@ -462,7 +462,7 @@ iOSはこのHOGPに対応していて、キーボードの接続をiOSが受け�
 
 iOSは、iOS独自にいくつかのカスタム・プロファイルを公開しています。それらは、iOSにしか提供できないもので、iOSのユーザ体験をより豊かにするためのものです。
 
-プロファイルの仕様が一般に公開 footnote:[Bluetooth for Developers, https://developer.apple.com/bluetooth/] されているものは、次の2つです。これらは、MFiプログラムに参加してなくとも利用ができます:
+プロファイルの仕様が一般に公開 footnote:[Bluetooth for Developers, @<href>{https://developer.apple.com/bluetooth/} されているものは、次の2つです。これらは、MFiプログラムに参加してなくとも利用ができます:
 
 - Apple Notification Center Service (ANCS)
 - MIDI over Bluetooth low energy
@@ -477,7 +477,7 @@ iOSは、iOS独自にいくつかのカスタム・プロファイルを公開�
 
 Apple Notification Center Service (ANCS)、iOSデバイスに表示されている通知表示を、そのままBluetooth Smart機器に提供する機能です。ANCSを通じて、Bluetooth Smart機器は通知情報をiOSから直接取得できます。ANCSのおかげで、通知を取得するアプリケーションをいちいち作らなくても、通知を知らせるBluetooth Smart機器が開発できます。
 
-MIDI（Musical Instrument Digital Interface、ミディ）は、電子楽器の演奏データを機器間でデジタル転送するための規格です。2012年にBluetooth low energy技術でMIDIデータをやり取りするカスタム・プロファイルが、2012年にApple Bluetooth low energy MIDIとして公開されました。この仕様は、2015年にMIDI本体の規格にそのまま取り込まれました footnote:[Specification for MIDI over Bluetooth Low Energy, https://www.midi.org/specifications/item/bluetooth-le-midi]。
+MIDI（Musical Instrument Digital Interface、ミディ）は、電子楽器の演奏データを機器間でデジタル転送するための規格です。2012年にBluetooth low energy技術でMIDIデータをやり取りするカスタム・プロファイルが、2012年にApple Bluetooth low energy MIDIとして公開されました。この仕様は、2015年にMIDI本体の規格にそのまま取り込まれました footnote:[Specification for MIDI over Bluetooth Low Energy, @<href>{https://www.midi.org/specifications/item/bluetooth-le-midi}。
 
 Apple Bluetooth low energy MIDIは、iOSに深く統合されています。楽器のデータは、人間が気づかない程度の小さな遅れ時間で送らなくてはなりません。そのために、この仕様は、データ形式に加えて、コネクション・インターバルを15ミリ秒以下の小さな値にすることを決めています。
 
@@ -503,11 +503,11 @@ iBeaconは、ビーコンのアドバタイジング・インターバルを規�
 
 ビーコンは、任意に設定できる128ビットの識別子(UUID)と2つの16ビット値を送出できます。iOSアプリケーションは、検出対象のビーコンのUUIDを必ず指定しなければならないので、周囲にある任意のビーコンを検出することはできません。ですから、誰かが設置したビーコンの識別情報を盗みだすスニッフィングなどの悪用はできないようになっています。
 
-iBeaconは、iOS標準アプリのPassbook footnote:[Passbook for Developers, https://developer.apple.com/passbook/](https://developer.apple.com/passbook/] が利用しています。ビーコンがあるとロック画面にパスが表示されます。
+iBeaconは、iOS標準アプリのPassbook footnote:[Passbook for Developers, @<href>{https://developer.apple.com/passbook/}](@<href>{https://developer.apple.com/passbook/}] が利用しています。ビーコンがあるとロック画面にパスが表示されます。
 
 ==== HomeKitとBluetooth low energy
 
-HomeKit footnote:[https://developer.apple.com/homekit/] は、照明機器や電子錠などの身の回りにある機器とiOSデバイスとを、 Bluetooth low energy または Wi-Fi で連携させる技術です。HomeKitは、Siriを通じて自然な音声コマンドで機器が操作できるという、映画では見慣れた誰もが理解しているアプリケーションを提供しています。
+HomeKit footnote:[@<href>{https://developer.apple.com/homekit/}] は、照明機器や電子錠などの身の回りにある機器とiOSデバイスとを、 Bluetooth low energy または Wi-Fi で連携させる技術です。HomeKitは、Siriを通じて自然な音声コマンドで機器が操作できるという、映画では見慣れた誰もが理解しているアプリケーションを提供しています。
 
 機器が連携さえしていれば、サービス提供者やアプリケーション開発者が工夫して、多種多様なアプリケーションが新たな便利さや利用シーンを作り出されていきます。しかし、アプリケーションが登場するには、機器が連携してからしばらく時間がかかります。音声コマンドによる操作は、今はまだないサード・パーティのアプリケーションがなくとも、HomeKitを特徴づけるアプリケーションとなっています。
 
@@ -547,7 +547,7 @@ Bluetooth low energy技術を、追加機能にするか、必須機能にする
 
 また、ブレインストーミングには、プロトタイピングが活用できます。プロトタイピングは、試作品を作り早期に企画や体験の検証を短期間で繰り返す手法です。専門分野の異なるチームでは、メンバー同士の認識のすり合わせにプロトタイピングが有効です。
 
-粘土をこねて外形を作ったり、あるいは目標とする機器とは大きさも形も違うとしても、例えばApple Watchのアプリケーションである程度の機能を作り、手で触れて動かして遊ぶと、驚くような発見や広がりそして展開につながります footnote:[Designing for Future Hardware, https://developer.apple.com/videos/play/wwdc2015/801/]。
+粘土をこねて外形を作ったり、あるいは目標とする機器とは大きさも形も違うとしても、例えばApple Watchのアプリケーションである程度の機能を作り、手で触れて動かして遊ぶと、驚くような発見や広がりそして展開につながります footnote:[Designing for Future Hardware, @<href>{https://developer.apple.com/videos/play/wwdc2015/801/}]。
 
 ==== センサー・デバイスと測定値
 
@@ -557,21 +557,21 @@ Bluetooth low energy技術を、追加機能にするか、必須機能にする
 
 最も身近なセンサーは、スマートホンに使われているものです。スマートホンに使われるセンサーは、大量生産されているので、高性能なものが安価に入手できます。例えば、スマートホンに使われるセンサーとその用途は次のものがあります。
 
-- 磁気センサー
-	- コンパス
-- 光センサー
-	- 画面の明るさ調整(照度センサー)
-	- 顔と画面の相対位置検出 (光学式近接センサー)
-	- 写真撮影 (イメージセンサー)
-- 音センサー
-	- マイク
-- 静電容量分布センサー
-	- タッチ検出
-- 加速度、角速度、気圧センサー
-	- デバイスの向き検出
-	- 歩数や運動量の検出
-- 気圧センサー
-  - 高度
+* 磁気センサー
+** コンパス
+* 光センサー
+** 画面の明るさ調整(照度センサー)
+** 顔と画面の相対位置検出 (光学式近接センサー)
+** 写真撮影 (イメージセンサー)
+* 音センサー
+** マイク
+* 静電容量分布センサー
+** タッチ検出
+* 加速度、角速度、気圧センサー
+** デバイスの向き検出
+** 歩数や運動量の検出
+* 気圧センサー
+** 高度
 
 アプセサリが提供するものは、利用者の体験です。ですから、センサーの計測値そのものではなく、その計測値が利用者の体験にどう関わるのかが重要です。センサーがどこに取り付けられているかが、計測値の意味を決めます。計測値がそのままで使うことは、あまりありません。いくつかの計測値を組み合わせたり、計測値を数値計算をして価値のある値を取り出したりします。
 
@@ -631,8 +631,7 @@ Bluetooth low energy技術を、追加機能にするか、必須機能にする
 
 このように、電波法の基準やその認証制度とその運営は国ごとに異なります。どのような試験項目があるのかは設計段階から把握し対応しなければ、試験に通らず再設計することになります。また、1回の測定で複数の国に提出できるデータを取得できるものもあります。ですから、量産のための試作では、認証サービス会社や製造パートナーと、事前にどの国で販売するかを設定して、技術評価項目を確認しておきます。
 
-Bluetooth機器を自社製品として販売するには、Bluetoothの認可を取得して製品申告をします。これには、Bluetooth無線技術の知的財産と商標のライセンシングが含まれます footnote:[Bluetooth 認証および申告プロセス, https://www.bluetooth.org/ja-jp/test-qualification/qualification-overview]。
-
+Bluetooth機器を自社製品として販売するには、Bluetoothの認可を取得して製品申告をします。これには、Bluetooth無線技術の知的財産と商標のライセンシングが含まれます footnote:[Bluetooth 認証および申告プロセス @<href>{https://www.bluetooth.org/ja-jp/test-qualification/qualification-overview}。
 申告料金は、アソシエイトメンバーであれば4,000米ドル、年会費が無償のアダプターメンバーであれば8,000米ドルです。年間収入が1億米ドル以下の中小企業のアソシエイト会員の年会費は7,500米ドルですから、1年間に2つ以上の製品を登録するならば、アソシエイトメンバーになる方が得です。
 
 また、小さな新興企業が最初のBluetooth製品を商品化できるように、イノベーション奨励プログラムがあります。年間収入が100万米ドル未満で、以前に申告をしたことがない企業は、2,500米ドルの割引金額で最大2つの申告を受けることができます。

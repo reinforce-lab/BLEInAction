@@ -45,9 +45,9 @@ iOSアプリケーションがペリフェラル・ロールならば、バッ�
 
 日本の技術基準適合証明を取得しているプロトタイピングに向いたものに:
 
-* SBBLE(サブレー) [http://sbble.micutil.com](http://sbble.micutil.com)
-* Konashi [http://konashi.ux-xu.com](http://konashi.ux-xu.com)
-* センサータグ [http://www.tij.co.jp/tool/jp/cc2541dk-sensor](http://www.tij.co.jp/tool/jp/cc2541dk-sensor)
+* SBBLE(サブレー) @<href>{[http://sbble.micutil.com](http://sbble.micutil.com)}
+* Konashi @<href>{[http://konashi.ux-xu.com](http://konashi.ux-xu.com)}
+* センサータグ @<href>{[http://www.tij.co.jp/tool/jp/cc2541dk-sensor](http://www.tij.co.jp/tool/jp/cc2541dk-sensor)}
 
 があります。
 
@@ -65,8 +65,8 @@ SBLBLE(サブレー)はマイクロチップ・テクノロジー・ジャパン
 キーホルダーまたはタグは、よくあるアクセサリです:
 
 * キーホルダー、
-[iPhone用探せるキーホルダー](http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/security/bshsbtpt01/)
-* StickNFind [https://www.sticknfind.com](https://www.sticknfind.com)
+[iPhone用探せるキーホルダー](@<href>{http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/security/bshsbtpt01/)}
+* StickNFind @<href>{[https://www.sticknfind.com](https://www.sticknfind.com)}
 
 キーホルダーは、iPhoneと接続して使うものです。iPhoneを置き忘れしそうになった時にキーホルダーから警告音を出したり、キーホルダーのボタンを押すとiPhoneから音が出る機能でiPhoneを探すのに利用します。タグは、代表的なものにStickNFindがありますが、ものに取り付けておいて、ものを探すのに使うものです。その機能は、キーホルダーのボタンを省略したもので、おおよその距離をiPhoneで確認すること、iPhoneから操作してタグから音や光を出すこと、ができます。
 
@@ -74,12 +74,12 @@ SBLBLE(サブレー)はマイクロチップ・テクノロジー・ジャパン
 
 この他にも:
 
-* 心拍センサ、 [Alpha](http://www.alphaheartrate.com)
-* 活動量計、[Fitbit](https://www.fitbit.com)
-* 睡眠記録、[オムロン ねむり時間計](http://www.healthcare.omron.co.jp/corp/news/detail/223)
-* 姿勢検出、 [Lumoback](http://www.lumoback.com)
-* 腕時計、[Pebble](http://getpebble.com)
-* 顔検出、[HVC-C1B](http://plus-sensing.omron.co.jp/egg-project/)
+* 心拍センサ、 [Alpha](@<href>{http://www.alphaheartrate.com)}
+* 活動量計、[Fitbit](@<href>{https://www.fitbit.com)}
+* 睡眠記録、[オムロン ねむり時間計](@<href>{http://www.healthcare.omron.co.jp/corp/news/detail/223)}
+* 姿勢検出、 [Lumoback](@<href>{http://www.lumoback.com)}
+* 腕時計、[Pebble](@<href>{http://getpebble.com)}
+* 顔検出、[HVC-C1B](@<href>{http://plus-sensing.omron.co.jp/egg-project/)}
 
 などが市販されています。
 
@@ -96,9 +96,9 @@ SBLBLE(サブレー)はマイクロチップ・テクノロジー・ジャパン
 
 日本の技術基準適合証明を取得しているプロトタイピングに向いたものに:
 
-* SBBLE(サブレー) [http://sbble.micutil.com](http://sbble.micutil.com)
-* Konashi [http://konashi.ux-xu.com](http://konashi.ux-xu.com)
-* センサータグ [http://www.tij.co.jp/tool/jp/cc2541dk-sensor](http://www.tij.co.jp/tool/jp/cc2541dk-sensor)
+* SBBLE(サブレー) [@<href>{http://sbble.micutil.com](http://sbble.micutil.com)}
+* Konashi [@<href>{http://konashi.ux-xu.com](http://konashi.ux-xu.com)}
+* センサータグ [@<href>{http://www.tij.co.jp/tool/jp/cc2541dk-sensor](http://www.tij.co.jp/tool/jp/cc2541dk-sensor)}
 
 があります。
 
@@ -116,8 +116,8 @@ SBLBLE(サブレー)はマイクロチップ・テクノロジー・ジャパン
 キーホルダーまたはタグは、よくあるアクセサリです:
 
 * キーホルダー、
-[iPhone用探せるキーホルダー](http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/security/bshsbtpt01/)
-* StickNFind [https://www.sticknfind.com](https://www.sticknfind.com)
+[iPhone用探せるキーホルダー](@<href>{http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/security/bshsbtpt01/)}
+* StickNFind @<href>{[https://www.sticknfind.com](https://www.sticknfind.com)}
 
 キーホルダーは、iPhoneと接続して使うものです。iPhoneを置き忘れしそうになった時にキーホルダーから警告音を出したり、キーホルダーのボタンを押すとiPhoneから音が出る機能でiPhoneを探すのに利用します。タグは、代表的なものにStickNFindがありますが、ものに取り付けておいて、ものを探すのに使うものです。その機能は、キーホルダーのボタンを省略したもので、おおよその距離をiPhoneで確認すること、iPhoneから操作してタグから音や光を出すこと、ができます。
 
@@ -125,12 +125,12 @@ SBLBLE(サブレー)はマイクロチップ・テクノロジー・ジャパン
 
 この他にも:
 
-* 心拍センサ、 [Alpha](http://www.alphaheartrate.com)
-* 活動量計、[Fitbit](https://www.fitbit.com)
-* 睡眠記録、[オムロン ねむり時間計](http://www.healthcare.omron.co.jp/corp/news/detail/223)
-* 姿勢検出、 [Lumoback](http://www.lumoback.com)
-* 腕時計、[Pebble](http://getpebble.com)
-* 顔検出、[HVC-C1B](http://plus-sensing.omron.co.jp/egg-project/)
+* 心拍センサ、 [Alpha](@<href>{http://www.alphaheartrate.com)}
+* 活動量計、[Fitbit](@<href>{https://www.fitbit.com)}
+* 睡眠記録、[オムロン ねむり時間計](@<href>{http://www.healthcare.omron.co.jp/corp/news/detail/223)}
+* 姿勢検出、 [Lumoback](@<href>{http://www.lumoback.com)}
+* 腕時計、[Pebble](@<href>{http://getpebble.com)}
+* 顔検出、[HVC-C1B](@<href>{http://plus-sensing.omron.co.jp/egg-project/)}
 
 などが市販されています。
 
@@ -546,11 +546,11 @@ Xcode
 
 === 参考情報源
 
-https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html
+@<href>{https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html}
 
-https://devforums.apple.com/community/ios/core/cbt
+@<href>{https://devforums.apple.com/community/ios/core/cbt}
 
-https://lists.apple.com/mailman/listinfo/bluetooth-dev
+@<href>{https://lists.apple.com/mailman/listinfo/bluetooth-dev}
 
 
 
@@ -570,17 +570,17 @@ Bluetooth LEを使うアプリケーションの振る舞いが、機種によ�
 
 アンテナは機種ごとに異なります。アンテナ自体の利得および指向性が異なるかもしれません。Bluetooth LEで通信をするだけであれば、利得の違いは通信可能距離の大小として見えます。検出される電波強度の絶対値が異なりますから、電波強度を用いる応用例では、その違いが振る舞いを変えるかもしれません。例えば、電波強度による近接検出ならば、近接と判断する距離が機種により異なってくるでしょう。
 
-無線通信の半導体は、Bluetooth規格に従い実装されるので、半導体による機能の違いはないはずです。また[iFixit](http://www.ifixit.com)が報告しているiPhoneの内部構成をみると、無線通信の半導体は、iPhone4SとiPad3はBroadcom社のBCM4330、iPhone5とiPad miniとiPod touch 5th Genは、同じくBroadcom社のBCM4334を採用しています。BCM4330からBCM4334の変更点は、半導体の製造プロセスが65nmから40nm LPに変更され、受信動作時のピーク電流が68mAから36mAに半減したことです。ですから、ただし、受信動作による電池消費量は、機種によって2倍違うでしょうが、ハードウェアの機能の違いはないでしょう。
+無線通信の半導体は、Bluetooth規格に従い実装されるので、半導体による機能の違いはないはずです。また[iFixit](@<href>{http://www.ifixit.com)}が報告しているiPhoneの内部構成をみると、無線通信の半導体は、iPhone4SとiPad3はBroadcom社のBCM4330、iPhone5とiPad miniとiPod touch 5th Genは、同じくBroadcom社のBCM4334を採用しています。BCM4330からBCM4334の変更点は、半導体の製造プロセスが65nmから40nm LPに変更され、受信動作時のピーク電流が68mAから36mAに半減したことです。ですから、ただし、受信動作による電池消費量は、機種によって2倍違うでしょうが、ハードウェアの機能の違いはないでしょう。
 
 iOS側の通信制御プログラムは、iOSのメジャー番号が変わると異なることがあります。またマイナーバージョンで、バグの修正や動作をより安定にする変更が入ります。動作保証対象となるiOSのバージョンごとに、動作の確認が必要です。
 
 <!-- iPhoneそれぞれが使っているモデムの半導体の番号を確認する -->
 <!-- 機種ごとの振る舞いの違いがあると、いやんなので、半導体型番が同じ=タイミングの振る舞いも同じだろうと、裏付けるための情報 -->
 
-<!-- iPhone4 http://www.ifixit.com/Teardown/iPhone+4+Teardown/3130/3 Broadcom BCM4329FKUBG -->
-<!-- iPhone4S http://www.ifixit.com/Teardown/iPhone+4S+Teardown/6610/2 ムラタのモジュール Murata SW SS1830010. 他のサイト http://eetimes.jp/ee/articles/1110/17/news109_5.html ではレイアウトの刻印から  BCM4330 -->
+<!-- iPhone4 @<href>{http://www.ifixit.com/Teardown/iPhone+4+Teardown/3130/3} Broadcom BCM4329FKUBG -->
+<!-- iPhone4S @<href>{http://www.ifixit.com/Teardown/iPhone+4S+Teardown/6610/2} ムラタのモジュール Murata SW SS1830010. 他のサイト @<href>{http://eetimes.jp/ee/articles/1110/17/news109_5.html} ではレイアウトの刻印から  BCM4330 -->
 
-<!-- iPad3 4G http://www.ifixit.com/Teardown/iPad+3+4G+Teardown/8277/2 Broadcom BCM4330 802.11a/b/g/n MAC/baseband/radio with integrated Bluetooth 4.0+HS and FM transceiver-->
+<!-- iPad3 4G @<href>{http://www.ifixit.com/Teardown/iPad+3+4G+Teardown/8277/2} Broadcom BCM4330 802.11a/b/g/n MAC/baseband/radio with integrated Bluetooth 4.0+HS and FM transceiver-->
 <!-- Single-band 2.4 GHz 802.11 b/g/n or dual-band 2.4 GHz and 5Ghz 802.11 a/b/g/n
 FM receiver and transmitter
 Bluetooth Core Specification Version 4.0 + HS compliant with provisions for supporting future specifications
@@ -589,9 +589,9 @@ An integrated ARM® Cortex™-M3 processor and on-chip memory
 The OneDriver™ software architecture for easy migration from existing embedded WLAN and Bluetooth devices as well as future devices
 SmartAudio® technology that dramatically improves voice quality in Bluetooth headsets -->
 
-<!-- iPod touch 5th Gen http://www.ifixit.com/Teardown/iPod+Touch+5th+Generation+Teardown/10803/3 Murata 339S0171 Wi-Fi module -->
+<!-- iPod touch 5th Gen @<href>{http://www.ifixit.com/Teardown/iPod+Touch+5th+Generation+Teardown/10803/3} Murata 339S0171 Wi-Fi module -->
 
-<!-- iPad mini http://www.ifixit.com/Teardown/iPad+Mini+Wi-Fi+Teardown/11423/1  Murata 339S0171 Wi-Fi module.  BCM4334 http://www.ifixit.com/Teardown/Apple+A6+Teardown/10528/2#s38332 -->
+<!-- iPad mini @<href>{http://www.ifixit.com/Teardown/iPad+Mini+Wi-Fi+Teardown/11423/1 } Murata 339S0171 Wi-Fi module.  BCM4334 @<href>{http://www.ifixit.com/Teardown/Apple+A6+Teardown/10528/2#s38332} -->
 
 <!-- The Murata Wi-Fi SoC module actually comprises a Broadcom BCM4334 package in addition to an oscillator, capacitors, resistors, etc. You can see all the components in the X-ray (third image).
 Murata assembles all of the components together and sends their package to Foxconn, where it eventually ends up on the iPhone's logic board. Chipworks said it best: "Murata makes a house that is full of other people's furniture."
@@ -600,9 +600,9 @@ Wi-Fi (802.11 a/b/g/n)
 Bluetooth 4.0 + HS
 FM Receiver -->
 
-<!-- iPhone5 http://www.ifixit.com/Teardown/iPhone+5+Teardown/10525/2#s38299 Murata 339S0171 Wi-Fi module , 上記のiPad  miniと同じもの-->
+<!-- iPhone5 @<href>{http://www.ifixit.com/Teardown/iPhone+5+Teardown/10525/2#s38299} Murata 339S0171 Wi-Fi module , 上記のiPad  miniと同じもの-->
 
-<!-- http://www.anandtech.com/show/5601/broadcom-announces-new-combo-chips-bcm4334-bcm43241-shows-80211ac-once-more -->
+<!-- @<href>{http://www.anandtech.com/show/5601/broadcom-announces-new-combo-chips-bcm4334-bcm43241-shows-80211ac-once-more} -->
 <!--
 First is BCM4334 which is the follow-up part to BCM4330 that we've seen in a bunch of devices. BCM4334 changes from a 65nm process to 40nm LP, which itself offers a power profile reduction. The change isn't a simple die shrink either, Broadcom says it has worked on and refined the existing BCM4330 design and reduced power a further 40-50% and dramatically reduced standby power by 3 orders of magnitude. I asked Broadcom to give me a realistic estimate of power consumption - BCM4330 in full Rx mode consumes around 68mA, BCM4334 consumes 36mA at the same voltage, just to give an example of the reduction. Air interfaces don't change between BCM4330 and BCM4334. The second part, BCM43241, is a 2x2MIMO combo chip that's geared at tablets and also is built on a 40nm process. -->
 
@@ -645,7 +645,7 @@ Amazonで購入できるものを試してみる。
 
 ==  その他
 
-http://developer.apple.com/library/ios/#technotes/tn2295/_index.html
+@<href>{http://developer.apple.com/library/ios/#technotes/tn2295/_index.html}
 
 Technical Note TN2295
 Testing Core Bluetooth Applications in the iOS Simulator
@@ -737,9 +737,9 @@ iOSシミュレータを動かしている時にUSBドングルを抜くと:
 
 === ドングルの動作確認
 
-* プラネックス BT-Micro4 http://www.planex.co.jp/products/bt-micro4/ 価格2000円、実売1100円(Amazon)
+* プラネックス BT-Micro4 @<href>{http://www.planex.co.jp/products/bt-micro4/} 価格2000円、実売1100円(Amazon)
  *  CSR8510
-* バッファロー BSHSBD08BK http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/adapter/bshsbd08/  価格2509円 実売1300円
+* バッファロー BSHSBD08BK @<href>{http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/adapter/bshsbd08/}  価格2509円 実売1300円
  * CSR8510
 
 === OS X Bluetooth ドライバの振る舞いを理解する
@@ -802,7 +802,7 @@ CC2540MINIDK_Dongle
 
 === 資料
 
-http://processors.wiki.ti.com/index.php/BLE_sniffer_guide
+@<href>{http://processors.wiki.ti.com/index.php/BLE_sniffer_guide}
 
 === 手順
 
@@ -816,15 +816,15 @@ Windows xxx
 
 === 買い方。
 
-http://www.ti.com/tool/CC2540DK-MINI
+@<href>{http://www.ti.com/tool/CC2540DK-MINI}
 CC2540DK-MINI
 99ドル
 
-http://www.ti.com/tool/cc2541dk-mini
+@<href>{http://www.ti.com/tool/cc2541dk-mini}
 CC2541DK-MINI
 でもOK。
 
-http://www.ti.com/tool/cc2540emk-usb
+@<href>{http://www.ti.com/tool/cc2540emk-usb}
 CC2540EMK-USB
 
 違いは、KeyfobがCC2540かCC2541か、という違い。
@@ -839,7 +839,7 @@ The CC2540 dongle is delivered pre-programmed with dedicated packet sniffer firm
 
 ==== フラッシュプログラマのDL
 
-http://www.ti.com/tool/flash-programmer
+@<href>{http://www.ti.com/tool/flash-programmer}
 v2じゃない方
 ”Flash Programmer for 8051-based CCxxxx SoCs and RF Evaluation Boards”とある方をDL。
 
@@ -849,7 +849,7 @@ Windows VistaまたはWindows7では、インストール開始直後に”User 
 
 === スニファをDL
 
-http://www.ti.com/tool/packet-sniffer
+@<href>{http://www.ti.com/tool/packet-sniffer}
 からアプリをDLする。
 SmartRF Packet Sniffer runs on Windows 98, Windows 2000, Windows XP (32 bit), Windows Vista (32 and 64 bit) and Windows 7 (32 and 64 bit).
 
@@ -895,7 +895,7 @@ SWRU187G、
 
 USBドングルの写真
 med_cc2540emk-usb_cc2540emk-usb_web.jpg
-http://www.ti.com/tool/cc2540emk-usb より引用
+@<href>{http://www.ti.com/tool/cc2540emk-usb} より引用
 49ドル。
 
 ==  Core Bluetooth フレームワークの実際の振る舞い

@@ -97,7 +97,7 @@ Bluetooth low energyは、一方がより消費電力が小さくなるように
 
 Apple社はiOSデバイスと接続するBluetooth Smart機器の設計ガイドライン [^1110] を公開しています。ここでは、アドバタイジング・インターバルを、最初の30秒間は20ミリ秒に、30秒後からは150ミリ秒から1.3秒の範囲の値として、最初は発見しやすく、その後は消費電力を抑える設定を推奨しています。1ミリ秒は、1000分の1秒です。
 
-[^1110]:[Bluetooth for Developers - APple Developer https://developer.apple.com/bluetooth/](https://developer.apple.com/bluetooth/)
+[^1110]:[Bluetooth for Developers - APple Developer @<href>{https://developer.apple.com/bluetooth/}](@<href>{https://developer.apple.com/bluetooth/})
 
 機器を発見すると、接続処理を行いお互いにパケットをやりとりし続ける接続状態になります ([#fig_low_energy_packet] (b) )。パケットのやりとりを管理する役割をマスター、マスターに応答してパケットを返す役割をスレーブと呼びます。スキャナがマスターに、アドバタイザがスレーブに、役割を切り替えます。
 
@@ -193,7 +193,7 @@ Bluetooth low energy のサービスとキャラクタリスは、ものをデ�
 
 iOSアプリケーション開発者ならば Objective-C でいう、クラスのインスタンスがサービスに、プロパティがキャラクタリスに対応していると理解できます。プロパティには、読み書き属性があります。またキー値監視( Key-Value Observing ) [^1130] でプロパティの値変化の通知が受け取れるのと同じく、キャラクタリスに監視登録をすれば、その値変化の通知を受け取れます。
 
-[^1210]: [Introduction to Key-Value Observing Programming Guide]( https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html )
+[^1210]: [Introduction to Key-Value Observing Programming Guide]( @<href>{https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html} )
 
 サービスとキャラクタリスの検索と取得、そしてキャラクタリスへの値の読み書きと値変化の通知取得の仕組みは、通信路の上にある アトリビュート・プロトコル(Attribute Protocol、ATT) と Generic Attribute Profile(ジェネリック アトリビュート プロファイル、GATT) の2つの層です。
 
@@ -255,13 +255,13 @@ Bluetoothは、Bluetooth で機器と通信したときの振る舞いと、そ�
 
 Proximity Profile は、ある一定距離離れた時にキーホルダーから警告を出力する振る舞いを定義します。 Find Me Profile は、ボタンが押された時に接続先から警告を出力させる振る舞いを定義します。つまり、製品の2つの機能がそれぞれプロファイルとして定義されているわけです。
 
-[^1220]: [Proximity Profile (PXP), https://developer.bluetooth.org/TechnologyOverview/Pages/PXP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/PXP.aspx)
+[^1220]: [Proximity Profile (PXP), @<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/PXP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/PXP.aspx})
 
-[^1230]: [Find Me Profile (FMP), https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx)
+[^1230]: [Find Me Profile (FMP), @<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/FMP.aspx})
 
 プロファイルは、1つのサービスを共有して利用できます。例えば、さきほどの Proximity Profile と Find Me Profile は、いずれも Immediate Alert Servide (イミディエイト・アラート・サービス)  [^1160] を使います。
 
-[^1240]: [Immediate Alert Service https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml)
+[^1240]: [Immediate Alert Service @<href>{https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml](https://developer.bluetooth.org/gatt/services/Pages/ServiceViewer.aspx?u=org.bluetooth.service.immediate_alert.xml})
 
 イミディエイト・アラート・サービスは、警告音を出す機能です。Proximity Profile では、置き忘れの警告レベルの設定に使われます。Find Me Profile では、直ちに警告を出力するために使われます。2つのプロファイルが1つのサービスを共有しても、使い方に不都合を生じない問題ありません。
 
@@ -283,25 +283,25 @@ Bluetooth low energy は、自由にプロファイルを設定できます。�
 
 2015年1月には、次の15のプロファイルが採択されています。Bluetooth low energy が登場する以前から無線化が進んでいた、フィットネスや自転車などの分野で使われる機器のプロファイルが、特に早くから採択されてきています。
 
-[Profiles | Bluetooth Development Portal](http://developer.bluetooth.org/gatt/profiles/Pages/ProfilesHome.aspx)
+[Profiles | Bluetooth Development Portal](@<href>{http://developer.bluetooth.org/gatt/profiles/Pages/ProfilesHome.aspx})
 
-- アラート通知 (Alert Notification)
-- 血圧計 (Blood Pressure)
-- 自転車のパワーメータ (Cycling Power)
-- 自転車の速度とペダル回転数 (Cycling Speed and Cadence)
-- デバイスの発見 (Find Me)
-- 血糖値 (Glucose)
-- 体温計 (Health Thermometer)
-- 心拍 (Heart Rate)
-- 入力装置 (HID OVER GATT)
-- 位置と経路誘導 (Location and Navigation)
-- 電話の警告(Phone Alert Status)
-- 近接 (Proximity)
-- ランナーの速度とペース (Running Speed and Cadence)
-- スキャナの通信パラメータ設定 (Scan Parameters)
-- 時刻 (Time)
+* アラート通知 (Alert Notification)
+* 血圧計 (Blood Pressure)
+* 自転車のパワーメータ (Cycling Power)
+* 自転車の速度とペダル回転数 (Cycling Speed and Cadence)
+* デバイスの発見 (Find Me)
+* 血糖値 (Glucose)
+* 体温計 (Health Thermometer)
+* 心拍 (Heart Rate)
+* 入力装置 (HID OVER GATT)
+* 位置と経路誘導 (Location and Navigation)
+* 電話の警告(Phone Alert Status)
+* 近接 (Proximity)
+* ランナーの速度とペース (Running Speed and Cadence)
+* スキャナの通信パラメータ設定 (Scan Parameters)
+* 時刻 (Time)
 
-<!-- レイヤをまたいだ、セキュリティとプライバシーの話をまとめる -->
+#@# レイヤをまたいだ、セキュリティとプライバシーの話をまとめる
 
 == 無線通信と通信規格
 
@@ -382,18 +382,18 @@ Bluetooth low energy は、自由にプロファイルを設定できます。�
 
 ですから、周辺デバイスを設計するためには、データ形式や機器の振る舞いまでが規格になっていなければなりません。アプリケーションまで包括した仕様が規格化されてはじめて、ヘッドセットやiOSデバイスなど様々な会社が設計製造したデバイス間での相互接続が保証できます。
 
-例えば、ヘッドセットは電話の着信や発信の操作、そして通話音声の双方向のやりとりをするハードウェアです。その機能や振る舞い、そしてデータ形式は [ハンズフリー・プロファイル (Hands-Free Profile)](https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx) [^2030] で決められています。
+例えば、ヘッドセットは電話の着信や発信の操作、そして通話音声の双方向のやりとりをするハードウェアです。その機能や振る舞い、そしてデータ形式は [ハンズフリー・プロファイル (Hands-Free Profile)](@<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx}) [^2030] で決められています。
 
-[^2030]: [Hands-Free Profile, https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx)
+[^2030]: [Hands-Free Profile, @<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/HFP.aspx})
 
 ヘッドセットに音楽を聞く機能も入れたければ、ハンズフリー・プロファイルに加えて高音質の音楽データを送る
-[Advanced Audio Distribution Profile (A2DP)](https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx) [^2040] も実装します。
+[Advanced Audio Distribution Profile (A2DP)](@<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx}) [^2040] も実装します。
 
-[^2040]: [Advanced Audio Distribution Profile (A2DP), https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx)
+[^2040]: [Advanced Audio Distribution Profile (A2DP), @<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/A2DP.aspx})
 
-クラシックBluetoothは、用途ごとに様々なプロファイルが規格として決められており、通信の双方が同じプロファイルを実装することで相互接続が確保されます。プロファイルが定義されていない場面には、仮想シリアル通信のプロファイル [Serial Port Profile (SPP)](https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx) [^2050] を使います。
+クラシックBluetoothは、用途ごとに様々なプロファイルが規格として決められており、通信の双方が同じプロファイルを実装することで相互接続が確保されます。プロファイルが定義されていない場面には、仮想シリアル通信のプロファイル [Serial Port Profile (SPP)](@<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx}) [^2050] を使います。
 
-[^2050]: [Serial Port Profile (SPP), https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx)
+[^2050]: [Serial Port Profile (SPP), @<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/SPP.aspx})
 
 ==  Bluetooth low energy のアーキテクチャ
 
@@ -403,16 +403,16 @@ Bluetooth low energy のアーキテクチャを階層表示したのが [#fig_b
 
 物理層からGATTまでの階層は、それぞれ下層の機能を使って、相手の同じ階層のプロトコルと通信します。ジェネリック・アクセス・プロファイルは、機器の振る舞いを定義します。機器の振る舞いは、物理層からGATTまでのレイヤそれぞれの役割を通じて実現されるので、ジェネリック・アクセス・プロファイルは、特定のレイヤのものではなく、物理層からGATTまでの全てのレイヤに影響を与えます。物理層からGATTまでの階層は、相手の同じ階層のプロトコルと通信します。レイヤの役割は以下のとおりです:
 
-- Generic attribute profile (GATT, ジェネリック・アトリビュート・プロファイル)
-	- サービス/キャラクタリスティクスを提供。
+* Generic attribute profile (GATT, ジェネリック・アトリビュート・プロファイル)
+** サービス/キャラクタリスティクスを提供。
 -Attribute protocol(ATT, アトリビュート・プロトコル)
-	- アトリビュートという値をやりとりする
-- Logical Link Control and Adaptation Protocol(L2CAP, ロジック・リンク・コントロール・アンド・アダプティブ・プロトコル)
-	- 論理チャンネルの提供
-- Logic link(ロジックリンク)
-	- 近接デバイスの発見と接続、通信
-- Physical layer(物理層、フィジカル・レイヤ)
-	- 無線通信
+** アトリビュートという値をやりとりする
+* Logical Link Control and Adaptation Protocol(L2CAP, ロジック・リンク・コントロール・アンド・アダプティブ・プロトコル)
+** 論理チャンネルの提供
+* Logic link(ロジックリンク)
+** 近接デバイスの発見と接続、通信
+* Physical layer(物理層、フィジカル・レイヤ)
+** 無線通信
 
 === コントローラとホスト
 
@@ -491,7 +491,7 @@ Bluetooth無線技術は、次の悪用や攻撃方法を想定しています [
 - トラッキング (tracking)
 - 中間者攻撃   (man-in-the-middle attack, MITM)
 
-[^1310]: [​Security, Bluetooth Smart (Low Energy), https://developer.bluetooth.org/TechnologyOverview/Pages/LE-Security.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/LE-Security.aspx)
+[^1310]: [​Security, Bluetooth Smart (Low Energy), @<href>{https://developer.bluetooth.org/TechnologyOverview/Pages/LE-Security.aspx](https://developer.bluetooth.org/TechnologyOverview/Pages/LE-Security.aspx)}
 
 電波は周囲に広がるうえに、Bluetooth無線技術は規格化された技術なので、電波を受信して通信内容を解析することはとても容易にできます。
 
