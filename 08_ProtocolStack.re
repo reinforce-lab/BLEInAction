@@ -1,11 +1,11 @@
 
-== スタックを作ってみる
+= スタックを作ってみる
 実際の通信例、動きを見る、処理を通じて。
-=== USBドングルとの通信
+== USBドングルとの通信
 usbデバイス、HCI、コマンドのあれこれ。
 ソースコードの構成。Playground?
 開発とか動作確認手順
-=== 接続と切断
+== 接続と切断
 リンク層
 発見、アドバタイジング
 接続と切断
@@ -44,14 +44,14 @@ iOSのHCIのログを見てみる。
 USBのドングルと接続する
 
 
-==== ドングルの動作確認
+=== ドングルの動作確認
 
 * プラネックス BT-Micro4 http://www.planex.co.jp/products/bt-micro4/ 価格2000円、実売1100円(Amazon)
  *  CSR8510
 * バッファロー BSHSBD08BK http://buffalo.jp/products/catalog/supply/bluetooth/bluetooth/adapter/bshsbd08/  価格2509円 実売1300円
  * CSR8510
 
-==== OS X Bluetooth ドライバの振る舞いを理解する
+=== OS X Bluetooth ドライバの振る舞いを理解する
 
 デフォルトのOS X Bluetoothドライバは、外付けのBluetooth HCIがアタッチされたら、
 ビルドインのBluetoothインタフェースからドライバが離れて、外部HCIにアタッチする。
@@ -77,7 +77,7 @@ OS XビルトインBluetoothドライバの振る舞い。
 * bluetoothHostControllerSwitchBehavior="default"
 ** 新しいHCIが接続されたら、ビルドインドライバはビルドインHICから切断されて、外部のHCIに接続される。もしも新しいモジュールがAppleモジュールじゃなければ。
 
-==== OSX Bluetooth LEアプリケーションをテストする
+=== OSX Bluetooth LEアプリケーションをテストする
 
 iOSとOS X、両方でBluetooth LEアプリケーションをテストするなら、
 bluetoothHostControllerSwitchBehavior setting を復元しないといけないかも。
@@ -118,7 +118,7 @@ TBD: パネルの画像と、手順を入れること
 see section Understanding the OS X Bluetooth Driver Behavior
 
 
-=== libUSB かなにかでBTドングルに接続する
+== libUSB かなにかでBTドングルに接続する
 kernel extension カーネルのモジュール
  kextstat
   83    0 0xffffff7f8162e000 0x9000     0x9000     com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport
