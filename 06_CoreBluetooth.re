@@ -223,7 +223,7 @@ CBCentralManagerScanOptionAllowDuplicatesKey の値をYESにすると、ロー�
 
 iOSアプリケーションがすでにスキャンを開始しているときに、scanForPeripheralsWithServices:options:メソッドをパラメータを指定して呼び出すと、指定したパラメータで更新されて、動作が切り替わります。
 
-====== アドバタイジング・パケットの受信
+===== = アドバタイジング・パケットの受信
 
 ローカルのセントラルがアドバタイジング・パケットを受信すると、CBCentralManagerDelegateプロトコルのcentralManager:didDiscoverPeripheral:advertisementData:RSSI: メソッドに通知されます。
 

@@ -1,4 +1,5 @@
 = Appendix
+
 == CBCentralManager Class
 これは、Apple社のCBCentralManagerクラスドキュメント [http://developer.apple.com/library/ios/#documentation/CoreBluetooth/Reference/CBCentralManager_Class/](http://developer.apple.com/library/ios/#documentation/CoreBluetooth/Reference/CBCentralManager_Class/)から、CoreBluetooth開発の理解に必要最低限の情報を日本語に意訳したものです。
 
