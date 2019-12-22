@@ -10,8 +10,9 @@ CHAPS:
   - 06_CoreBluetooth.re
   - 07_Hardware.re
   - 08_ProtocolStack.re
-
+  - 09_Application.re
+  
 APPENDIX:
-  - 09_Appendix.re
+  - 10_Appendix.re
 
 POSTDEF:
