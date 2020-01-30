@@ -11,6 +11,7 @@ CHAPS:
   - 07_Hardware.re
   - 08_ProtocolStack.re
   - 09_Application.re
+  - 11_BluetoothDiff.re
   
 APPENDIX:
   - 10_Appendix.re
