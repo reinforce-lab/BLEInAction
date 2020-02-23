@@ -2,7 +2,7 @@ PREDEF:
   - 00_preface.re
 
 CHAPS:
-  - 01_whatIsBLE.re
+  - 01_LetsBeginBLE.re
   - 02_BLEOverView.re
   - 03_LinkLayer.re
   - 04_HostControllerInterface.re
