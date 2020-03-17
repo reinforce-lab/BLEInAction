@@ -1305,4 +1305,5 @@ Bluetooth SIGの管理をうけないならば、128ビットのUUIDを使うほ
 
 もしもMACアドレス・ブロックに登録しているなら、自社で管理したMACアドレスを使えばいいでしょう。アドレス・ブロックを持たないならば、最下位ビットを1にした乱数を使えばいいでしょう。
 
-
+#@# UUIDをデータベースのキーに使えるようにとver6というのが提案中。らしい。
+#@# https://tools.ietf.org/html/draft-peabody-dispatch-new-uuid-format-00
