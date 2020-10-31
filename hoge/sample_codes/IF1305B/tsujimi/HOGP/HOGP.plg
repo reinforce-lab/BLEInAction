@@ -1,0 +1,47 @@
+<html>
+<body>
+<pre>
+<h1>ﾋﾞﾙﾄﾞのﾛｸﾞ</h1>
+<h3>
+--------------------構成: HOGP - Win32 Release--------------------
+</h3>
+<h3>ｺﾏﾝﾄﾞ ﾗｲﾝ</h3>
+Creating command line "rc.exe /l 0x411 /fo"Release/HOGP.res" /d "NDEBUG" "K:\Interface\HOGP\HOGP.rc"" 
+一時ﾌｧｲﾙ "C:\Users\yts\AppData\Local\Temp\RSP2A5C.tmp" を作成し、次の内容を記録します
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Release/HOGP.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"K:\Interface\HOGP\HOGP.cpp"
+"K:\Interface\HOGP\HOGPDlg.cpp"
+"K:\Interface\HOGP\Usbhidioc.cpp"
+]
+Creating command line "cl.exe @C:\Users\yts\AppData\Local\Temp\RSP2A5C.tmp" 
+一時ﾌｧｲﾙ "C:\Users\yts\AppData\Local\Temp\RSP2A5D.tmp" を作成し、次の内容を記録します
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Release/HOGP.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"K:\Interface\HOGP\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\yts\AppData\Local\Temp\RSP2A5D.tmp" 
+ｺﾏﾝﾄﾞ ﾗｲﾝ "link.exe hid.lib setupapi.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/HOGP.pdb" /machine:I386 /out:"Release/HOGP.exe"  .\Release\HOGP.obj .\Release\HOGPDlg.obj .\Release\StdAfx.obj .\Release\Usbhidioc.obj .\Release\HOGP.res " の作成中
+<h3>ｱｳﾄﾌﾟｯﾄ ｳｨﾝﾄﾞｳ</h3>
+ﾘｿｰｽをｺﾝﾊﾟｲﾙ中...
+ｺﾝﾊﾟｲﾙ中...
+StdAfx.cpp
+ｺﾝﾊﾟｲﾙ中...
+HOGP.cpp
+HOGPDlg.cpp
+K:\Interface\HOGP\HOGPDlg.cpp(78) : warning C4101: 'cbData' : ﾛｰｶﾙ変数は 1 度も使われません。
+Usbhidioc.cpp
+K:\Interface\HOGP\Usbhidioc.cpp(393) : warning C4800: 'unsigned long' : ﾌﾞｰﾙ値を 'true' または 'false' に強制的に設定します (警告の処理)
+K:\Interface\HOGP\Usbhidioc.cpp(444) : warning C4800: 'unsigned long' : ﾌﾞｰﾙ値を 'true' または 'false' に強制的に設定します (警告の処理)
+ｺｰﾄﾞを生成中...
+ﾘﾝｸ中...
+LINK : warning LNK4089: "SHELL32.dll" へのすべての参照は /OPT:REF によって廃棄されます
+LINK : warning LNK4089: "comdlg32.dll" へのすべての参照は /OPT:REF によって廃棄されます
+
+
+
+<h3>結果</h3>
+HOGP.exe - ｴﾗｰ 0、警告 5
+</pre>
+</body>
+</html>
