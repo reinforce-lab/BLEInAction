@@ -1,0 +1,12 @@
+PREDEF:
+
+CHAPS:
+  - 00_preface.re
+  - 01_LetsBeginBLE.re
+  - 02_WirelessStandards.re
+  - 03_BLEOverview.re
+  
+APPENDIX:
+
+POSTDEF:
+

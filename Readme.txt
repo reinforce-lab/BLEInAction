@@ -1,0 +1,2 @@
+% rake pdf
+% rake epub
