@@ -5,8 +5,17 @@ CHAPS:
   - 01_LetsBeginBLE.re
   - 02_WirelessStandards.re
   - 03_BLEOverview.re
-  
-APPENDIX:
+  - 04_LinkLayer.re
+  - 05_HCI.re
+  - 06_GATT.re 
+  - 07_CoreBluetooth.re
+  - 08_Hardware.re
+  - 09_ProtocolStack.re
+  - 10_Application.re
+  - 11_BluetoothDiff.re
 
+APPENDIX:
+  - 01_Appendix.re
+   
 POSTDEF:
 
